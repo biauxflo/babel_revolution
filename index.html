@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <title>Basic Graph Network with D3.js</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body>
+
+    <div id="container">
+      <div id="graph"></div>
+      
+      <div id="text-box">
+        <form id="add-node-form">
+          <input id="add-node-input" type="text" placeholder="Add a node...">
+          <button id="add-node-button" type="submit">Add</button>
+        </form>
+
+        <div id="node-info">
+          <h3 id="node-name"></h3>
+          <p id="node-description"></p>
+      </div>
+
+    </div>
+
+
+    
+    <script type="module" src="app.js"></script>
+  
+    </body>
+ </html>
