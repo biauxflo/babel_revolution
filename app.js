@@ -1,25 +1,55 @@
 
-// =================================== DATA ===================================
+// =================================== FIREBASE ===================================
 
-// Charger les fichiers CSV des noeuds et des liens
-d3.csv("nodes.csv").then(function(nodesData) {
-  d3.csv("links.csv").then(function(linksData) {
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+import { getDatabase, ref, onValue, push, update} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
-    // Convertir les données des noeuds en format utilisable par d3
-    const nodes = nodesData.map(function(d) {
-      return {id: d.id, label: d.label};
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+apiKey: "AIzaSyA1J5oEELCYV4N0Sd_skLk68JLGMwQerdQ",
+authDomain: "babelrevolution.firebaseapp.com",
+projectId: "babelrevolution",
+storageBucket: "babelrevolution.appspot.com",
+messagingSenderId: "360685414071",
+appId: "1:360685414071:web:e3c8d49460074f9fdc4f32",
+measurementId: "G-H390V8NZ3B",
+databaseURL: "https://babelrevolution-default-rtdb.europe-west1.firebasedatabase.app/",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// Initialize Realtime Database and get a reference to the service
+const database = getDatabase(app);
+
+
+function fetchData() {
+  return new Promise((resolve, reject) => {
+    const nodes_data = ref(database, 'nodes');
+    onValue(nodes_data, (snapshot) => {
+      const nodes = snapshot.val();
+    const links_data = ref(database, 'links');
+    onValue(links_data, (snapshot) => {
+      const links = snapshot.val();
+      resolve({ nodes: nodes, links: links })});
+    }, (error) => {
+      reject(error); // rejeter la promesse en cas d'erreur
     });
+  });
+}
 
-    // Convertir les données des liens en format utilisable par d3
-    const links = linksData.map(function(d) {
-      return {source: d.source, target: d.target};
-    });
+fetchData()
+  .then((result) => {
+    let nodes = result.nodes;
+    // let links = result.links;
+    
+    console.log("Les deux opérations asynchrones sont terminées avec succès.");
 
-    // Code pour dessiner le graphe ici en utilisant les données de nodes et links
-    console.log(nodes);
-    console.log(links);
-
-        // =================================== GRAPH SETTINGS ===================================
+    // =================================== GRAPH SETTINGS ===================================
 
     // Set the dimensions and margins of the graph
     const margin = { top: 10, right: 10, bottom: 10, left: 10 }
@@ -28,28 +58,65 @@ d3.csv("nodes.csv").then(function(nodesData) {
 
     // Append the SVG object to the page
     let svg = d3
-      .select('#graph')
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height)
+    .select('#graph')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height)
 
     // =================================== NODES ===================================
 
-    const node = svg.selectAll(".node")
+    // Ajouter les nœuds à notre graphique
+    function createNodes() {
+
+      var node = svg.selectAll(".node")
         .data(nodes)
-        .enter().append("circle")
+        .enter()
+        .append("circle")
         .attr("class", "node")
         .attr("r", 30)
         .style("fill", "blue");
+      
+      return node
+    }
+    
+    var node = createNodes()
 
     // =================================== LINKS ===================================
 
-    const link = svg.selectAll(".link")
+    function createLinks(nodes) {
+                
+      var links = [];
+
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          let node1 = nodes[i];
+          let node2 = nodes[j];
+
+          let commonHashtags = node1.hashtags.filter(h => node2.hashtags.includes(h));
+
+          if (commonHashtags.length > 0) {
+            links.push({ source: node1.id, target: node2.id });
+          }
+        }
+      }
+
+      return links
+    }
+
+    function updateLinks(nodes) {
+
+      let links = createLinks(nodes)
+      let link = svg.selectAll(".link")
         .data(links)
         .enter().append("line")
         .attr("class", "link")
         .style("stroke", "gray")
         .style("stroke-width", 1);
+
+      return [links, link]
+    }
+
+    let [links, link] = updateLinks(nodes)
 
     // =================================== LABELS ===================================
 
@@ -65,7 +132,7 @@ d3.csv("nodes.csv").then(function(nodesData) {
       .style('stroke', 'none')
       .attr('text-anchor', 'middle') // Ajouter cet attribut
       .text(function (d) {
-        return d.label
+        return d.author
       })
 
     // =================================== FORCE SIMULATION ===================================
@@ -74,9 +141,9 @@ d3.csv("nodes.csv").then(function(nodesData) {
     let simulation = d3
       .forceSimulation(nodes)
       .force('link',
-        d3.forceLink(links).id(d => d.id)
+        d3.forceLink(links).id(d => d.id).distance(300)
       )
-      .force('charge', d3.forceManyBody().strength(-1000))
+      .force('charge', d3.forceManyBody().strength(-50))
       .force('center', d3.forceCenter(width / 2, height / 2))
       .alphaTarget(0.1) // Add alphaTarget parameter to the simulation
 
@@ -93,6 +160,7 @@ d3.csv("nodes.csv").then(function(nodesData) {
       d3.select(this).style("fill", "blue");
     });
 
+    function tooltip() {
     // // Créer un élément SVG pour la fenêtre contextuelle
     // const tooltip = d3.select("body").append("svg")
     //   .style('position', 'absolute')
@@ -126,58 +194,6 @@ d3.csv("nodes.csv").then(function(nodesData) {
     //         tooltip.style("visibility", "hidden");
     //         d3.select(this).style("fill", "blue");
     //     });
-
-    // =================================== FORM ADDING NODE ===================================
-
-    d3.select('#add-node-form').on('submit', function () {
-      d3.event.preventDefault()
-      const input = d3.select('#add-node-input')
-      const label = input.property('value')
-      const id = 10
-      nodes.push({ id: id, label: label })
-      links.push({ source: 1, target: id })
-      input.property('value', '')
-      updateGraph()
-    })
-
-    function updateGraph () {
-      // Update the nodes of the graph
-      node = node.data(nodes, d => d.id)
-      node
-        .enter()
-        .append('circle')
-        .attr('r', 15)
-        .attr('fill', '#69b3a2')
-        .merge(node)
-        .attr('id', d => 'node-' + d.id)
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 1.5)
-        .call(drag(simulation))
-
-      // Update the links between the nodes
-      link = link.data(links, d => [d.source, d.target])
-      link
-        .enter()
-        .append('line')
-        .attr('stroke', '#999')
-        .attr('stroke-opacity', 0.6)
-        .attr('id', d => 'link-' + d.source.id + '-' + d.target.id)
-        .merge(link)
-
-      // Update the labels of the nodes
-      label = label.data(nodes, d => d.id)
-      label
-        .enter()
-        .append('text')
-        .text(d => d.label)
-        .merge(label)
-        .attr('x', d => d.x + 20)
-        .attr('y', d => d.y)
-
-      // Update the positions of the nodes and links on each tick of the simulation
-      simulation.nodes(nodes)
-      simulation.force('link').links(links)
-      simulation.alpha(1).restart()
     }
 
 
@@ -218,7 +234,8 @@ d3.csv("nodes.csv").then(function(nodesData) {
         .attr('y1', d => d.source.y)
         .attr('x2', d => d.target.x)
         .attr('y2', d => d.target.y)
-      node.attr('cx', d => d.x).attr('cy', d => d.y)
+      node
+        .attr('cx', d => d.x).attr('cy', d => d.y)
       label
         .attr('x', function (d) {
           return d.x
@@ -229,7 +246,90 @@ d3.csv("nodes.csv").then(function(nodesData) {
     })
 
 
+
+    // =================================== FORM ADDING NODE ===================================
+
+    const myForm = document.getElementById("add-node-form");
+
+    function addNewNode(author, text) {
+
+      const nextNodeId = nodes.length + 1;
+      
+      const node_data = {
+          "author": author,
+          "hashtags": ["intro"],
+          "id": nextNodeId,
+          "text": text,
+          "x": Math.random() * width, 
+          "y": Math.random()* height
+      };
+      
+      // Add the new node to the nodes array
+      nodes.push(node_data);
+
+      // Recompute the links with the updated nodes array
+      [links, link] = updateLinks(nodes);
+      
+      // Update the nodes, links and label selections with the updated data
+      node = svg.selectAll(".node").data(nodes);
+      link = svg.selectAll(".link").data(links);
+      label = svg.selectAll('text').data(nodes);
+
+      
+      // Remove any old nodes, links and labels that are no longer in the updated data
+      node.exit().remove();
+      link.exit().remove();
+      label.exit().remove();
+      
+      // Add any new nodes, links and labels that were added to the updated data
+      node
+        .enter()
+        .append("circle")
+        .attr("class", "node")
+        .attr("r", 30)
+        .style("fill", "blue")
+      
+      link
+        .enter()
+        .append("line")
+        .attr("class", "link")
+        .style("stroke", "gray")
+        .style("stroke-width", 1);
+      
+      label
+        .enter()
+        .append('text')
+        .style('fill', 'red')
+        .style('stroke', 'none')
+        .attr('text-anchor', 'middle')
+        .text(function (d) {
+            return d.author
+          })
+      
+
+      simulation.nodes(nodes)
+      simulation.force('link').links(links);
+      simulation.alpha(1).restart();
+
+  }
+  
+
+    myForm.addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent the default form submission behavior
+      const inputAuthor = document.getElementById("add-node-author");
+      const inputText = document.getElementById("add-node-text");
+
+      const inputAuthorValue = inputAuthor.value;
+      const inputTextValue = inputText.value;
+
+      addNewNode(inputAuthorValue, inputTextValue)
+    });
+
+
+  })
+  .catch((error) => {
+    console.error("Une erreur s'est produite lors de la récupération des données:", error);
   });
-});
+
 
 

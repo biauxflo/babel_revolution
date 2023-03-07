@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <title>Basic Graph Network with D3.js</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    
     <link rel="stylesheet" href="style.css">
 
   </head>
@@ -17,7 +19,8 @@
       
       <div id="text-box">
         <form id="add-node-form">
-          <input id="add-node-input" type="text" placeholder="Add a node...">
+          <input id="add-node-author" type="text" placeholder="Add an author...">
+          <input id="add-node-text" type="text" placeholder="Add a text...">
           <button id="add-node-button" type="submit">Add</button>
         </form>
 
@@ -28,9 +31,8 @@
 
     </div>
 
-
-    
     <script type="module" src="app.js"></script>
-  
+
+
     </body>
  </html>
