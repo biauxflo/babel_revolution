@@ -252,7 +252,7 @@ fetchData()
       // Updating the database
       const updates = {};
       updates['/nodes/' + (nextNodeId - 1)] = node_data;
-      // update(ref(database), updates);
+      update(ref(database), updates);
       
       // Update the nodes, links and label selections with the updated data
       node = svg.selectAll(".node").data(nodes);
