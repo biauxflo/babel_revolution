@@ -68,7 +68,8 @@ fetchData()
     // Ajouter les nœuds à notre graphique
     function createNodes() {
 
-      var node = svg.selectAll(".node")
+      var node = svg.append("g")
+        .selectAll(".node")
         .data(nodes)
         .enter()
         .append("circle")
@@ -228,7 +229,7 @@ fetchData()
     // =================================== SIMULATION ===================================
 
     // Update the positions of the nodes and links on each tick of the simulation
-    simulation.on('tick', () => {
+    function ticked() {
       link
         .attr('x1', d => d.source.x)
         .attr('y1', d => d.source.y)
@@ -243,9 +244,8 @@ fetchData()
         .attr('y', function (d) {
           return d.y
         })
-    })
-
-
+    }
+    simulation.on('tick', ticked)
 
     // =================================== FORM ADDING NODE ===================================
 
@@ -257,11 +257,9 @@ fetchData()
       
       const node_data = {
           "author": author,
-          "hashtags": ["intro"],
+          "hashtags": [],
           "id": nextNodeId,
           "text": text,
-          "x": Math.random() * width, 
-          "y": Math.random()* height
       };
       
       // Add the new node to the nodes array
@@ -269,6 +267,11 @@ fetchData()
 
       // Recompute the links with the updated nodes array
       [links, link] = updateLinks(nodes);
+
+      // Updating the database
+      const updates = {};
+      updates['/nodes/' + (nextNodeId - 1)] = node_data;
+      update(ref(database), updates);
       
       // Update the nodes, links and label selections with the updated data
       node = svg.selectAll(".node").data(nodes);
@@ -282,21 +285,23 @@ fetchData()
       label.exit().remove();
       
       // Add any new nodes, links and labels that were added to the updated data
-      node
+      let nodeEnter = node
         .enter()
         .append("circle")
         .attr("class", "node")
         .attr("r", 30)
         .style("fill", "blue")
+        .merge(node)
       
-      link
+      let linkEnter = link
         .enter()
         .append("line")
         .attr("class", "link")
         .style("stroke", "gray")
-        .style("stroke-width", 1);
+        .style("stroke-width", 1)
+        .merge(link)
       
-      label
+      let labelEnter = label
         .enter()
         .append('text')
         .style('fill', 'red')
@@ -305,11 +310,19 @@ fetchData()
         .text(function (d) {
             return d.author
           })
+        .merge(label)
       
-
+      node = nodeEnter.merge(node)
+      link = linkEnter.merge(link)
+      label = labelEnter.merge(label)
+        
       simulation.nodes(nodes)
       simulation.force('link').links(links);
       simulation.alpha(1).restart();
+
+      
+      
+      node.call(drag(simulation))
 
   }
   
