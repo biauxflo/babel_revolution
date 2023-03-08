@@ -146,6 +146,8 @@ fetchData()
       )
       .force('charge', d3.forceManyBody().strength(-50))
       .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('collide', d3.forceCollide().radius(30)) // ajoutez la force 'collide' avec un rayon de 30
+
       .alphaTarget(0.1) // Add alphaTarget parameter to the simulation
 
     // =================================== TOOLTIP ===================================
@@ -257,7 +259,7 @@ fetchData()
       
       const node_data = {
           "author": author,
-          "hashtags": [],
+          "hashtags": ["intro"],
           "id": nextNodeId,
           "text": text,
       };
@@ -320,7 +322,11 @@ fetchData()
       simulation.force('link').links(links);
       simulation.alpha(1).restart();
 
-      
+      // Centrer le nouveau noeud sur le graphique
+      node.filter(d => d.id === nextNodeId)
+      .attr('cx', width/2)
+      .attr('cy', height/2);
+          
       
       node.call(drag(simulation))
 
