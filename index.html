@@ -17,21 +17,29 @@
     <div id="container">
       <div id="graph"></div>
       
-      <div id="text-box">
-        <form id="add-node-form">
-          <input id="add-node-author" type="text" placeholder="Add an author...">
-          <input id="add-node-text" type="text" placeholder="Add a text...">
-          <button id="add-node-button" type="submit">Add</button>
-        </form>
+        <div id="text-box">
 
-        <div id="node-info">
-          <h3 id="node-name"></h3>
-          <p id="node-description"></p>
+          <div id="node-info">
+            <p id="node-description"></p>
+          </div>
+
+          <form id="add-node-form">
+            <input required id="add-node-author" class="input" type="text" placeholder="Add an author...">
+            <input required id="add-node-text" class="input" type="text" placeholder="Add a text...">
+            <input required id="add-node-hashtags" class="input" type="text" placeholder="Add a hashtag...">
+            <button id="add-node-button" type="submit">Add</button>
+            <button id="reset-graph" type="button">Reset</button>
+          </form>
+          
+
+        </div>
+
       </div>
+
 
     </div>
 
-    <script type="module" src="app.js"></script>
+    <script type="module" src="src/app.js"></script>
 
 
     </body>
