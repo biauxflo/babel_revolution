@@ -14,16 +14,21 @@ export function createNodes(svg, nodes) {
 }
 
 // Displaying node text on a div
-export function displayNodeText(node, nodeDiv) {
-    node.on("mouseover", function(event, d) {
-      nodeDiv.html(d.text);
-      d3.select(this).style("fill", "red");
-    })
-    .on("mouseout", function(d) {
-      nodeDiv.html("");
-      d3.select(this).style("fill", "blue");
-    });
-  }
+//todo
+// Displaying the text and hashtags of a node on a div
+export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv) {
+  node.on("mouseover", function(event, d) {
+    let hashtags = d.hashtags.join(" /")
+    nodeTextDiv.html(d.text);
+    nodeHashtagsDiv.html(hashtags);
+    d3.select(this).style("fill", "green");
+  })
+  .on("mouseout", function(d) {
+    nodeTextDiv.html("");
+    nodeHashtagsDiv.html("");
+    d3.select(this).style("fill", "black");
+  });
+}
 
   
 // function tooltip_2() {
