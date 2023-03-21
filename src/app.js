@@ -4,7 +4,7 @@
 import { ref, update, set} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 import { fetchData } from "./fetch_database.js";
 import { forceSimulation, simulationTicked, createNodeDragBehavior } from "./simulation.js";
-import { createNodes, displayNodeText } from "./nodes.js";
+import { createNodes, displayNodeInfo } from "./nodes.js";
 import { createLinks } from "./links.js";
 import { createLabels } from "./labels.js";
 
@@ -50,9 +50,13 @@ fetchData()
 
 // =================================== TOOLTIP ===================================
 
-    const nodeDiv = d3.select("#node-info");
+    //elements-nodes
+    const nodeTextDiv = d3.select("#node-text");
+    const nodeHashtagsDiv = d3.select("#node-hashtags");
+    const nodeTitle = d3.select("#node-title")
 
-    displayNodeText(node, nodeDiv)
+    displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle)
+
 
 // =================================== DRAGGING ===================================
 
@@ -98,7 +102,7 @@ fetchData()
         .append("circle")
         .attr("class", "node")
         .attr("r", 30)
-        .style("fill", "blue")
+        .style("fill", "black")
         .merge(node)
       
       let linkEnter = link
@@ -132,7 +136,8 @@ fetchData()
 
       simulation = simulationTicked(simulation, link, node, label)
       node.call(nodeDragBehavior);
-      displayNodeText(node, nodeDiv)
+      //elements-nodes
+      displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv)
 
     }
 
@@ -195,7 +200,7 @@ fetchData()
         .append("circle")
         .attr("class", "node")
         .attr("r", 30)
-        .style("fill", "blue")
+        .style("fill", "black")
         .merge(node)
       
       let linkEnter = link
