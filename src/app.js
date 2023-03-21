@@ -50,11 +50,12 @@ fetchData()
 
 // =================================== TOOLTIP ===================================
 
-    //todo
+    //elements-nodes
     const nodeTextDiv = d3.select("#node-text");
     const nodeHashtagsDiv = d3.select("#node-hashtags");
+    const nodeTitle = d3.select("#node-title")
 
-    displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv)
+    displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle)
 
 
 // =================================== DRAGGING ===================================
@@ -135,7 +136,7 @@ fetchData()
 
       simulation = simulationTicked(simulation, link, node, label)
       node.call(nodeDragBehavior);
-      //todo
+      //elements-nodes
       displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv)
 
     }
