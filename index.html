@@ -9,7 +9,6 @@
     <script src="https://apis.google.com/js/api.js"></script>
     
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style_introduction.css">
 
   </head>
 
@@ -39,7 +38,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus vestibulum sed arcu non odio euismod lacinia at quis. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum. Lacus vestibulum sed arcu non odio euismod. Est ultricies integer quis auctor elit sed vulputate. Sem nulla pharetra diam sit amet nisl suscipit adipiscing. Enim tortor at auctor urna nunc. Felis donec et odio pellentesque diam volutpat. Ipsum consequat nisl vel pretium lectus quam id. Sed id semper risus in hendrerit gravida rutrum quisque non. Vel facilisis volutpat est velit egestas dui. A lacus vestibulum sed arcu.</p>
             </div>
             <button id="button-next" onclick="nextPageIntro('#firstDecree', '#react')">Réagir</button>
-            <button id="button-next" onclick="toMain()">Accepter</button>
+            <button id="button-next" onclick="removeIntro()">Accepter</button>
             <button id="button-next" onclick="nextPageIntro('#firstDecree', '#intro')">Retour</button>
         </div>
         
@@ -48,33 +47,28 @@
             <div id="text">
                 <h1>Réaction au 1er décret</h1>
                 <div id="text">
-                    <h2>Réaction du 1er décret</h2>
+                    <h2>Rappel</h2>
                     <p style="font-style:italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus vestibulum sed arcu non odio euismod lacinia at quis. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum. Lacus vestibulum sed arcu non odio euismod. Est ultricies integer quis auctor elit sed vulputate. Sem nulla pharetra diam sit amet nisl suscipit adipiscing. Enim tortor at auctor urna nunc. Felis donec et odio pellentesque diam volutpat. Ipsum consequat nisl vel pretium lectus quam id. Sed id semper risus in hendrerit gravida rutrum quisque non. Vel facilisis volutpat est velit egestas dui. A lacus vestibulum sed arcu.</p>
                 </div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus vestibulum sed arcu non odio euismod lacinia at quis. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum. Lacus vestibulum sed arcu non odio euismod. Est ultricies integer quis auctor elit sed vulputate. Sem nulla pharetra diam sit amet nisl suscipit adipiscing. Enim tortor at auctor urna nunc. Felis donec et odio pellentesque diam volutpat. Ipsum consequat nisl vel pretium lectus quam id. Sed id semper risus in hendrerit gravida rutrum quisque non. Vel facilisis volutpat est velit egestas dui. A lacus vestibulum sed arcu.</p>
             </div>
             <button id="button-next" onclick="nextPageIntro('#react', '#firstDecree')">Retour</button>
-            <form id="add-node-form">
-                <h2>Publier</h2>
+            <form id="add-node-form" style="width: 100%;">
                 <input required id="add-node-author" class="input" type="text" placeholder="Add an author...">
                 <input required id="add-node-text" class="input" type="text" placeholder="Add a text...">
                 <input required id="add-node-hashtags" class="input" type="text" placeholder="Add a hashtag...">
-                <button id="add-node-button" type="submit" onclick="toMain()">Réagir</button> 
+                <button id="add-node-button" type="submit" onclick="removeIntro()">Réagir</button> 
             </form>
         </div> 
         
     
       </div>
 
-
-
-
-
-      <div id="main" >
+      <div id="main">
 
         <div id="graph"></div>
         
-          <div id="text-box">
+          <div id="text-box" style="display:none">
 
             <div id="node-info">
               <h3 id="node-title" style="display:none">Publication</h3> 

@@ -12,10 +12,10 @@ function nextPageIntro(current, next) {
 
 }
 
-function toMain() {
+function removeIntro() {
     let divIntro = d3.select("#text-box-intro")
-    let divMain = d3.select("#main")
+    let divTextBox = d3.select("#text-box") //partie de droite
 
     divIntro.style("display", "none")
-    //divMain.style("display", "flex")
+    divTextBox.style("display", "flex")
 }
