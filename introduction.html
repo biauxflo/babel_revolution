@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <title>BⱯBEL Rëvoluθion</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    
+    <link rel="stylesheet" href="style_introduction.css">
+
+  </head>
+
+  <body>
+
+    <div id="container">
+        <div id="title">
+            <img id="logo" src="img/logo_babel_revolution.png" alt="Logo Bable Revolution">
+        </div>
+
+        <div id="text-box">
+            <!-- introToDecree / reactToDecree / acceptDecree --> 
+
+            <!-- Explications / début -->
+            <div id="intro" style="display:block">
+                <div id="text">
+                    <h1>Explications</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus vestibulum sed arcu non odio euismod lacinia at quis. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum. Lacus vestibulum sed arcu non odio euismod. Est ultricies integer quis auctor elit sed vulputate. Sem nulla pharetra diam sit amet nisl suscipit adipiscing. Enim tortor at auctor urna nunc. Felis donec et odio pellentesque diam volutpat. Ipsum consequat nisl vel pretium lectus quam id. Sed id semper risus in hendrerit gravida rutrum quisque non. Vel facilisis volutpat est velit egestas dui. A lacus vestibulum sed arcu.</p>
+                </div>
+                <button id="button-next" onclick="next('#intro', '#firstDecree')">Suivant</button>    
+            </div>
+            
+            <!-- Premier décret -->
+            <div id="firstDecree" style="display:none">
+                <div id="text">
+                    <h1>1er décret</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus vestibulum sed arcu non odio euismod lacinia at quis. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum. Lacus vestibulum sed arcu non odio euismod. Est ultricies integer quis auctor elit sed vulputate. Sem nulla pharetra diam sit amet nisl suscipit adipiscing. Enim tortor at auctor urna nunc. Felis donec et odio pellentesque diam volutpat. Ipsum consequat nisl vel pretium lectus quam id. Sed id semper risus in hendrerit gravida rutrum quisque non. Vel facilisis volutpat est velit egestas dui. A lacus vestibulum sed arcu.</p>
+                </div>
+                <button id="button-next" onclick="next('#firstDecree', '#react')">Réagir</button>
+                <button id="button-next"><a a href="index.html">Accepter</a></button>
+                <button id="button-next" onclick="next('#firstDecree', '#intro')">Retour</button>
+            </div>
+            
+            <!-- Réaction au premier décret -->
+            <div id="react" style="display:none">
+                <div id="text">
+                    <h1>Réaction au 1er décret</h1>
+                    <div id="text">
+                        <h2>Réaction du 1er décret</h2>
+                        <p style="font-style:italic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus vestibulum sed arcu non odio euismod lacinia at quis. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum. Lacus vestibulum sed arcu non odio euismod. Est ultricies integer quis auctor elit sed vulputate. Sem nulla pharetra diam sit amet nisl suscipit adipiscing. Enim tortor at auctor urna nunc. Felis donec et odio pellentesque diam volutpat. Ipsum consequat nisl vel pretium lectus quam id. Sed id semper risus in hendrerit gravida rutrum quisque non. Vel facilisis volutpat est velit egestas dui. A lacus vestibulum sed arcu.</p>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus vestibulum sed arcu non odio euismod lacinia at quis. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum. Lacus vestibulum sed arcu non odio euismod. Est ultricies integer quis auctor elit sed vulputate. Sem nulla pharetra diam sit amet nisl suscipit adipiscing. Enim tortor at auctor urna nunc. Felis donec et odio pellentesque diam volutpat. Ipsum consequat nisl vel pretium lectus quam id. Sed id semper risus in hendrerit gravida rutrum quisque non. Vel facilisis volutpat est velit egestas dui. A lacus vestibulum sed arcu.</p>
+                </div>
+                <button id="button-next" onclick="next('#react', '#firstDecree')">Retour</button>
+                <form id="add-node-form">
+                    <h2>Publier</h2>
+                    <input required id="add-node-author" class="input" type="text" placeholder="Add an author...">
+                    <input required id="add-node-text" class="input" type="text" placeholder="Add a text...">
+                    <input required id="add-node-hashtags" class="input" type="text" placeholder="Add a hashtag...">
+                    <button id="add-node-button" type="submit" onclick="window.location.href='index.html';">Réagir</button> 
+                </form>
+                <script>
+                    console.log(window.location.pathname)
+                    //window.location.href="index.html";
+                </script>
+            </div> 
+            
+        
+        </div>
+
+           
+
+       
+        
+
+
+    </div>
+
+    <script src="src/introduction.js"></script>
+
+
+    </body>
+ </html>

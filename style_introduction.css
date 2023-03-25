@@ -1,0 +1,21 @@
+
+  /* Center the graph network on the page */
+  /* à garder ou enlever ?*/
+  
+
+  #container {
+    height: 100vh;
+    width: 100vw;
+  }
+
+
+  /* text-box in the middle of the page */
+  #text-box-intro {
+    position: absolute; 
+    top: 50%; left: 50%; 
+    transform: translate(-50%, -50%);
+    border: 1px solid #1C6EA4;
+    padding: 20px;
+    text-align: center;
+    background-color: white;
+  }

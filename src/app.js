@@ -160,6 +160,7 @@ fetchData()
         "id": nextNodeId,
         "text": inputTextValue,
       }
+      
 
       addNewNode(nodeData)
     });
