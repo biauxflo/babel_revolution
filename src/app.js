@@ -83,7 +83,8 @@ fetchData()
       // Updating the database
       const updates = {};
       updates['/nodes/' + (nodeData.id - 1)] = nodeData;
-      // update(ref(database), updates);
+      //to update database
+      //update(ref(database), updates);
       
       // Update the nodes, links and label selections with the updated data
       node = svg.selectAll(".node").data(nodes);
@@ -141,6 +142,7 @@ fetchData()
 
     }
 
+    //function for creating new nodes on main page (must be unique)
     const myForm = document.getElementById("add-node-form");
 
     myForm.addEventListener("submit", function(event) {
@@ -148,6 +150,31 @@ fetchData()
       const inputAuthor = document.getElementById("add-node-author");
       const inputText = document.getElementById("add-node-text");
       const inputHashtag = document.getElementById("add-node-hashtags");
+
+      const inputAuthorValue = inputAuthor.value;
+      const inputTextValue = inputText.value;
+      const inputHashTagArray = inputHashtag.value.split(',').map(hashtag => hashtag.trim());
+      const nextNodeId = nodes.length + 1;
+
+      const nodeData = {
+        "author": inputAuthorValue,
+        "hashtags": inputHashTagArray,
+        "id": nextNodeId,
+        "text": inputTextValue,
+      }
+      
+
+      addNewNode(nodeData)
+    });
+
+    //function for the react node
+    const formReact = document.getElementById("add-node-form-react");
+
+    formReact.addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent the default form submission behavior
+      const inputAuthor = document.getElementById("add-node-author-react");
+      const inputText = document.getElementById("add-node-text-react");
+      const inputHashtag = document.getElementById("add-node-hashtags-react");
 
       const inputAuthorValue = inputAuthor.value;
       const inputTextValue = inputText.value;
