@@ -23,16 +23,10 @@ jobs:
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
-          username: wbabel
-          server: stargate.utc.fr
-          port: 22 # default is 22
-          password: ${{ secrets.BABEL_PASSWORD }}
- 
-          
-          # will put all file under this path
-          local_path: ./* # default is ./*
-          # files will copy to under remote_path
-          remote_path: /volgen/users/wbabel/public_html/dev
-          
-          # sftp args
-          args: '-o ConnectTimeout=5'
+          username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
+          port: ${{ secrets.FTP_PORT }}
+          local_path: './*'
+          remote_path: '/volgen/users/wbabel/public_html/dev'
+          sftp_only: true
+          password: ${{ secrets.FTP_PASSWORD }}
