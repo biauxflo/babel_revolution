@@ -26,7 +26,7 @@ jobs:
           username: wbabel
           server: stargate.utc.fr
           port: 22 # default is 22
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.BABEL_PASSWORD }}
  
           
           # will put all file under this path
