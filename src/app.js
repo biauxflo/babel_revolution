@@ -167,31 +167,6 @@ fetchData()
       addNewNode(nodeData)
     });
 
-    //function for the react node
-    const formReact = document.getElementById("add-node-form-react");
-
-    formReact.addEventListener("submit", function(event) {
-      event.preventDefault(); // prevent the default form submission behavior
-      const inputAuthor = document.getElementById("add-node-author-react");
-      const inputText = document.getElementById("add-node-text-react");
-      const inputHashtag = document.getElementById("add-node-hashtags-react");
-
-      const inputAuthorValue = inputAuthor.value;
-      const inputTextValue = inputText.value;
-      const inputHashTagArray = inputHashtag.value.split(',').map(hashtag => hashtag.trim());
-      const nextNodeId = nodes.length + 1;
-
-      const nodeData = {
-        "author": inputAuthorValue,
-        "hashtags": inputHashTagArray,
-        "id": nextNodeId,
-        "text": inputTextValue,
-      }
-      
-
-      addNewNode(nodeData)
-    });
-
 // =================================== RESET GRAPH BUTTON  ===================================
 
     let monBouton = document.getElementById("reset-graph");

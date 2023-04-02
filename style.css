@@ -14,18 +14,6 @@
 }
 
 
-  /* INTRODUCTION : text-box in the middle of the page */
-  #text-box-intro {
-    position: absolute; 
-    top: 50%; left: 50%; 
-    transform: translate(-50%, -50%);
-    border: 1px solid #1C6EA4;
-    padding: 20px;
-    text-align: center;
-    background-color: white;
-  }
-
-
 /* Center the graph network on the page */
 #main {
   /* border: 1px solid red; */
