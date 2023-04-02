@@ -1,20 +1,14 @@
-
-// =================================== IMPORT MODULES ===================================
-
-import { ref, update, set} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
-import { fetchData } from "./fetch_database.js";
-import { forceSimulation, simulationTicked, createNodeDragBehavior } from "./simulation.js";
-import { createNodes, displayNodeInfo } from "./nodes.js";
-import { createLinks } from "./links.js";
-import { createLabels } from "./labels.js";
+import {fetchData} from "./fetch_database.js";
+import {createNodeDragBehavior, forceSimulation, simulationTicked} from "./simulation.js";
+import {createNodes, displayNodeInfo} from "./nodes.js";
+import {createLinks} from "./links.js";
+import {createLabels} from "./labels.js";
+import {insertData} from "./insert_database.js";
 
 fetchData()
   .then((result) => {
-
     let nodes = result.nodes;
-    const database = result.database;
-    
-    console.log("Les deux opérations asynchrones sont terminées avec succès.");
+    console.log("Les données ont été récuperées avec succès.");
 
 // =================================== GRAPH SETTINGS ===================================
 
@@ -80,11 +74,10 @@ fetchData()
       // Recompute the links with the updated nodes array
       [links, link] = createLinks(svg, nodes);
 
-      // Updating the database
-      const updates = {};
-      updates['/nodes/' + (nodeData.id - 1)] = nodeData;
-      // update(ref(database), updates);
-      
+      // TODO Updating the database
+      insertData(nodeData);
+
+      // TODO redo the update mecanism
       // Update the nodes, links and label selections with the updated data
       node = svg.selectAll(".node").data(nodes);
       link = svg.selectAll(".link").data(links);
@@ -131,7 +124,7 @@ fetchData()
       simulation.nodes(nodes)
       simulation.force('link',
         d3.forceLink(links).id(d => d.id).distance(300)
-      )      
+      )
       simulation.alpha(1).restart();
 
       simulation = simulationTicked(simulation, link, node, label)
@@ -160,7 +153,6 @@ fetchData()
         "id": nextNodeId,
         "text": inputTextValue,
       }
-
       addNewNode(nodeData)
     });
 
@@ -169,17 +161,13 @@ fetchData()
     let monBouton = document.getElementById("reset-graph");
     monBouton.addEventListener("click",   function() {
 
-      const reset_node = [{
-        "author": "Ismail",
-        "hashtags": ["intro"],
-        "id": 1,
-        "text": "Hello World",
-      }];
-
-      set(ref(database, '/nodes/'), reset_node);
-
       // Add the new node to the nodes array
-      nodes = reset_node;
+      nodes = [{
+          "author": "Ismail",
+          "hashtags": ["intro"],
+          "id": 1,
+          "text": "Hello World",
+      }];
 
       // Recompute the links with the updated nodes array
       [links, link] = createLinks(svg, nodes);
