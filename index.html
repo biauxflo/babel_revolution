@@ -8,11 +8,11 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_story.css">
 
   </head>
 
-  <body onload="onLoadGraph()">
+  <body onload="onLoadStory()">
 
     <div id="container">
 
@@ -20,41 +20,95 @@
         <img id="logo" src="img/logo_babel_revolution.png" alt="Logo Babel Revolution">
       </div>
 
-      <button id="button-decree2" onclick="window.location.href = 'story.html?decree=2'">Décret 2</button>
-      <button id="button-decree3" onclick="window.location.href = 'story.html?decree=3'">Décret 3</button>
-      <button id="button-end" onclick="alert('Le soulèvement populaire s’organise de manière auto-gérée, prend de l’ampleur  et parvient à renverser le pouvoir en place pour imposer une politique écolinguistique ouverte à la diversité des langues, des cultures et des espèces. Et on commence par limiter le recours au numérique, très coûteux pour l’environnement, en éteignant/détruisant la Matrice. \n [fin temporaire] ')">Fin</button>
-      
+      <div id="text-box-intro">
 
-      <div id="main">
-
-        <div id="graph"></div>
-        
-          <div id="text-box" style="display:flex">
-
-            <div id="node-info">
-              <h3 id="node-title" style="display:none">Publication</h3> 
-              <div id="node-text"></div>
-              <div id="node-hashtags"></div>
+        <!-- Explications / début -->
+        <div id="intro" style="display:block">
+            <div id="text">
+                <h1>Introduction</h1>
+                <p>« Une expression qui, il y a un instant à peine, vivait encore et semblait même indéracinable, pouvait brusquement s’évanouir : elle a disparu avec la situation qui l’avait engendrée et dont elle témoignera un jour tel un fossile »
+                    (Klemperer, LTI, la langue du Troisième Reich, 1947).</p>
+                <p>
+                    Dans une uchronie – qui ressemble étrangement à notre monde contemporain –, un mouvement populaire spontané émerge suite à l’édiction d’une nouvelle épuration linguistique. Sous l’impulsion du Centre de la monoculture (CMC), la toute puissante institution agro-culturelle régissant à la fois l’agroforesterie et la vie intellectuelle, des centaines de noms de plantes, de fleurs, d’arbres ont été supprimés du Dictionnaire officiel de la CMC. Cette dernière d’une longue série de lois et amendements vise à expurger la langue commune pour « l’actualiser et la mettre mieux en adéquation avec l’environnement » (extrait du Dictionnaire officiel de la CMC), dans lequel la biodiversité végétale s’est drastiquement réduite. Le blog publié dans la Dark Machine d’une anonyme rend témoignage, dans le langage même, de l’appauvrissement et la colonisation de la nature et du savoir par l’humain (et par son prolongement, la Machine, mais aussi de la résistance qui s’organise contre cet étiolement conjoint de la nature et de l'esprit.
+                    Assignées derrière leurs écrans par la pollution qui gangrène la ville, les seuls moyens d’action des populations pour résister : les posts plurilingues émis au cœur même codé de la Machine, organisme dématérialisé où s’agence désormais la vie sociale, professionnelle et civique. Ainsi, spontanément, des voix y germent, d’abord balbutiantes et isolées, bientôt articulées, en des langues éradiquées au Coup d’État : naguères florissantes, comme l’anglais, le mandarin, l’hindi, l’espagnol, l’arabe, l’espagnol, le bengali, le russe ; mais aussi de cultures désormais bien lointaines, comme l’étrusque, le trégorois ou les créoles... Suite à l’actualisation du dictionnaire et en dépit de l’interdiction de parler ces langues interdites, le mur de la Machine se couvre de graphes et de glyphes numériques ; de technotextes, de poèmes sonores et d’éclats de voix hypermédiatisés ; de fenêtres ouvertes sur un ailleurs hypertextuel plurilingue devenu zone prohibée ; de souvenirs de rencontres hétérolingues hétérodoxes ; d’exhortations à cultiver son jardin, là, maintenant, même dans la plus infime fissure de la langue et du bitume. Et qu’importe si les langues se défont ou se fondent, s’intriquent à s’en empêtrer les consonnes...
+                    
+                    Il y a urgence à dire en présence de toutes les langues de ce monde multiple et divers dont vous avez encore souvenir, avant que ces – que vos langues ne meurent définitivement, à l’instar des espèces végétales menacées. Hâtez-vous : sauvons ce qui est déjà en voix d’extinction !</p>
             </div>
+            <button id="button-next" onclick="nextPageIntro('#intro', '#story')">Suivant</button>    
+        </div>
 
-            <form id="add-node-form">
-              <h2>Publier</h2>
-              <input required id="add-node-author" class="input" type="text" placeholder="Add an author...">
-              <input required id="add-node-text" class="input" type="text" placeholder="Add a text...">
-              <input required id="add-node-hashtags" class="input" type="text" placeholder="Add a hashtag...">
-              <button id="add-node-button" type="submit">Add</button>
-              <button id="reset-graph" type="button">Reset graph</button>
-            </form>
+        <!-- Histoire -->
+        <div id="story" style="display:none">
+            <div id="text">
+                <h1>Épuration écologique et linguistique</h1>
+                <p>
+                    Tilleul, courge, chêne, orchidée, pommier, haricot, cerisier, platane… Et maintenant « patate » ! Cette fois, ces damnés linguistes du Centre de la langue unique ont même banni « patate » du dernier opus du Dictionnaire officiel de la CMC : nous ne dînerons plus, frugaux et indifféremment, que de purées de légumes [Doc 1 : article du Dictionnaire officiel sur « légume » ou un autre mot]. Et, seulement les grands jours : d’un fruit en dessert auquel sera éventuellement accolé un adjectif pour en caractériser la taille, la forme ou la couleur. Moi, ce soir, comme tous les autres soirs, je mangerai les yeux caves devant mon écran une soupe de gros légumes et un fruit rond. Austère. Comme le goût fade de ces succédanés issus de croisements in vitro : Nutriscore imbattable, évidemment [Doc 2 : Pub audio ou visuelle pour une purée en poudre de « gros légumes »]. Ils avaient commencé par les arbres. Déjà, lors du Coup d’Etat, personne n’avait bronché de voir rayé du dictionnaire le cocobolo ou le pokemoboy, moi la première [Doc. 3 : photos des arbres/page Wikipédia ou autre base de données] : si peu savaient encore à quelles espèces ils s’attachaient dans leur verdoyante jeunesse puisque les mots pour les dire étaient si rarement usités. À quoi bon ? Qui en avait déjà vu, de toute façon des cocolos et des pokemboys ? Vous, oui ?  Moi, non, jamais. Ça avait certes jasé un peu, lorsqu’ils avaient refrancisé le baobab et l’araucaria, en bobe et en aroque. Les autres plantes aux noms étrangers avaient suivi : le pomel, le curcume, le dèkon, le chou patchoix, la rutabague… Ca, c'était avant qu’ils ne disparaissent tout bonnement des étals. Trop coûteux, trop difficiles à faire pousser, pas assez performants énergétiquement, par rapport à leurs légumes de laboratoire. 
+                    
+                    Jusqu’où iront-ils nous rogner la nature ? Jusqu’où accepterons-nous cette stérilisation du monde si ample qu’a été notre langue [Doc 3 : citation de Wittgenstein] ? Jusqu’où ? Il faut agir ! Mais comment ?
+                    </p>
+            </div>
+            <button id="button-next" onclick="nextPageIntro('#story', '#story2')">Suivant</button>  
+            <button id="button-next" onclick="nextPageIntro('#story', '#intro')">Retour</button>  
             
+        </div>
 
-          </div>
+        <!-- Histoire 2 -->
+        <div id="story2" style="display:none">
+            <div id="text">
+                <h1>La Machine s’emballe toutes langues dehors !</h1>
+                <p>
+                    Quelque chose se passe ! C’est encore incertain, encore souterrain, mais des voix s’élèvent au sein même de la Machine officielle, pas même sur la Dark Machine où j’écris, peu héroïque, en samizdat, ces carnets sans lecteurs. Des voix qui résistent contre cette épuration linguistique, en français, et en des langues dont je n’ai parfois jamais même entendu parler. Existent-elles, ont-elle déjà existé, toutes ? J’ai navigué la nuit durant dans la Matrice, suivi les échos hypertextes de ces voix : ce sont des voyages. 
 
+                    Certains premiers posts ont été censurés par l’algorithme mais d’autres ont réussi à forcer le code, en s’émaillant de mots bannis, en français non autorisé, et dans d’autres langues. Ça gronde, en-haut-du-code. 
+
+                    Allez donc lire ça vous-même !
+
+                </p>
+            </div>
+            <button id="button-next" onclick="nextPageIntro('#story2', '#firstDecree')">Suivant</button>    
+            <button id="button-next" onclick="nextPageIntro('#story2', '#story')">Retour</button> 
+        </div>
+        
+        <!-- Premier décret -->
+        <div id="firstDecree" style="display:none">
+            <div id="text">
+                <h1>1er décret - plantes</h1>
+                <p>Il est maintenant interdit d'utiliser des mots comme artichaut, lentille, oignon, radis, potiron, ... Les termes scientifiques pour décrire une plante sont bannis, car inutiles. Merci d'utiliser les attributs nécessaires, comme "légume vert" ou "petit légume rond". Toute usage non conventionnel sera sanctionné. -- Le CMC
+                </p>
+            </div>
+            <button id="button-next" onclick="window.location.href = 'graph.html?decree=1&react=true'">Réagir</button>
+            <button id="button-next" onclick="window.location.href = 'graph.html?decree=1&react=false'">Accepter</button>
+            <button id="button-next" onclick="nextPageIntro('#firstDecree', '#intro')">Retour</button>
+        </div>
+
+        <!-- Deuxième décret -->
+        <div id="secondDecree" style="display:none">
+            <div id="text">
+                <h1>2e décret - adjectifs</h1>
+                <p>Après une étude poussée et documentée sur les relations inter-individus, le CMC a constaté un nombre trop important d'adjectifs pour décrire les personnalités. Dans une démarche de simplicité qui aidera chacun et chacune, il est désormais interdit de qualifier quelqu'un par un adjectif différent de la liste suivante : gentil, méchant. Les superlatifs (très, beaucoup, peu, ...) restent utilisables sans excès. 
+                     Le CMC condamne notamment les mots trop précis, comme "affectueux", "caustique", "désorganisé", "humble", "prévenant", ... Une sanction supplémentaire sera ajoutée pour les mots à double sens, qui s'oppose au progrès de la simplicité de compréhension. -- Le CMC
+                </p>
+            </div>
+            <button id="button-next" onclick="window.location.href = 'graph.html?decree=2&react=true'">Réagir</button>
+            <button id="button-next" onclick="window.location.href = 'graph.html?decree=2&react=false'">Accepter</button>
+        </div>
+
+        <!-- Troisième décret -->
+        <div id="thirdDecree" style="display:none">
+            <div id="text">
+                <h1>3e décret - langues</h1>
+                <p>La simplicité et la compréhension sont les objectifs principaux du CMC. Ainsi, à partir d'aujourd'hui, l'usage de plusieurs langues est interdit. De plus, les termes inventés ou utilisant une règle non conforme au règlement (exemple : le "verlan") sont aussi interdits. Ces pratiques laissent certaines personnes hors des conversations qu'ils ou elles ne peuvent pas comprendre. Pour une bonne cohésion de groupe, utilisons une seule langue, donc chaque mot est simple. La présence dans le dictionnaire des termes utilisés est une règle absolue. -- Le CMC</p>
+            </div>
+            <button id="button-next" onclick="window.location.href = 'graph.html?decree=3&react=true'">Réagir</button>
+            <button id="button-next" onclick="window.location.href = 'graph.html?decree=3&react=false'">Accepter</button>
+        </div>
+        
+    
       </div>
 
 
-    </div>
 
-    <script type="module" src="src/app.js"></script>
+    </div>
     <script src="src/story.js"></script>
 
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <title>BⱯBEL Rëvoluθion</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body onload="onLoadGraph()">
+
+    <div id="container">
+
+      <div id="title">
+        <img id="logo" src="img/logo_babel_revolution.png" alt="Logo Babel Revolution">
+      </div>
+
+      <button id="button-decree2" onclick="window.location.href = 'index.html?decree=2'">Décret 2</button>
+      <button id="button-decree3" onclick="window.location.href = 'index.html?decree=3'">Décret 3</button>
+      <button id="button-end" onclick="alert('Le soulèvement populaire s’organise de manière auto-gérée, prend de l’ampleur  et parvient à renverser le pouvoir en place pour imposer une politique écolinguistique ouverte à la diversité des langues, des cultures et des espèces. Et on commence par limiter le recours au numérique, très coûteux pour l’environnement, en éteignant/détruisant la Matrice. \n [fin temporaire] ')">Fin</button>
+      
+
+      <div id="main">
+
+        <div id="graph"></div>
+        
+          <div id="text-box" style="display:flex">
+
+            <div id="node-info">
+              <h3 id="node-title" style="display:none">Publication</h3> 
+              <div id="node-text"></div>
+              <div id="node-hashtags"></div>
+            </div>
+
+            <form id="add-node-form">
+              <h2>Publier</h2>
+              <input required id="add-node-author" class="input" type="text" placeholder="Add an author...">
+              <input required id="add-node-text" class="input" type="text" placeholder="Add a text...">
+              <input required id="add-node-hashtags" class="input" type="text" placeholder="Add a hashtag...">
+              <button id="add-node-button" type="submit">Add</button>
+              <button id="reset-graph" type="button">Reset graph</button>
+            </form>
+            
+
+          </div>
+
+      </div>
+
+
+    </div>
+
+    <script type="module" src="src/app.js"></script>
+    <script src="src/story.js"></script>
+
+
+    </body>
+ </html>

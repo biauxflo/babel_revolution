@@ -11,11 +11,11 @@ function nextPageIntro(current, next) {
 
 }
 
-//fonction onload de la page index.html
+//fonction onload de la page graph.html
 
 //gestion de l'affichage des noeuds avec les décrets déjà lus + boutons
 function onLoadGraph() {
-    // ex of URL : index.html?decree=2&react=true
+    // ex of URL : graph.html?decree=2&react=true
 
     var parameters = location.search.substring(1).split("&");
     var temp = parameters[0].split("=");
@@ -49,7 +49,7 @@ function onLoadGraph() {
         default :
             //si erreur ou changement manuelle -> retour à l'intro
             console.log("Paramètre inconnu - redirection introduction")
-            window.location.href = 'story.html'
+            window.location.href = 'index.html'
     }
 }
 
@@ -66,7 +66,7 @@ function buttonsToShow(toShow, toRemove1, toRemove2) {
 }
 
 function onLoadStory() {
-    // ex of URL : story.html?decree=2
+    // ex of URL : index.html?decree=2
 
     var parameters = location.search.substring(1).split("&");
     var temp = parameters[0].split("=");
