@@ -74,7 +74,7 @@ fetchData()
       // Recompute the links with the updated nodes array
       [links, link] = createLinks(svg, nodes);
 
-      // TODO Updating the database
+      //updating the database
       insertData(nodeData);
 
       // TODO redo the update mecanism
@@ -134,6 +134,7 @@ fetchData()
 
     }
 
+    //function for creating new nodes on main page (must be unique)
     const myForm = document.getElementById("add-node-form");
 
     myForm.addEventListener("submit", function(event) {
