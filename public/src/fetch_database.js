@@ -1,5 +1,5 @@
 export function fetchData() {
-    return fetch("https://babel.utc.fr/dev/src/php/get_data.php")
+    return fetch("/node")
         .then((response) => {
             if(!response.ok){ // Before parsing (i.e. decoding) the JSON data,
                 // check for any errors.
@@ -18,6 +18,6 @@ export function fetchData() {
             });
         })
         .catch((error) => {
-            // TODO handle errors.
+            console.log(error);
         });
 }
