@@ -56,7 +56,21 @@
 
     <script type="module" src="src/app.js"></script>
     <script src="src/story.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+      $(function(){
+        let socket = io();
 
+        socket.on("databaseUpdate", ()=>{
+          console.log("BDD mise à jour");
+          location.reload();
+        });
 
+        $("form").submit(function(){
+          socket.emit("databaseUpdate");
+        })
+      });
+    </script>
     </body>
  </html>

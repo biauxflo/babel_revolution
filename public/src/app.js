@@ -4,12 +4,16 @@ import {createNodes, displayNodeInfo} from "./nodes.js";
 import {createLinks} from "./links.js";
 import {createLabels} from "./labels.js";
 import {insertData} from "./insert_database.js";
-
 fetchData()
   .then((result) => {
+      console.log(result);
     let nodes = result.nodes;
     console.log("Les données ont été récuperées avec succès.");
-
+    let socket = io();
+    socket.on("databaseUpdate", () =>
+      {
+            console.log("Mettre à jour la BDD")
+      });
 // =================================== GRAPH SETTINGS ===================================
 
     // Set the parameters for the graph (dimensions, margins, etc.)
@@ -77,7 +81,9 @@ fetchData()
       //updating the database
       insertData(nodeData);
 
-      // TODO redo the update mecanism
+      //Inform that DB has been updated
+      socket.emit("databaseUpdate");
+
       // Update the nodes, links and label selections with the updated data
       node = svg.selectAll(".node").data(nodes);
       link = svg.selectAll(".link").data(links);
