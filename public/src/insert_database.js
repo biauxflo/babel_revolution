@@ -9,5 +9,5 @@ export function insertData(node){
         body: JSON.stringify(node),
     })
         .then(r=>console.log(r))
-        .catch(err => alert(err));
+        .catch(err => console.log(err));
 }
