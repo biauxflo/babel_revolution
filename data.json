@@ -1,7 +1,0 @@
-{
-    "nodes": [
-      { "id":1, "author": "Ismail", "text": "Hello World", "hashtags": ["intro"] },
-      { "id":2, "author": "Ismail", "text": "Bonjour le monde", "hashtags": ["intro"] },
-      { "id":3, "author": "Ismail", "text": "Hola el mundo", "hashtags": ["intro"] }
-    ]
-}

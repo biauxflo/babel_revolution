@@ -1,0 +1,38 @@
+{
+  "name": "babel_revolution",
+  "version": "1.0.0",
+  "description": "Source code for babel revolution project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=development nodemon --exec babel-node ./server/index.js",
+    "build": "babel ./server --out-dir ./build",
+    "prestart": "npm run build",
+    "start": "node ./build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biauxflo/babel_revolution.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/biauxflo/babel_revolution/issues"
+  },
+  "homepage": "https://github.com/biauxflo/babel_revolution#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^6.1.5",
+    "mariadb": "^3.1.1",
+    "mysql2": "^3.2.3",
+    "nodemon": "^2.0.22",
+    "sequelize": "^6.31.0",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.0"
+  }
+}
