@@ -32,26 +32,34 @@
 #text-box {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  
   height: 90vh;
-  width: 30vw;
-  /* border: 1px solid red; */
+  width: 25vw;
+  /*border: 1px solid black;*/
+}
+
+#about {
+  border: 1px solid black;
+}
+
+#messages {
+  border: 1px solid black;
 }
 
 #node-info {
-  width: 65%;
-  height: 60%;
-  margin: 50px;
-  /* border: 1px solid red; */
+  height: 50vh;
+  margin: 20px;
+  /*border: 1px solid red; */
   justify-content: center;
   text-align: center;
+  overflow:auto;
 }
 
 /* Style the form */
 #add-node-form {
   /* border: 1px solid red; */
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: center;
   height: 40%;
@@ -65,8 +73,28 @@
 }
 
 button {
-    padding: 5px;
+  padding: 5px;
   margin: 5px;
+}
+
+.button-toggle-down {
+  background-image: url("/img/arrow_down.png");
+  background-size:cover;
+  height: 20px;
+  width: 30px;
+  border: none;
+}
+
+.button-toggle-up {
+  background-image: url("/img/arrow_up.png");
+  background-size:cover;
+  height: 20px;
+  width: 30px;
+  border: none;
+}
+
+#title-with-toggle {
+  display:inline-block;
 }
 
 #add-node-button {

@@ -17,20 +17,15 @@ export function createNodes(svg, nodes) {
 //elements-nodes
 // Displaying the text and hashtags of a node on a div
 export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle) {
-  node.on("mouseover", function(event, d) {
+  node.on("click", function(event, d) {
     let hashtags = d.hashtags.join(" / ")
     nodeTextDiv.html(d.text);
     nodeHashtagsDiv.html("# : " +hashtags);
+    d3.selectAll(".node").style("fill", "black") //reset color on all nodes
     d3.select(this).style("fill", "green");
     nodeTitle.style("display", "block") //show title, otherwise hidden
   })
-  .on("mouseout", function(d) {
-    nodeTextDiv.html("");
-    nodeHashtagsDiv.html("");
-    d3.select(this).style("fill", "black");
-    nodeTitle.style("display", "none")
-    
-  });
+  
 }
 
   
