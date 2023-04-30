@@ -1,5 +1,3 @@
-var cpt = 0;
-
 //current et next sont des id (#...)
 function nextPageIntro(current, next) {
 
@@ -36,15 +34,15 @@ function onLoadGraph() {
     switch(decree) { //decree = '1' ou '2' ou '3'
         case '1' :
             console.log("Premier décret - graphe")
-            buttonsToShow(toShow="#button-decree2", toRemove1="#button-decree3", toRemove2="#button-end")
+            d3.select("#button-decree2").style("display", "block");
             break;
         case '2' :
             console.log("Deuxième décret - graphe")
-            buttonsToShow(toShow="#button-decree3", toRemove1="#button-decree2", toRemove2="#button-end")
+            d3.select("#button-decree3").style("display", "block");
             break;
         case '3' :
             console.log("Troisitème décret - graphe")
-            buttonsToShow(toShow="#button-end", toRemove1="#button-decree2", toRemove2="#button-decree3")
+            d3.select("#button-end").style("display", "block");
             break;
         default :
             //si erreur ou changement manuelle -> retour à l'intro
@@ -53,40 +51,25 @@ function onLoadGraph() {
     }
 }
 
-//gestion des boutons - paramètres = #id
-function buttonsToShow(toShow, toRemove1, toRemove2) {
-    let buttonToShow = d3.select(toShow);
-    let buttonToRemove1 = d3.select(toRemove1);
-    let buttonToRemove2 = d3.select(toRemove2);
-
-    buttonToShow.style("display", "block")
-    buttonToRemove1.style("display", "none")
-    buttonToRemove2.style("display", "none")
-
-}
-
 function onLoadStory() {
     // ex of URL : index.html?decree=2
 
     var parameters = location.search.substring(1).split("&");
     var temp = parameters[0].split("=");
     var decree = decodeURI(temp[1]);
-
-    let introDiv = d3.select("#intro");
     
     switch(decree) { //decree = '2' ou '3'
         case '2' :
             console.log("Deuxième décret - lecture")
             let secondDecreeDiv = d3.select("#secondDecree");
             secondDecreeDiv.style("display", "block")
-            introDiv.style("display", "none")
             break;
         case '3' :
             console.log("Troisitème décret")
             let thirdDecreeDiv = d3.select("#thirdDecree");
             thirdDecreeDiv.style("display", "block")
-            introDiv.style("display", "none")
             break;
         default :
+        d3.select("#intro").style("display", "block");
     }
 }
