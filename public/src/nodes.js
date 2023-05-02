@@ -17,6 +17,22 @@ export function createNodes(svg, nodes) {
 //elements-nodes
 // Displaying the text and hashtags of a node on a div
 export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle) {
+  //if click on graph but outside a node
+  const svg = d3.select("svg");
+  svg.on("click", function(event, d) {
+    if(event.target.nodeName === "svg") {
+      node.style("fill", "black");
+      nodeTitle.style("display", "none") //hide title
+      nodeTextDiv.html("");  //set text to empty to not show
+      nodeHashtagsDiv.html("");
+
+      //close side bar
+      d3.select("#messages-inside").style("display", "none")
+      d3.select("#button-toggle-messages").classed("button-toggle-down", true)
+      d3.select("#button-toggle-messages").classed("button-toggle-up", false)
+    }
+   });
+
   node.on("click", function(event, d) {
     let hashtags = d.hashtags.join(" / ")
     nodeTextDiv.html(d.text);
@@ -24,6 +40,11 @@ export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle) {
     d3.selectAll(".node").style("fill", "black") //reset color on all nodes
     d3.select(this).style("fill", "green");
     nodeTitle.style("display", "block") //show title, otherwise hidden
+
+    //open side bar
+    d3.select("#messages-inside").style("display", "block")
+    d3.select("#button-toggle-messages").classed("button-toggle-down", false)
+    d3.select("#button-toggle-messages").classed("button-toggle-up", true)
   })
   
 }

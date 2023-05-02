@@ -23,13 +23,25 @@ function onLoadGraph() {
         temp = parameters[1].split("=");
     var react = decodeURI(temp[1]);
     }
-
     
-
     //react = true or false
-    //to do : gestion du react
-
     console.log("react : "+react)
+
+    if(react == "true") {
+        //open side bar
+        d3.select("#messages-inside").style("display", "block")
+        d3.select("#button-toggle-messages").classed("button-toggle-down", false)
+        d3.select("#button-toggle-messages").classed("button-toggle-up", true)
+
+        //open message box
+        //open side bar & message box
+        d3.select("#add-node-form").style("display", "block")
+        d3.select("#button-toggle-writing").classed("button-toggle-down", false)
+        d3.select("#button-toggle-writing").classed("button-toggle-up", true)
+
+        document.getElementById("add-node-author").focus();
+    }
+
     
     switch(decree) { //decree = '1' ou '2' ou '3'
         case '1' :
