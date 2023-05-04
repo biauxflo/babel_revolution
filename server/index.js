@@ -1,6 +1,12 @@
-const http = require('http');
 const app = require('./app');
-const server = http.createServer(app);
+const https = require('https');
+const fs = require('fs');
+
+const server = https.createServer({
+    key: fs.readFileSync('certificate/key.pem'),
+    cert: fs.readFileSync('certificate/cert.pem')
+  }, app);
+
 const io= require('socket.io')(server);
 
 const normalizePort = val => {
