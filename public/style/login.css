@@ -1,0 +1,80 @@
+html {
+  caret-color: #0a0a0a;  /* hide the text cursor by giving it the same color than the background */
+}
+
+body {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  background-color: #0a0a0a;
+}
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+  margin: 9% 0 1% 0;
+  padding: 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0;
+  width: 100%;
+  font-size: 26px;
+  margin-top: 0;
+}
+
+main > div {
+  grid-column: 2;
+}
+
+main > div > form > div {
+  margin-top: 1.5em;
+}
+
+label {
+  display: inline-block;
+  width: 10em;
+  text-align: right;
+  margin-right: 2em;
+}
+
+input {
+  display: inline-block;
+  width: 8em;
+  font: inherit;
+  font-family: noto;
+  height: 1em;
+  border: 1px solid #f2f2f2;
+}
+
+button {
+  display: block;
+  font: inherit;
+  width: 7em;
+  margin: 2.5em 9em 0 9em;
+  padding: .5em 0;
+  border: 1px solid #f2f2f2;
+  color: #e5e5e5;
+  background-color: #0a0a0a;
+}
+
+button:hover{
+  background-color: #1a1a1a;
+}
+
+div#message_div {
+  margin: 0;
+  height: 1em;
+}
+
+p {
+  position: relative;
+  font-size: 0.9em;
+  font-style: italic;
+  text-align: center;
+  color: #cc0000;
+  caret-color: #0a0a0a;  /* hide the text cursor by giving it the same color than the background */
+}
