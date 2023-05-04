@@ -1,0 +1,54 @@
+@font-face {
+  font-family: "altertype";
+  src: url("../fonts/altertype_DOUBLE_JE-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "noto";
+  src: url("../fonts/NotoSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "pictsicons";
+  src: url("../fonts/pictosicons-Regular.woff2") format("woff2");
+}
+
+html {
+  font-size: 16px;
+  font-family: altertype, noto, sans-serif;
+  color: #e5e5e5;
+  background-color: #0a0a0a;
+}
+
+p {
+  font-family: noto, sans-serif;
+}
+
+button {
+  font: inherit;
+  font-size: 30px;
+  width: auto;
+  padding: .2em;
+  border: 1px solid #f2f2f2;
+  color: #e5e5e5;
+  background-color: #0a0a0a;
+}
+
+button:hover {
+  background-color: #1a1a1a;
+}
+
+/*********************************** HEADER WITH TITLE: BABEL REVOLUTION ***************************************/
+header {
+  display: block;
+  width: 650px;
+  height: 70px;
+}
+
+header > h1 {
+  margin: 15px 0 0 10px;
+  font-size: 40px;
+  padding: 0;
+  width: 17em;
+  caret-color: #0a0a0a;  /* hide the text cursor by giving it the same color than the background */
+}
