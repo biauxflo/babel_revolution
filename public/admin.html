@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta name="author" content="Lucas D'aquaro">
+    <meta name="description" content="Interface administrateur de Babel Revolution">
+    <meta charset="utf-8">
+    <link rel="icon" href="img/icone-babel.png" type="image/png">
+    <title>BABEL - Admin</title>
+    <link href="style/style.css" rel="stylesheet" type="text/css">
+    <link href="style/admin.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="background">
+        <!-- This div is used to set the background color on the whole page -->
+    </div>
+    <header>
+        <h1>BⱯBEL RËVOLUㅏION</h1>
+        <p id="application_message"></p>
+        <button type="button" id="menu_button">Menu</button>
+    </header>
+    <aside>
+        <div class="glass" id="menu_hiding_glass">
+            <!-- This div 'hide' the rest of the screen when the menu is open -->
+        </div>
+        <div id="menu_div">
+            <h2>Menu</h2>
+            <button type="button" id="create_account">Créer un compte</button>
+            <button type="button" id="delete_account">Supprimer un compte</button>
+            <button type="button" id="change_password">Changer de mot de passe</button>
+            <form action="admin/logout" method="GET">
+                <button type="submit" id="disconnect">Déconnexion</button>
+            </form>
+        </div>
+    </aside>
+    <main>
+        <div class="glass" id="session_actions_glass">
+            <!-- This div 'hide' the rest of the screen when one session's actions are shown -->
+        </div>
+        <!-- The following div is the template for the sessions. It is copied when a new session is created -->
+        <div class="session ongoing" id="session_template">
+            <div class="image">
+                <img src="img/graphe1.png" alt="graph" class="graph">
+                <div class="session_actions">
+                    <button type="button" class="enter">Entrer</button>
+                    <button type="button" class="link">Copier lien</button>
+                    <button type="button" class="rename">Renommer</button>
+                    <button type="button" class="delete">Supprimer</button>
+                </div>
+            </div>
+            <p class="session_title">Titre</p>
+            <p class="session_author">Créé par</p>
+        </div>
+        <h2>Session en cours</h2>
+        <div class="sessions_set" id="ongoing_sessions_set">
+            <div class="session ongoing" id="create_session">
+                <p id="create_session_image">+</p>
+            </div>
+        </div>
+        <h2>Session terminées</h2>
+        <h3>Visibles</h3>
+        <div class="sessions_set" id="visible_completed_sessions_set">
+        </div>
+        <h3>Non visibles</h3>
+        <div class="sessions_set" id="non_visible_completed_sessions_set">
+        </div>
+    </main>
+    <!-- The following prompts will be shown only when needed -->
+    <!-- Session Name Prompt -->
+    <div class="prompt glass" id="session_name_prompt">
+        <div>
+            <button type="button" class="close">X</button>
+            <div>
+                <h2>Nouvelle Session</h2>
+                <label>Nom de la session</label>
+                <input type="text">
+                <div class="one_button">
+                    <button type="button" class="create">Créer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Session Rename Prompt -->
+    <div class="prompt glass" id="session_rename_prompt">
+        <div>
+            <button type="button" class="close">X</button>
+            <div>
+                <h2>Renommer la session</h2>
+                <label>Nouveau nom</label>
+                <input type="text">
+                <div class="one_button">
+                    <button type="button" class="rename">Renommer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Session Delete Prompt -->
+    <div class="prompt glass" id="session_delete_prompt">
+        <div>
+            <button type="button" class="close">X</button>
+            <div>
+                <h2>Supprimer la session</h2>
+                <p>Cette action est irréversible.</p>
+                <div class="two_buttons">
+                    <button type="button" class="cancel">Annuler</button>
+                    <button type="button" class="delete">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Account Create Prompt -->
+    <div class="prompt glass" id="account_create_prompt">
+        <div>
+            <button type="button" class="close">X</button>
+            <div>
+                <h2>Nouveau compte admin</h2>
+                <form id="create_account_form">
+                    <div>
+                        <p id="create_account_message"></p>
+                    </div>
+                    <div class="input">
+                        <label for="name">Identifiant</label>
+                        <input type="text" id="username" name="username">
+                    </div>
+                    <div class="input">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password">
+                    </div>
+                    <div class="input">
+                        <label for="password_verification">Vérification du <br> mot de passe</label>
+                        <input type="password" class="two_lines" id="password_verification"
+                            name="password_verification">
+                    </div>
+                    <div class="input">
+                        <label for="privilege">Niveau admin</label>
+                        <div>
+                            <input type="radio" name="privilege" id="privilege_1_radio" value="1">
+                            <label id="privilege_1_radio_label"> 1 </label>
+                            <input type="radio" name="privilege" id="privilege_2_radio" value="2">
+                            <label> 2 </label>
+                        </div>
+                    </div>
+                    <div id="privileges_description">
+                        <div class="cover">
+                            <!-- Use to cover the text to hide -->
+                        </div>
+                        <div id="privileges_1">
+                            <h4>Admin de niveau 1</h4>
+                            <ul>
+                                <li>Création de comptes admin</li>
+                                <li>Création de sessions</li>
+                                <li>Contrôle de toutes les sessions</li>
+                            </ul>
+                        </div>
+                        <div id="privileges_2">
+                            <h4>Admin de niveau 2</h4>
+                            <ul>
+                                <li>Création de sessions</li>
+                                <li>Contrôle des sessions créées par ce compte</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="cancel">Annuler</button>
+                        <button type="submit">Créer le compte</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Session Delete Prompt -->
+    <div class="prompt glass" id="account_delete_prompt">
+        <div>
+            <button type="button" class="close">X</button>
+            <div>
+                <h2>Supprimer un compte</h2>
+                <form id="delete_account_form">
+                    <div>
+                        <p id="delete_account_message"></p>
+                    </div>
+                    <label>Compte à supprimer :</label>
+                    <select class="account" name="username">
+                        <!-- The accounts are added by admin.js -->
+                    </select>
+                    <div class="buttons">
+                        <button type="button" class="cancel">Annuler</button>
+                        <button type="submit" class="delete">Supprimer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Password Change Prompt -->
+    <div class="prompt glass" id="password_change_prompt">
+        <div>
+            <button type="button" class="close">X</button>
+            <div>
+                <h2>Nouveau mot de passe</h2>
+                <form id="password_change_form">
+                    <div>
+                        <p id="password_change_message"></p>
+                    </div>
+                    <div class="input">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password">
+                    </div>
+                    <div class="input">
+                        <label for="password_verification">Vérification du <br> mot de passe</label>
+                        <input type="password" class="two_lines" id="password_verification"
+                            name="password_verification">
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="cancel">Annuler</button>
+                        <button type="submit">Confirmer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="src/admin/admin.js"></script>
+</body>
+
+</html>

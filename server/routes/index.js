@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const nodeRoutes = require('./node');
+const loginRoutes = require('./login');
+const adminRoutes = require('./admin');
 const router = express.Router();
 
 // Home page
@@ -10,6 +12,12 @@ router.get('/', (req, res, next) =>
 
 // Node get and post
 router.use('/node', nodeRoutes);
+
+// Admin login routes
+router.use('/login', loginRoutes);
+
+// Admin panel routes
+router.use('/admin', adminRoutes);
 
 // Block other access
 router.all('*', (req, res, next) =>
