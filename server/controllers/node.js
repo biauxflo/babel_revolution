@@ -19,6 +19,10 @@ exports.addNewNode = (req, res, next) => {
         author: received.author,
         text: received.text,
         hashtags: hashtags,
+        belief:received.belief,
+        decree:received.decree,
+        title:received.title,
+        type:received.type
     })
         .then(()=>res.status(201).json("Objet crée"))
         .catch(error => res.status(400).json({ error }));
