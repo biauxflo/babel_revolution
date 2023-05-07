@@ -16,14 +16,15 @@ export function createNodes(svg, nodes) {
 // Displaying node text on a div
 //elements-nodes
 // Displaying the text and hashtags of a node on a div
-export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle) {
+export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor) {
   //if click on graph but outside a node
   const svg = d3.select("svg");
   svg.on("click", function(event, d) {
     if(event.target.nodeName === "svg") {
       node.style("fill", "black");
-      nodeTitle.style("display", "none") //hide title
       nodeTextDiv.html("");  //set text to empty to not show
+      nodeTitle.html("");
+      nodeAuthor.html("");
       nodeHashtagsDiv.html("");
 
       //close side bar
@@ -35,6 +36,8 @@ export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle) {
 
   node.on("click", function(event, d) {
     let hashtags = d.hashtags.join(" / ")
+    nodeTitle.html(d.title);
+    nodeAuthor.html("écrit par "+d.author);
     nodeTextDiv.html(d.text);
     nodeHashtagsDiv.html("# : " +hashtags);
     d3.selectAll(".node").style("fill", "black") //reset color on all nodes

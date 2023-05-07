@@ -53,15 +53,28 @@
                 <h5 id="title-with-toggle">écrire un message</h5>
                 <button type="button" id="button-toggle-writing" class="button-toggle-down" onclick="toggle(this.id, 'add-node-form')"></button>
                 <form id="add-node-form" style="display:none">
+                  <input required id="add-node-title" class="input" type="text" placeholder="Add a title...">
                   <input required id="add-node-author" class="input" type="text" placeholder="Add an author...">
+                  <select id="add-node-decree">
+                    <option value="decree1" selected>Décret 1</option>
+                    <option value="decree2">Décret 2</option>
+                    <option value="decree3">Décret 3</option>
+                  </select>
+                  <select id="add-node-belief">
+                    <option value="against" selected>Dissidant.e</option>
+                    <option value="in_favor">CMC</option>
+                    <option value="neutral">Neutre</option>
+                  </select>
                   <input required id="add-node-text" class="input" type="text" placeholder="Add a text...">
                   <input required id="add-node-hashtags" class="input" type="text" placeholder="Add a hashtag...">
+                  <input id="add-node-type" class="input" type="hidden" value="contribution">
                   <button id="add-node-button" type="submit">Add</button>
                   <button id="reset-graph" type="button">Reset graph</button>
                 </form>
 
                 <div id="node-info">
-                  <h4 id="node-title" style="display:none">Publication</h4> 
+                  <h4><div id="node-title"></div></h4> 
+                  <h5><div id="node-author"></div></h5>
                   <div id="node-text"></div>
                   <div id="node-hashtags"></div>
                 </div>
