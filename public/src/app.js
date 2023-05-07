@@ -14,6 +14,17 @@ fetchData()
       {
             console.log("Mettre à jour la BDD")
       });
+
+// =================================== DECREE OPTIONS FOR MESSAGE FORM ===================================
+
+      let decrees = nodes.filter(e => e.type == "decree")
+      let select = document.getElementById("add-node-decree");
+      if(select.options.length != decrees.length) {
+        for(const decree of decrees) {
+          select.add(new Option(decree.title,decree.id)) //add an option for each decree
+        } 
+      }
+
 // =================================== GRAPH SETTINGS ===================================
 
     // Set the parameters for the graph (dimensions, margins, etc.)
