@@ -52,8 +52,9 @@ fetchData()
     const nodeTextDiv = d3.select("#node-text");
     const nodeHashtagsDiv = d3.select("#node-hashtags");
     const nodeTitle = d3.select("#node-title")
+    const nodeAuthor = d3.select("#node-author")
 
-    displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle)
+    displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
 
 
 // =================================== DRAGGING ===================================
@@ -136,7 +137,7 @@ fetchData()
       simulation = simulationTicked(simulation, link, node, label)
       node.call(nodeDragBehavior);
       //elements-nodes
-      displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv)
+      displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
 
     }
 
@@ -145,21 +146,37 @@ fetchData()
 
     myForm.addEventListener("submit", function(event) {
       event.preventDefault(); // prevent the default form submission behavior
+      
+      const inputTitle = document.getElementById("add-node-title");
       const inputAuthor = document.getElementById("add-node-author");
       const inputText = document.getElementById("add-node-text");
       const inputHashtag = document.getElementById("add-node-hashtags");
+      const inputDecree = document.getElementById("add-node-decree");
+      const inputBelief = document.getElementById("add-node-belief");
+      const inputType = document.getElementById("add-node-type");
 
+      const inputTitleValue = inputTitle.value;
       const inputAuthorValue = inputAuthor.value;
       const inputTextValue = inputText.value;
+      const inputDecreeValue = inputDecree.value;
+      const inputBeliefValue = inputBelief.value;
       const inputHashTagArray = inputHashtag.value.split(',').map(hashtag => hashtag.trim());
       const nextNodeId = nodes.length + 1;
+      const inputTypeValue = inputType.value;
 
       const nodeData = {
         "author": inputAuthorValue,
         "hashtags": inputHashTagArray,
         "id": nextNodeId,
         "text": inputTextValue,
+        "decree" : inputDecreeValue,
+        "belief" : inputBeliefValue,
+        "type" : inputTypeValue,
+        "title": inputTitleValue
       }
+
+      console.log(nodeData)
+
       addNewNode(nodeData)
     });
 
