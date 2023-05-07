@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     hashtags: DataTypes.STRING,
     decree: DataTypes.STRING,
     belief: DataTypes.STRING,
+    title: DataTypes.STRING,
+    type: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Node',
