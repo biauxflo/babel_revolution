@@ -20,23 +20,10 @@ let nodes = result.nodes;
 let decrees = nodes.filter(e => e.type == "decree")
 let select = document.getElementById("add-node-decree");
 if(select.options.length != decrees.length) {
-for(const decree of decrees) {
-  select.add(new Option(decree.title,decree.id)) //add an option for each decree
+  for (const decree of decrees) {
+    select.add(new Option(decree.title, decree.id)) //add an option for each decree
+  }
 }
-}
-
-
-let result;
-try{
-    result = await fetchData();
-    console.log("Les données ont été récuperées avec succès.");
-}
-catch (e){
-    console.log("Error :", e);
-}
-console.log(result);
-
-let nodes = result.nodes;
 
 // =================================== GRAPH SETTINGS ===================================
 
@@ -147,70 +134,66 @@ export default async function updateGraph() {
   simulation.alpha(1).restart();
 
   simulation = simulationTicked(simulation, link, node, label)
-    node.call(nodeDragBehavior);
-    //elements-nodes
-    displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
-
-// ======== UPDATE DATA ===========
-async function updateData() {
-  try{
-    var newResult = await fetchData();
-    console.log("Les données ont été récuperées avec succès.");
-  }
-  catch (e){
-    console.log("Error while fetching datas:", e);
-    return;
-  }
-  console.log(result);
-  nodes = newResult.nodes;
-
-  // Recompute the links with the updated nodes array
-  [links, link] = createLinks(svg, nodes);
+  node.call(nodeDragBehavior);
+  //elements-nodes
+  displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
 }
 
+// ======== UPDATE DATA ===========
+  async function updateData() {
+    try {
+      var newResult = await fetchData();
+      console.log("Les données ont été récuperées avec succès.");
+    } catch (e) {
+      console.log("Error while fetching datas:", e);
+      return;
+    }
+    console.log(result);
+    nodes = newResult.nodes;
+
+    // Recompute the links with the updated nodes array
+    [links, link] = createLinks(svg, nodes);
+  }
+
 //function for creating new nodes on main page (must be unique)
-const myForm = document.getElementById("add-node-form");
+  const myForm = document.getElementById("add-node-form");
 
-    myForm.addEventListener("submit", function(event) {
-      event.preventDefault(); // prevent the default form submission behavior
-      
-      const inputTitle = document.getElementById("add-node-title");
-      const inputAuthor = document.getElementById("add-node-author");
-      const inputText = document.getElementById("add-node-text");
-      const inputHashtag = document.getElementById("add-node-hashtags");
-      const inputDecree = document.getElementById("add-node-decree");
-      const inputBelief = document.getElementById("add-node-belief");
-      const inputType = document.getElementById("add-node-type");
+  myForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // prevent the default form submission behavior
 
-      const inputTitleValue = inputTitle.value;
-      const inputAuthorValue = inputAuthor.value;
-      const inputTextValue = inputText.value;
-      const inputDecreeValue = inputDecree.value;
-      const inputBeliefValue = inputBelief.value;
-      const inputHashTagArray = inputHashtag.value.split(',').map(hashtag => hashtag.trim());
-      const nextNodeId = nodes.length + 1;
-      const inputTypeValue = inputType.value;
+    const inputTitle = document.getElementById("add-node-title");
+    const inputAuthor = document.getElementById("add-node-author");
+    const inputText = document.getElementById("add-node-text");
+    const inputHashtag = document.getElementById("add-node-hashtags");
+    const inputDecree = document.getElementById("add-node-decree");
+    const inputBelief = document.getElementById("add-node-belief");
+    const inputType = document.getElementById("add-node-type");
 
-      const nodeData = {
-        "author": inputAuthorValue,
-        "hashtags": inputHashTagArray,
-        "id": nextNodeId,
-        "text": inputTextValue,
-        "decree" : inputDecreeValue,
-        "belief" : inputBeliefValue,
-        "type" : inputTypeValue,
-        "title": inputTitleValue
-      }
+    const inputTitleValue = inputTitle.value;
+    const inputAuthorValue = inputAuthor.value;
+    const inputTextValue = inputText.value;
+    const inputDecreeValue = inputDecree.value;
+    const inputBeliefValue = inputBelief.value;
+    const inputHashTagArray = inputHashtag.value.split(',').map(hashtag => hashtag.trim());
+    const nextNodeId = nodes.length + 1;
+    const inputTypeValue = inputType.value;
 
-      console.log(nodeData)
+    const nodeData = {
+      "author": inputAuthorValue,
+      "hashtags": inputHashTagArray,
+      "id": nextNodeId,
+      "text": inputTextValue,
+      "decree": inputDecreeValue,
+      "belief": inputBeliefValue,
+      "type": inputTypeValue,
+      "title": inputTitleValue
+    }
 
-      addNewNode(nodeData)
-    });
-
-  var form = document.getElementById("add-node-form");
-  form.reset();
-  //UPDATE DB
-  insertData(nodeData);
-});
+    //Reset form
+    var form = document.getElementById("add-node-form");
+    form.reset();
+    //UPDATE DB
+    insertData(nodeData);
+  });
 
 

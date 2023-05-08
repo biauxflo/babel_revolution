@@ -4,14 +4,10 @@ export function forceSimulation(nodes, links, parameters) {
     let simulation = d3
         .forceSimulation(nodes)
         .force('link',
-        d3.forceLink(links).id(d => d.id).distance(300).strength(0.01)
+        d3.forceLink(links).id(d => d.id).distance(300)
         )
-        .force('charge', d3.forceManyBody().strength(50))
+        .force('charge', d3.forceManyBody())
         .force('center', d3.forceCenter(parameters.width / 2, parameters.height / 2))
-        .force("collide", d3.forceCollide().strength(1).radius(35))
-        // .force("forceX", d3.forceX())
-        // .force("forceY", d3.forceY())
-        .alphaTarget(0.5) // Add alphaTarget parameter to the simulation
 
         return simulation
     }
@@ -26,7 +22,8 @@ export function simulationTicked(simulation, link, node, label) {
           .attr('x2', d => d.target.x)
           .attr('y2', d => d.target.y)
       node
-          .attr('cx', d => d.x).attr('cy', d => d.y)
+          .attr('cx', d => d.x)
+          .attr('cy', d => d.y)
       label
           .attr('x', function (d) {
           return d.x
