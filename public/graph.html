@@ -90,24 +90,25 @@
 
     </div>
 
-    <script type="module" src="src/app.js"></script>
+    <script type=module src="/src/app.js"></script>
     <script src="src/story.js"></script>
     <script src="src/interface.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-      $(function(){
-        let socket = io();
+    <script type="module">
+      import updateGraph from "./src/app.js";
 
-        socket.on("databaseUpdate", ()=>{
-          console.log("BDD mise à jour");
-          location.reload();
-        });
+      console.log("OUI");
+      var socket = io();
 
-        $("form").submit(function(){
-          socket.emit("databaseUpdate");
-        })
+      var form = document.getElementById('add-node-form');
+
+      form.addEventListener('submit', function() {
+        socket.emit('databaseUpdate');
       });
+
+      socket.on('databaseUpdate', async function(){
+        await updateGraph();
+      })
     </script>
     </body>
  </html>
