@@ -211,9 +211,17 @@ router.post('/create-session', (req, res) => {
   const image = 'graphe1.png';
   const completed = false;
   const visible = false;
+  // 1. We create the entry for the session in the table SessionInfo
   db.SessionInfo.create({ title, author, image, completed, visible })
     .then(session => {
-      res.json({ success: true, session });
+      // 2. We create a new table for the new session using the id of the session
+      const newTableName = 'session-' + session.id;
+      const sessionModel = db.sequelize.define(newTableName, db.Node.rawAttributes, { timestamps: false });
+      sessionModel.sync().
+        then(() => {
+          // 3. We send the info of the session
+          res.json({ success: true, session });
+        })
     })
     .catch(err => {
       console.error(err);
