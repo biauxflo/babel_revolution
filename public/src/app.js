@@ -185,8 +185,8 @@ export default async function updateGraph() {
       "text": inputTextValue,
       "decree": inputDecreeValue,
       "belief": inputBeliefValue,
-      "type": inputTypeValue,
-      "title": inputTitleValue
+      "title": inputTitleValue,
+      "type": inputTypeValue
     }
 
     //Reset form
