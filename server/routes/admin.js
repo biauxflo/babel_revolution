@@ -13,6 +13,67 @@ router.get('/', auth, (req, res) => {
   res.sendFile('admin.html', { root: '../public' });
 });
 
+/*********************************** ENTER SESSION ROUTES ***************************************/
+// Function to check if the admin is authorized to control the the session
+function checkAdminSessionControl(user, sessionNumber) {
+  if (user.privileges === 0 || user.privileges === 1) {
+    // If the admin is level 0 or 1, they can control the session
+    return Promise.resolve();
+  } else {
+    // If the admin is level 2, they has to be the author of the session to control the session
+    // 1. We find the sessionInfo
+    return db.SessionInfo.findOne({
+      where: { id: sessionNumber }
+    })
+      .then(sessionInfo => {
+        if (sessionInfo === null) {
+          throw new Error('Wrong session number.');
+        } else {
+          // 2. If the admin is not the author, we throw an error
+          if (sessionInfo.author !== user.username) {
+            throw new Error('This account did not create this session.');
+          }
+        }
+      });
+  }
+}
+
+// Route to enter a session as admin and control it
+router.get('/session/:number', auth, (req, res) => {
+  const sessionNumber = req.params.number;
+  // If 'sessionNumber' corresponds to a number, we send the graph-admin page
+  if (!isNaN(sessionNumber)) {
+    checkAdminSessionControl(req.session.user, Number(sessionNumber))
+      .then(() => {
+        res.sendFile('graph-admin.html', { root: '../public' });
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).json({ success: false, error: err });
+      });
+  }
+});
+
+// Route to get the content of the graph-admin 
+router.get('/get-content/:number', auth, (req, res) => {
+  const sessionNumber = req.params.number;
+  checkAdminSessionControl(req.session.user, Number(sessionNumber))
+    .then(() => {
+      // The name of the database session table is 'session-X', with X a number
+      const tableName = 'session-' + sessionNumber;
+      const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: false });
+      // We get all the nodes from the table, and send them
+      sessionModel.findAll()
+        .then(nodes => {
+          res.status(200).json({ success: true, nodes });
+        })
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ success: false, error: err });
+    });
+});
+
 /*********************************** MENU BUTTONS ROUTES ***************************************/
 // This function returns true if the password is correct, else it returns false and send an error
 function checkPassword(password, passwordVerification, errorMessage = "") {

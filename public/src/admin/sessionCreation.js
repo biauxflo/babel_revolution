@@ -93,7 +93,7 @@ export function addSessionHTML(template, sessionInfo, actionsGlass, ongoingSessi
 
     actionsDiv.querySelector('button.enter').addEventListener('click', function () {
         // When the user click on the button "Entrer", it loads the session
-        document.location.href = window.location.href + '/' + sessionInfo.id;
+        document.location.href = window.location.href + '/session/' + sessionInfo.id;
     });
 
     actionsDiv.querySelector('button.rename').addEventListener('click', function () {
@@ -116,7 +116,7 @@ export function addSessionHTML(template, sessionInfo, actionsGlass, ongoingSessi
         // We add the listener for the button "Copier le lien"
         secondButton.addEventListener('click', function () {
             // When the user click on the button "Copier lien", it copies the link
-            let adress = window.location.href + '/' + sessionInfo.id;
+            let adress = window.location.href + '/session/' + sessionInfo.id;
             navigator.clipboard.writeText(adress)
                 .then(() => {
                     appMessage.showMessage("Le lien a été copié.")
