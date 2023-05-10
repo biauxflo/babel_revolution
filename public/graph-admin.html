@@ -2,109 +2,71 @@
 <html>
 
 <head>
-
-  <meta charset="utf-8">
-  <title>BⱯBEL Rëvoluθion</title>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://apis.google.com/js/api.js"></script>
-
-  <link rel="icon" href="/img/icone-babel.png" type="image/png">
-
-  <link href="/style/style.css" rel="stylesheet" type="text/css">
-  <link href="/style/graph.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title>BⱯBEL Rëvoluθion</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <link rel="icon" href="/img/icone-babel.png" type="image/png">
+    <link href="/style/style.css" rel="stylesheet" type="text/css">
+    <link href="/style/graph.css" rel="stylesheet" type="text/css">
+    <link href="/style/graph-admin.css" rel="stylesheet" type="text/css">
 </head>
 
-<body onload="onLoadGraph()">
-
-  <div id="container">
-
+<body>
     <header>
-      <h1>BⱯBEL<br>RËVOLUㅏION</h1>
+        <h1>BⱯBEL<br>RËVOLUㅏION</h1>
     </header>
-
-    <button id="button-decree2" style="display:none" onclick="window.location.href = 'index.html?decree=2'">Décret
-      2</button>
-    <button id="button-decree3" style="display:none" onclick="window.location.href = 'index.html?decree=3'">Décret
-      3</button>
-    <button id="button-end" style="display:none"
-      onclick="alert('Le soulèvement populaire s’organise de manière auto-gérée, prend de l’ampleur  et parvient à renverser le pouvoir en place pour imposer une politique écolinguistique ouverte à la diversité des langues, des cultures et des espèces. Et on commence par limiter le recours au numérique, très coûteux pour l’environnement, en éteignant/détruisant la Matrice. \n [fin temporaire] ')">Fin</button>
-
-
-    <div id="main">
-
-      <div id="graph"></div>
-
-      <div id="text-box" style="display:flex"> <!-- right zone-->
-
-        <div id="about">
-          <h3 id="title-with-toggle">à propos</h3>
-          <button type="button" id="button-toggle-about" class="button-toggle-down"
-            onclick="toggle(this.id, 'about-text')"></button>
-
-          <div id="about-text" style="display:none">
-            <p>Texte à propos du projet</p>
-          </div>
-
-        </div>
-
-        <div id="messages">
-          <h3 id="title-with-toggle">messages</h3>
-          <button type="button" id="button-toggle-messages" class="button-toggle-down"
-            onclick="toggle(this.id, 'messages-inside')"></button>
-
-          <div id="messages-inside" style="display:none">
-
-            <h5 id="title-with-toggle">écrire un message</h5>
-            <button type="button" id="button-toggle-writing" class="button-toggle-down"
-              onclick="toggle(this.id, 'add-node-form')"></button>
-            <form id="add-node-form" style="display:none">
-              <input required id="add-node-title" class="input" type="text" placeholder="Add a title...">
-              <input required id="add-node-author" class="input" type="text" placeholder="Add an author...">
-              <select id="add-node-decree">
-                <!-- options added for each decree in src/app.js-->
-              </select>
-              <select id="add-node-belief">
-                <option value="against" selected>Dissidant.e</option>
-                <option value="in_favor">CMC</option>
-                <option value="neutral">Neutre</option>
-              </select>
-              <input required id="add-node-text" class="input" type="text" placeholder="Add a text...">
-              <input required id="add-node-hashtags" class="input" type="text" placeholder="Add a hashtag...">
-              <input id="add-node-type" class="input" type="hidden" value="contribution">
-              <button id="add-node-button" type="submit">Add</button>
-              <button id="reset-graph" type="button">Reset graph</button>
-            </form>
-
-            <div id="node-info">
-              <h4>
-                <div id="node-title"></div>
-              </h4>
-              <h5>
-                <div id="node-author"></div>
-              </h5>
-              <div id="node-text"></div>
-              <div id="node-hashtags"></div>
+    <aside>
+        <div id="publish_decree">
+            <div class="head">
+                <p class="toggle_indicator">►</p>
+                <h2>Promulger un décret</h2>
             </div>
+            <div class="body">
 
-
-          </div>
-
+            </div>
         </div>
+        <div id="end_session">
+            <div class="head">
+                <p class="toggle_indicator">►</p>
+                <h2>Terminer la session</h2>
+            </div>
+            <div class="body">
 
+            </div>
+        </div>
+        <div id="write_message">
+            <div class="head">
+                <p class="toggle_indicator">►</p>
+                <h2>Message du CMC</h2>
+            </div>
+            <div class="body">
 
-      </div>
+            </div>
+        </div>
+        <div id="modify_message">
+            <div class="head">
+                <p class="toggle_indicator">►</p>
+                <h2>Modifier une contribution</h2>
+            </div>
+            <div class="body">
 
-    </div>
+            </div>
+        </div>
+    </aside>
+    <main>
+        <div id="graph">
+            <!-- This div is used to display the graph -->
+        </div>
+    </main>
 
-
-  </div>
-  <!--
+    <!--
   <script type=module src="/src/app.js"></script>
-  -->
-  <script src="/src/story.js"></script>
-  <script src="/src/interface.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <!--
+ 
+    <script src="/src/story.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+     -->
+    <!--
   <script type="module">
     import updateGraph from "./src/app.js";
 
