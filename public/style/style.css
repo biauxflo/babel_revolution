@@ -62,13 +62,13 @@ button:hover {
 /*********************************** HEADER WITH TITLE: BABEL REVOLUTION ***************************************/
 header {
   display: block;
-  width: 650px;
-  height: 70px;
+  width: 340px;
+  height: 80px;
 }
 
 header > h1 {
   margin: 15px 0 0 10px;
-  font-size: 40px;
+  font-size: 32px;
   padding: 0;
   width: 17em;
   caret-color: #0a0a0a;  /* hide the text cursor by giving it the same color than the background */
