@@ -159,7 +159,7 @@ router.post('/change-password', auth, (req, res) => {
 });
 
 // Get accounts list route
-router.get('/accounts-list', (req, res) => {
+router.get('/accounts-list', auth, (req, res) => {
   const currentUsername = req.session.user.username;
   db.User.findAll({
     attributes: ['username'],  // We only take usernames
@@ -180,7 +180,7 @@ router.get('/accounts-list', (req, res) => {
 });
 
 // Get privilege route
-router.get('/admin-level', (req, res) => {
+router.get('/admin-level', auth, (req, res) => {
   const privileges = req.session.user.privileges;
   if (typeof (privileges) === 'number') {
     res.json({ success: true, privileges });
@@ -190,7 +190,7 @@ router.get('/admin-level', (req, res) => {
 });
 
 // Get all accounts list route
-router.get('/all-accounts-list', (req, res) => {
+router.get('/all-accounts-list', auth, (req, res) => {
   db.User.findAll({
     attributes: ['username']  // We only take usernames
   })
@@ -204,7 +204,7 @@ router.get('/all-accounts-list', (req, res) => {
 });
 
 // Delete account route
-router.post('/delete-account', (req, res) => {
+router.post('/delete-account', auth, (req, res) => {
   // We first check if the user has the right to delete an account (privileges 0 or 1)
   const privileges = req.session.user.privileges;
   if (privileges !== 0 && privileges !== 1) {
@@ -251,7 +251,7 @@ router.get('/get-sessions', auth, (req, res) => {
 });
 
 // Change visibility session route
-router.post('/change-visibility', (req, res) => {
+router.post('/change-visibility', auth, (req, res) => {
   const { id, visible } = req.body;
   db.SessionInfo.update({ visible }, {
     where: { id }
@@ -266,7 +266,7 @@ router.post('/change-visibility', (req, res) => {
 });
 
 // Create session route
-router.post('/create-session', (req, res) => {
+router.post('/create-session', auth, (req, res) => {
   const { title } = req.body;
   const author = req.session.user.username;
   const image = 'graphe1.png';
@@ -291,7 +291,7 @@ router.post('/create-session', (req, res) => {
 });
 
 // rename session route
-router.post('/rename-session', (req, res) => {
+router.post('/rename-session', auth, (req, res) => {
   const { id, newTitle } = req.body;
   db.SessionInfo.update({ newTitle }, {
     where: { id }
@@ -306,7 +306,7 @@ router.post('/rename-session', (req, res) => {
 });
 
 // Delete session route
-router.post('/delete-session', (req, res) => {
+router.post('/delete-session', auth, (req, res) => {
   const { id } = req.body;
   // If the user has not the right to delete all sessions (privileges 0 or 1), they has to have created the session
   const privileges = req.session.user.privileges;
