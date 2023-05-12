@@ -8,7 +8,6 @@
     <script src="https://apis.google.com/js/api.js"></script>
     <link rel="icon" href="/img/icone-babel.png" type="image/png">
     <link href="/style/style.css" rel="stylesheet" type="text/css">
-    <link href="/style/graph.css" rel="stylesheet" type="text/css">
     <link href="/style/graph-admin.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -60,30 +59,27 @@
         </div>
     </main>
 
-    <!--
-  <script type=module src="/src/app.js"></script>
- 
-    <script src="/src/story.js"></script>
+    <script type=module src="/src/admin/graph-admin.js"></script>
+    <script type=module src="/src/admin/graph-admin_app.js"></script> <!-- Display the graph -->
     <script src="/socket.io/socket.io.js"></script>
-     -->
     <!--
-  <script type="module">
-    import updateGraph from "./src/app.js";
+    <script type="module">
+        import updateGraph from "./src/app.js";
 
-    console.log("OUI");
-    var socket = io();
+        console.log("OUI");
+        var socket = io();
 
-    var form = document.getElementById('add-node-form');
+        var form = document.getElementById('add-node-form');
 
-    form.addEventListener('submit', function () {
-      socket.emit('databaseUpdate');
-    });
+        form.addEventListener('submit', function () {
+            socket.emit('databaseUpdate');
+        });
 
-    socket.on('databaseUpdate', async function () {
-      await updateGraph();
-    })
-  </script>
-  -->
+        socket.on('databaseUpdate', async function () {
+            await updateGraph();
+        })
+    </script>
+    -->
 </body>
 
 </html>
