@@ -2,7 +2,7 @@
 
 export class ToggleAside {
     constructor() {
-        this.aside = document.querySelector('aside');
+        this.element = document.querySelector('aside');
         // divsBodiesList is a list with each div body of the aside's div
         this.divsList = [];
         // For each div head, we add a listener
@@ -32,3 +32,11 @@ export class ToggleAside {
     }
 }
 
+export class AsideDiv {
+    constructor(divId) {
+        this.div = document.querySelector(divId);
+        this.head = this.div.querySelector('div.head');
+        this.body = this.div.querySelector('div.body');
+        this.select = this.body.querySelector('select');  // Depends on the div, this element may be null
+    }
+}
