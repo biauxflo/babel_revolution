@@ -6,6 +6,7 @@ import { createNodes, displayNodeInfo } from "../nodes.js";
 import { createLinks } from "../links.js";
 import { createLabels } from "../labels.js";
 import { insertData } from "../insert_database.js";
+
 let result;
 try {
     result = await fetchData();
@@ -81,6 +82,14 @@ node.call(nodeDragBehavior);
 // =================================== SIMULATION ===================================
 
 simulation = simulationTicked(simulation, link, node, label)
+
+// =================================== SOCKET ==================================
+
+const socket = io();
+socket.on('databaseUpdate', async function () {
+    await updateGraph();
+    console.log("+++ databaseUpdate done");
+})
 
 // =================================== UPDATE GRAPH ==================================
 export default async function updateGraph() {
