@@ -18,4 +18,16 @@ router.get('/get-decrees', auth, (req, res) => {
     });
 });
 
+// Get examples route
+router.get('/get-examples', auth, (req, res) => {
+  db.Example.findAll()
+    .then(examples => {
+      res.json({ success: true, examples });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ success: false, error: "Erreur lors de la récupération des messages d'exemple : " + err });
+    });
+});
+
 module.exports = router;
