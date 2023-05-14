@@ -45,6 +45,50 @@ publishDecree.head.addEventListener('click', () => {
             appMessage.showError("Les décrets n'ont pas été récupérés.");
             console.error('Error fetching decrees : ', error);
         });
+
+    // At the same time, we send a GET request to get the list of the example messages
+    fetch('/graph-admin/get-examples')
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                const examplesDiv = publishDecree.body.querySelector('div#example_messages');
+                // Delete previous content 
+                examplesDiv.innerHTML = '';
+                // Add the decrees to the select object
+                res.examples.forEach(example => {
+                    const idCheckbox = 'example_checkbox_' + example.id;
+                    // Checkbox creation
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = idCheckbox;
+                    checkbox.example = example;
+                    // Creation to the label associated to the checkbox
+                    const label = document.createElement('label');
+                    label.htmlFor = idCheckbox;
+                    let checkboxText = '';
+                    if (example.title) {
+                        checkboxText += '[ ' + example.title + ' ] ';
+                    }
+                    if (example.author) {
+                        checkboxText += '[ ' + example.author + ' ] : ';
+                    }
+                    checkboxText += example.text;
+                    if (example.hashtags) {
+                        checkboxText += ' [ #' + example.hashtags + ' ]';
+                    }
+                    label.textContent = checkboxText;
+                    // We add the elements to the html as children of example messages
+                    examplesDiv.appendChild(checkbox);
+                    examplesDiv.appendChild(label);
+                });
+            } else {
+                throw new Error(res.error);
+            }
+        })
+        .catch(error => {
+            appMessage.showError("Les exemples n'ont pas été récupérés.");
+            console.error('Error fetching examples : ', error);
+        });
 });
 
 // When the user change the selected decree, it changes the text to show the current decree text
