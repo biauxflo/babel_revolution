@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     author: DataTypes.STRING,
     text: DataTypes.LONGTEXT,
     hashtags: DataTypes.STRING,
-    decree: DataTypes.STRING,
+    decree: DataTypes.INTEGER,
     belief: DataTypes.STRING,
     title: DataTypes.STRING,
     type: DataTypes.STRING,
