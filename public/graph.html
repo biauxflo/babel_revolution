@@ -27,22 +27,20 @@
       <button id="button-decree3" style="display:none" onclick="window.location.href = 'index.html?decree=3'">Décret 3</button>
       <button id="button-end" style="display:none" onclick="alert('Le soulèvement populaire s’organise de manière auto-gérée, prend de l’ampleur  et parvient à renverser le pouvoir en place pour imposer une politique écolinguistique ouverte à la diversité des langues, des cultures et des espèces. Et on commence par limiter le recours au numérique, très coûteux pour l’environnement, en éteignant/détruisant la Matrice. \n [fin temporaire] ')">Fin</button>
       
+      <div id="about">
+        <button type="button" id="button-about" onclick="toggle_simple('about-text')">à propos</button>
+        <div id="about-text" style="display:none">
+          <p><i>« Une expression qui, il y a un instant à peine, vivait encore et semblait même indéracinable, pouvait brusquement s’évanouir : elle a disparu avec la situation qui l’avait engendrée et dont elle témoignera un jour tel un fossile » (Klemperer, LTI, la langue du Troisième Reich, 1947).</i></p>
+          <p>BⱯBEL RËVOLUㅏION est un récit participatif dystopique, qui ressemble étrangement à notre monde contemporain. Cette création aborde la question du lien entre la dégradation de la biodiversité et la dégradation de la diversité linguistique et culturelle.</p>
+          <p>Il s'agit d'un projet transdisciplinaire en cours qui implique des chercheuses et chercheurs (didactique des langues, littérature, design, sciences de l'information et de la communication) et des élèves-ingénieur·es en informatique.</p>
+        </div>
+      </div>
 
       <div id="main">
 
         <div id="graph"></div>
         
           <div id="text-box" style="display:flex"> <!-- right zone-->
-
-            <div id="about">
-              <h3 id="title-with-toggle">à propos</h3>
-              <button type="button" id="button-toggle-about" class="button-toggle-down" onclick="toggle(this.id, 'about-text')"></button>
-
-              <div id="about-text" style="display:none">
-                <p>Texte à propos du projet</p>
-              </div>
-              
-            </div>
 
             <div id="messages">
               <h3 id="title-with-toggle">messages</h3>
@@ -59,15 +57,14 @@
                     <!-- options added for each decree in src/app.js-->
                   </select>
                   <select id="add-node-belief">
-                    <option value="against" selected>Dissidant.e</option>
-                    <option value="in_favor">CMC</option>
-                    <option value="neutral">Neutre</option>
+                    <option value="against" selected>Dissident·e</option>
+                    <option value="neutral">Partagé·e</option>
+                    <option value="in_favor">Partisant·e</option>
                   </select>
-                  <input required id="add-node-text" class="input" type="text" placeholder="Add a text...">
-                  <input required id="add-node-hashtags" class="input" type="text" placeholder="Add a hashtag...">
+                  <input required id="add-node-text" class="input" type="text" placeholder="Ajouter du texte...">
+                  <input required id="add-node-hashtags" class="input" type="text" placeholder="Ajouter un hashtag...">
                   <input id="add-node-type" class="input" type="hidden" value="contribution">
                   <button id="add-node-button" type="submit">Add</button>
-                  <button id="reset-graph" type="button">Reset graph</button>
                 </form>
 
                 <div id="node-info">

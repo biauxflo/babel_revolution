@@ -13,3 +13,15 @@ function toggle(idButton, idDiv) {
     }
     
 }
+
+function toggle_simple(idDiv) {
+    div = document.getElementById(idDiv)
+
+    if(div.style.display == "none") { //display
+        d3.select("#"+idDiv).style("display", "block")
+    }
+    else { //hide
+        d3.select("#"+idDiv).style("display", "none")
+    }
+    
+}

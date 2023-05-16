@@ -38,6 +38,27 @@ button:hover {
   background-color: #1a1a1a;
 }
 
+#about {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100px;
+}
+
+#button-about {
+  font-size: 20px;
+}
+
+#about-text {
+  width: 800px;
+  height: fit-content;
+}
+
+#about-text p {
+  font-size: 13px;
+  text-align: left;
+}
+
 /*********************************** HEADER WITH TITLE: BABEL REVOLUTION ***************************************/
 header {
   display: block;
