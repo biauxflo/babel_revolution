@@ -23,23 +23,31 @@
         <h1>BⱯBEL RËVOLUㅏION</h1>
       </header>
 
+      <div id="about">
+        <button type="button" id="button-about" onclick="toggle_simple('about-text')">à propos</button>
+        <div id="about-text" style="display:none">
+          <p><i>« Une expression qui, il y a un instant à peine, vivait encore et semblait même indéracinable, pouvait brusquement s’évanouir : elle a disparu avec la situation qui l’avait engendrée et dont elle témoignera un jour tel un fossile » (Klemperer, LTI, la langue du Troisième Reich, 1947).</i></p>
+          <p>BⱯBEL RËVOLUㅏION est un récit participatif dystopique, qui ressemble étrangement à notre monde contemporain. Cette création aborde la question du lien entre la dégradation de la biodiversité et la dégradation de la diversité linguistique et culturelle.</p>
+          <p>Il s'agit d'un projet transdisciplinaire en cours qui implique des chercheuses et chercheurs (didactique des langues, littérature, design, sciences de l'information et de la communication) et des élèves-ingénieur·es en informatique.</p>
+        </div>
+      </div>
+
       <div id="text-box-intro">
 
         <!-- Explications / début -->
         <div id="intro" style="display:none">
             <div id="text">
-                <h1>Introduction</h1>
-                <p><i>« Une expression qui, il y a un instant à peine, vivait encore et semblait même indéracinable, pouvait brusquement s’évanouir : elle a disparu avec la situation qui l’avait engendrée et dont elle témoignera un jour tel un fossile »</i> (Klemperer, LTI, la langue du Troisième Reich, 1947).</p>
+                <h1>Prologue</h1>
                 <p>
                   Dans une dystopie – qui ressemble étrangement à notre monde contemporain –, un mouvement populaire spontané émerge suite à l’édiction d’une nouvelle épuration linguistique. Sous l’impulsion du Centre de la monoculture (CMC), la toute puissante institution agro-culturelle régissant à la fois l’agroforesterie et la vie intellectuelle, des centaines de noms de plantes, de fleurs, d’arbres ont été supprimés du Dictionnaire officiel de la CMC. Cette dernière d’une longue série de lois et amendements vise à expurger la langue commune pour « l’actualiser et la mettre mieux en adéquation avec l’environnement » (extrait du Dictionnaire officiel de la CMC), dans lequel la biodiversité végétale s’est drastiquement réduite. 
                 </p>
             </div>
-            <button id="button-next" onclick="nextPageIntro('#intro', '#intro2')">Suivant</button>   
+            <button id="button-next" onclick="nextPageIntro('#intro', '#intro2')">Poursuivre</button>   
         </div>
 
         <div id="intro2" style="display:none">
           <div id="text">
-              <h1>Introduction</h1>
+              <h1>Prologue</h1>
               <p>
                 Le blog  publié dans la Dark Machine d’une anonyme rend témoignage, dans le langage même, de l’appauvrissement et la colonisation de la nature et du savoir par l’humain (et par son prolongement, la Machine, mais aussi de la résistance qui s’organise contre cet étiolement conjoint de la nature et de l'esprit.
               </p>
@@ -48,12 +56,12 @@
               </p>
           </div>
           <button id="button-next" onclick="nextPageIntro('#intro2', '#intro')">Retour</button> 
-          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro3')">Suivant</button>   
+          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro3')">Poursuivre</button>   
       </div>
 
       <div id="intro3" style="display:none">
         <div id="text">
-            <h1>Introduction</h1>
+            <h1>Prologue</h1>
             <p>
               Suite à l’actualisation du dictionnaire et en dépit de l’interdiction de parler ces langues interdites,  le mur de la Machine se couvre de graphes et de glyphes numériques ; de technotextes, de poèmes sonores et d’éclats de voix hypermédiatisés ; de fenêtres ouvertes sur un ailleurs hypertextuel plurilingue devenu zone prohibée ; de souvenirs de rencontres hétérolingues hétérodoxes ; d’exhortations à cultiver son jardin, là, maintenant, même dans la plus infime fissure de la langue et du bitume. Et qu’importe si les langues se défont ou se fondent, s’intriquent à s’en empêtrer les consonnes...
             </p>
@@ -62,7 +70,7 @@
             </p>
         </div>
         <button id="button-next" onclick="nextPageIntro('#intro3', '#intro2')">Retour</button> 
-        <button id="button-next" onclick="nextPageIntro('#intro3', '#firstDecree')">Suivant</button>  
+        <button id="button-next" onclick="nextPageIntro('#intro3', '#firstDecree')">Entrer dans le monde</button>  
     </div>
         
         <!-- Premier décret -->
@@ -74,7 +82,7 @@
             </div>
             <button id="button-next" onclick="nextPageIntro('#firstDecree', '#intro')">Retour</button>
             <button id="button-next" onclick="window.location.href = 'graph.html?decree=1&react=true'">Réagir</button>
-            <button id="button-next" onclick="window.location.href = 'graph.html?decree=1&react=false'">Accepter</button>
+            <button id="button-next" onclick="window.location.href = 'graph.html?decree=1&react=false'">x</button>
         </div>
 
         <!-- Deuxième décret -->
@@ -86,7 +94,7 @@
                 </p>
             </div>
             <button id="button-next" onclick="window.location.href = 'graph.html?decree=2&react=true'">Réagir</button>
-            <button id="button-next" onclick="window.location.href = 'graph.html?decree=2&react=false'">Accepter</button>
+            <button id="button-next" onclick="window.location.href = 'graph.html?decree=2&react=false'">x</button>
         </div>
 
         <!-- Troisième décret -->
@@ -96,7 +104,7 @@
                 <p>La simplicité et la compréhension sont les objectifs principaux du CMC. Ainsi, à partir d'aujourd'hui, l'usage de plusieurs langues est interdit. Cette interdiction s'étend à tous les patois. De plus, les termes inventés ou utilisant une règle non conforme au règlement (exemple : le "verlan") sont aussi interdits. Ces pratiques excluent en effet des communications les personnes qui ne peuvent les comprendre. Pour le bien commun, utilisons une seule langue épurée, gage de paix et d'intercompréhension. -- Le CMC</p>
             </div>
             <button id="button-next" onclick="window.location.href = 'graph.html?decree=3&react=true'">Réagir</button>
-            <button id="button-next" onclick="window.location.href = 'graph.html?decree=3&react=false'">Accepter</button>
+            <button id="button-next" onclick="window.location.href = 'graph.html?decree=3&react=false'">x</button>
         </div>
         
     
@@ -106,6 +114,7 @@
 
     </div>
     <script src="src/story.js"></script>
+    <script src="src/interface.js"></script>
 
 
     </body>
