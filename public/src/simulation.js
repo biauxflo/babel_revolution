@@ -1,16 +1,16 @@
 // Create the force simulation for the nodes
 export function forceSimulation(nodes, links, parameters) {
-
     let simulation = d3
         .forceSimulation(nodes)
         .force('link',
-        d3.forceLink(links).id(d => d.id).distance(300)
+            d3.forceLink(links).id(d => d.id).strength(d => d.value)
         )
         .force('charge', d3.forceManyBody())
         .force('center', d3.forceCenter(parameters.width / 2, parameters.height / 2))
+        .force('collide',d3.forceCollide().radius(50))
 
-        return simulation
-    }
+    return simulation
+}
 
 // Update the positions of nodes and links in a force-directed graph simulation on each tick of the simulation.
 export function simulationTicked(simulation, link, node, label) {

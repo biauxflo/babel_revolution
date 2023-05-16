@@ -15,12 +15,32 @@ export function createLinksData(nodes) {
             links.push({
               source: node1.id,
               target: node2.id,
-              value: numCommonHashtags
+              value: Math.round((1/numCommonHashtags) * 10) / 10
             });
           }
         }
+
+        if (nodes[i].type === "contribution"){
+            var value;
+            switch (String(nodes[i].belief)) {
+                case "in_favor":
+                    value = 0.9;
+                    break;
+                case "against":
+                    value = 0.1;
+                    break;
+                default:
+                    value = 0.4;
+            }
+            links.push({
+                source: nodes[i].id,
+                target: nodes[i].decree,
+                value: value
+            });
+        }
       }
-    
+
+      console.log(links);
       return links;
     }    
     

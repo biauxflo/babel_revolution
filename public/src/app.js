@@ -129,7 +129,7 @@ export default async function updateGraph() {
 
   simulation.nodes(nodes)
   simulation.force('link',
-      d3.forceLink(links).id(d => d.id).distance(300)
+          d3.forceLink(links).id(d => d.id).strength(d => d.value)
   )
   simulation.alpha(1).restart();
 
