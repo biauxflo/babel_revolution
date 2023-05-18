@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({ success: false, message: "Erreur lors de l'authentification.", error: err });
-    });;
+    });
 });
 
 module.exports = router;

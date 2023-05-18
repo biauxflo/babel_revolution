@@ -38,5 +38,6 @@ export class AsideDiv {
         this.head = this.div.querySelector('div.head');
         this.body = this.div.querySelector('div.body');
         this.select = this.body.querySelector('select');  // Depends on the div, this element may be null
+        this.submit = this.body.querySelector('button.submit');
     }
 }

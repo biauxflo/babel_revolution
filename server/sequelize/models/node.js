@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   DataTypes.LONGTEXT = DataTypes.STRING;
   Node.init({
     author: DataTypes.STRING,
-    text: DataTypes.LONGTEXT,
+    // text: DataTypes.LONGTEXT,
+    text: DataTypes.TEXT({ length: 'long' }),
     hashtags: DataTypes.STRING,
     decree: DataTypes.INTEGER,
     belief: DataTypes.STRING,
