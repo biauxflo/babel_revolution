@@ -155,6 +155,14 @@ export default async function updateGraph() {
     [links, link] = createLinks(svg, nodes);
   }
 
+  function removeHashtag(h) {
+    if (h.charAt(0) == "#") {
+      h = h.substring(1);
+    } 
+    return h.trim()
+    
+  }
+
 //function for creating new nodes on main page (must be unique)
   const myForm = document.getElementById("add-node-form");
 
@@ -174,7 +182,7 @@ export default async function updateGraph() {
     const inputTextValue = inputText.value;
     const inputDecreeValue = inputDecree.value;
     const inputBeliefValue = inputBelief.value;
-    const inputHashTagArray = inputHashtag.value.split(',').map(hashtag => hashtag.trim());
+    const inputHashTagArray = inputHashtag.value.split(',').map(hashtag => removeHashtag(hashtag));
     const nextNodeId = nodes.length + 1;
     const inputTypeValue = inputType.value;
 
