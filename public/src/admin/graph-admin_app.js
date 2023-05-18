@@ -9,7 +9,9 @@ import { insertData } from "../insert_database.js";
 
 let result;
 try {
-    result = await fetchData();
+    // We get the number of the session in the url to send it
+    const idSession = document.location.href.split('/').pop();
+    result = await fetchData('/node/session/' + idSession);
     console.log("Les données ont été récuperées avec succès.");
 }
 catch (e) {
@@ -183,7 +185,9 @@ export default async function updateGraph() {
 // ======== UPDATE DATA ===========
 async function updateData() {
     try {
-        var newResult = await fetchData();
+        // We get the number of the session in the url to send it
+        const idSession = document.location.href.split('/').pop();
+        var newResult = await fetchData('/node/session/' + idSession);
         console.log("Les données ont été récuperées avec succès.");
     } catch (e) {
         console.log("Error while fetching datas:", e);
