@@ -89,7 +89,36 @@ const socket = io();
 socket.on('databaseUpdate', async function () {
     await updateGraph();
     console.log("+++ databaseUpdate done");
-})
+});
+// The event 'decreePublished' is received when a new decree is published
+socket.on('decreePublished', async function (decreeAndExamples) {
+    const decreeDialog = document.querySelector('dialog#decree_dialog');
+    // We add the decree title and text
+    decreeDialog.querySelector('#decree_title').textContent = decreeAndExamples.decree.title;
+    decreeDialog.querySelector('#decree_text').textContent = decreeAndExamples.decree.text;
+    // We add the exemples
+    decreeAndExamples.examples.forEach(example => {
+        let paragraphText = '';
+        if (example.title) {
+            paragraphText += '[ ' + example.title + ' ] ';
+        }
+        if (example.author) {
+            paragraphText += '[ ' + example.author + ' ] : ';
+        }
+        paragraphText += example.text;
+        if (example.hashtags) {
+            paragraphText += ' [ #' + example.hashtags + ' ]';
+        }
+        const paragraph = document.createElement('p');
+        paragraph.textContent = paragraphText;
+        decreeDialog.appendChild(paragraph);
+    });
+    // We show the dialog
+    decreeDialog.showModal();
+    // We update the graph
+    await updateGraph();
+    console.log("+++ decreePublished done");
+});
 
 // =================================== UPDATE GRAPH ==================================
 export default async function updateGraph() {

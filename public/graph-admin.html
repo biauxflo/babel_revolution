@@ -76,6 +76,12 @@
         <div id="graph">
             <!-- This div is used to display the graph -->
         </div>
+        <dialog id="decree_dialog">
+            <button type="button" class="close">X</button>
+            <h3>Nouveau décret</h3>
+            <h2 id="decree_title"></h2>
+            <p id="decree_text"></p>
+        </dialog>
     </main>
     <!-- socket.io ables us to synchronise the graph between the users -->
     <script src="/socket.io/socket.io.js"></script>
