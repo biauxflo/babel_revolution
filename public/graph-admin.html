@@ -27,7 +27,7 @@
                     <h3>Décret</h3>
                     <div>
                         <select class="decree" name="decree">
-                            <!-- The decree are added by graph-admin.js -->
+                            <!-- The decrees are added by graph-admin.js -->
                         </select>
                         <p class="show_selected">
                             <!-- Show the text of the selected decree -->
@@ -50,7 +50,23 @@
                 <h2>Terminer la session</h2>
             </div>
             <div class="body">
-
+                <div>
+                    <h3>Fin</h3>
+                    <div>
+                        <select class="end" name="end">
+                            <!-- The ends are added by graph-admin.js -->
+                        </select>
+                        <p class="show_selected">
+                            <!-- Show the text of the selected end -->
+                        </p>
+                    </div>
+                    <p>Une fois la session terminée, plus aucune contribution ne pourra être ajoutée.</p>
+                    <label for="confirm_end">
+                        <input type="checkbox" id="confirm_end" name="confirm_end">
+                        J'ai compris.
+                    </label>
+                    <button class="submit">Terminer la session</button>
+                </div>
             </div>
         </div>
         <div id="write_message">
@@ -76,11 +92,14 @@
         <div id="graph">
             <!-- This div is used to display the graph -->
         </div>
-        <dialog id="decree_dialog">
+        <dialog id="session_dialog">
             <button type="button" class="close">X</button>
-            <h3>Nouveau décret</h3>
-            <h2 id="decree_title"></h2>
-            <p id="decree_text"></p>
+            <h3 id="dialog_type">Nouveau décret</h3>
+            <h2 id="dialog_title"></h2>
+            <p id="dialog_text"></p>
+            <div id="dialog_examples">
+                <!-- The examples are added by graph-admin.js -->
+            </div>
         </dialog>
     </main>
     <!-- socket.io ables us to synchronise the graph between the users -->

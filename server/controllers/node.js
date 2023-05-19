@@ -19,7 +19,6 @@ exports.getSessionNodes = (req, res, next) => {
     const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
     sessionModel.findAll()
         .then(nodes => {
-            console.log(nodes)
             res.status(200).json(nodes)
         })
         .catch(error => res.status(400).json({ error }))

@@ -88,17 +88,24 @@ simulation = simulationTicked(simulation, link, node, label)
 // =================================== SOCKET ==================================
 
 const socket = io();
+
 socket.on('databaseUpdate', async function () {
     await updateGraph();
     console.log("+++ databaseUpdate done");
 });
+
 // The event 'decreePublished' is received when a new decree is published
 socket.on('decreePublished', async function (decreeAndExamples) {
-    const decreeDialog = document.querySelector('dialog#decree_dialog');
-    // We add the decree title and text
-    decreeDialog.querySelector('#decree_title').textContent = decreeAndExamples.decree.title;
-    decreeDialog.querySelector('#decree_text').textContent = decreeAndExamples.decree.text;
-    // We add the exemples
+    const decreeDialog = document.querySelector('dialog#session_dialog');
+    // We add the decree type, title and text
+    decreeDialog.querySelector('#dialog_type').textContent = 'Nouveau décret';
+    decreeDialog.querySelector('#dialog_title').textContent = decreeAndExamples.decree.title;
+    decreeDialog.querySelector('#dialog_text').textContent = decreeAndExamples.decree.text;
+
+    const dialogExamples = decreeDialog.querySelector('div#dialog_examples');
+    // We delete the precedent examples
+    dialogExamples.innerHTML = '';
+    // Then we add the current examples
     decreeAndExamples.examples.forEach(example => {
         let paragraphText = '';
         if (example.title) {
@@ -113,10 +120,26 @@ socket.on('decreePublished', async function (decreeAndExamples) {
         }
         const paragraph = document.createElement('p');
         paragraph.textContent = paragraphText;
-        decreeDialog.appendChild(paragraph);
+        dialogExamples.appendChild(paragraph);
     });
     // We show the dialog
     decreeDialog.showModal();
+    // We update the graph
+    await updateGraph();
+    console.log("+++ sessionCompleted done");
+});
+
+// The event 'sessionCompleted' is received when the session ends
+socket.on('sessionCompleted', async function (end) {
+    const endDialog = document.querySelector('dialog#session_dialog');
+    // We add the decree title and text
+    endDialog.querySelector('#dialog_type').textContent = null;
+    endDialog.querySelector('#dialog_title').textContent = end.title;
+    endDialog.querySelector('#dialog_text').textContent = end.text;
+    // We delete the examples
+    endDialog.querySelector('div#dialog_examples').innerHTML = '';
+    // We show the dialog
+    endDialog.showModal();
     // We update the graph
     await updateGraph();
     console.log("+++ decreePublished done");

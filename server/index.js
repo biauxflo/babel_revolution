@@ -55,10 +55,15 @@ io.on('connection', (socket) => {
         console.log("Database Updated");
         io.emit("databaseUpdate");
     });
-    // When a decree is published, 
+    // When a decree is published
     socket.on("decreePublished", decreeAndExamples => {
         console.log("Decree is published");
         io.emit("decreePublished", decreeAndExamples);
+    });
+    // When a session is completed 
+    socket.on("sessionCompleted", end => {
+        console.log("Session is completed");
+        io.emit("sessionCompleted", end);
     });
 })
 

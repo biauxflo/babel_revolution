@@ -11,10 +11,17 @@ const idSession = document.location.href.split('/').pop();
 const socket = io();
 
 const appMessage = new Message('#application_message');
+const sessionDialog = document.querySelector('dialog#session_dialog');
 
 const aside = new ToggleAside();
 const publishDecree = new AsideDiv('#publish_decree');
-const decreeDialog = document.querySelector('dialog#decree_dialog');
+const endSession = new AsideDiv('#end_session');
+
+/*********************************** DIALOG ***************************************/
+// To close the dialog
+sessionDialog.querySelector('button.close').addEventListener('click', () => {
+    sessionDialog.close();
+});
 
 /*********************************** PUBLISH DECREE ***************************************/
 // When the user clicks on "Promulger un décret", it updates the list of decrees
@@ -24,18 +31,7 @@ publishDecree.head.addEventListener('click', () => {
         .then(response => response.json())
         .then(res => {
             if (res.success) {
-                // Delete previous content 
-                publishDecree.select.innerHTML = '';
-                // Add the decrees to the select object
-                res.decrees.forEach(decree => {
-                    const option = document.createElement('option');
-                    option.value = decree.id;
-                    option.label = decree.title;
-                    option.decree = decree;
-                    publishDecree.select.appendChild(option);
-                });
-                // Show the current decree text
-                publishDecree.body.querySelector('p.show_selected').textContent = publishDecree.select.selectedOptions[0].decree.text;
+                publishDecree.updateSelect(res.decrees);
             } else {
                 throw new Error(res.error);
             }
@@ -90,15 +86,10 @@ publishDecree.head.addEventListener('click', () => {
         });
 });
 
-// When the user change the selected decree, it changes the text to show the current decree text
-publishDecree.select.addEventListener('change', function () {
-    publishDecree.body.querySelector('p.show_selected').textContent = publishDecree.select.selectedOptions[0].decree.text;
-});
-
 // When the user clicks on the button "Promulger le décret", the decree is published
 publishDecree.submit.addEventListener('click', function () {
     // We get the selected decree and the checked examples 
-    const decree = publishDecree.select.selectedOptions[0].decree;
+    const decree = publishDecree.select.selectedOptions[0].element;
     const examples = [];
     publishDecree.body.querySelectorAll('div#example_messages input[type="checkbox"]').forEach(checkbox => {
         if (checkbox.checked) {
@@ -130,6 +121,54 @@ publishDecree.submit.addEventListener('click', function () {
         });
 });
 
-decreeDialog.querySelector('button.close').addEventListener('click', () => {
-    decreeDialog.close();
+/*********************************** END SESSION ***************************************/
+// When the user clicks on the head "Terminer la session", it updates the list of decrees
+endSession.head.addEventListener('click', () => {
+    // We uncheck the checkbox
+    endSession.body.querySelector('input#confirm_end').checked = false;
+    // Send a GET request to get the list of the ends
+    fetch('/graph-admin/get-ends')
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                endSession.updateSelect(res.ends);
+            } else {
+                throw new Error(res.error);
+            }
+        })
+        .catch(error => {
+            appMessage.showError("Les fins n'ont pas été récupérées.");
+            console.error('Error fetching ends : ', error);
+        });
+});
+
+// When the user clicks on the button "Terminer la session", it ends the session
+endSession.submit.addEventListener('click', function () {
+    // We first verify that the checkbox 'J'ai compris' is checked
+    if (!endSession.body.querySelector('input#confirm_end').checked) {
+        appMessage.showMessage("Vous devez cocher la case pour terminer la session");
+        return;
+    }
+    // We get the selected end
+    const end = endSession.select.selectedOptions[0].element;
+    const data = new URLSearchParams({ idSession, end });
+    // We send the data to the server
+    fetch('/graph-admin/end-session', {
+        method: 'post',
+        body: data
+    })
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                // We send the signal to the server, that will send it to the users
+                socket.emit('sessionCompleted', end);
+                appMessage.showMessage("Session terminée.");
+            } else {
+                throw new Error(res.error);
+            }
+        })
+        .catch(error => {
+            appMessage.showError("Erreur lors de la fin de la session.");
+            console.error('Error session ending : ', error);
+        });
 });
