@@ -1,5 +1,6 @@
 "use strict";
 
+// This class is for the aside menu and make its elements toggle
 export class ToggleAside {
     constructor() {
         this.element = document.querySelector('aside');
@@ -32,12 +33,37 @@ export class ToggleAside {
     }
 }
 
+// This class is for the aside's elements
 export class AsideDiv {
     constructor(divId) {
         this.div = document.querySelector(divId);
         this.head = this.div.querySelector('div.head');
         this.body = this.div.querySelector('div.body');
-        this.select = this.body.querySelector('select');  // Depends on the div, this element may be null
         this.submit = this.body.querySelector('button.submit');
+
+        this.select = this.body.querySelector('select');  // Depends on the div, this element may be null
+        this.selectedText = this.body.querySelector('p.show_selected');  // Depends on the div, this element may be null
+        if (this.select) {
+            // We add a listener that updates the text when the option change
+            this.select.addEventListener('change', function () {
+                this.selectedText.textContent = this.select.selectedOptions[0].element.text;
+            });
+        }
+    }
+
+    // This method updates the select options with the list given as argument
+    updateSelect(elementsList) {
+        // Delete previous content 
+        this.select.innerHTML = '';
+        // Add the elements to the select object
+        elementsList.forEach(element => {
+            const option = document.createElement('option');
+            option.value = element.id;
+            option.label = element.title;
+            option.element = element;
+            this.select.appendChild(option);
+        });
+        // Show the current element text
+        this.selectedText.textContent = this.select.selectedOptions[0].element.text;
     }
 }

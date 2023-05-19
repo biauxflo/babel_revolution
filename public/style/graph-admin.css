@@ -87,6 +87,10 @@ aside p {
   font-style: italic;
 }
 
+aside > div > div.body p {
+  margin: 5px 0;
+}
+
 aside > div > div.body p.show_selected {
   padding: 5px;
   font: inherit;
@@ -113,15 +117,19 @@ aside > div > div.body div.checkboxes label {
   overflow: auto;
 }
 
+aside > div > div.body label {
+  margin: 10px 20px;
+  font-family: noto;
+  font-size: 16px;
+}
+
+aside > div > div.body input[type="checkbox"] {
+  margin-right: 10px;
+}
+
 aside > div button {
   font-size: 18px;
   margin: 10px 4vw 0 4vw;
-}
-
-/*********************************** PUBLISH DECREE ***************************************/
-/*
-div#publish_decree > div.body {
-  display: block;
 }
 
 /*********************************** GRAPH ***************************************/
