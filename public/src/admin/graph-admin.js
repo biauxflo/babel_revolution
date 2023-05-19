@@ -17,6 +17,13 @@ const aside = new ToggleAside();
 const publishDecree = new AsideDiv('#publish_decree');
 const endSession = new AsideDiv('#end_session');
 
+/*********************************** TITLE REDIRECTION ***************************************/
+// When the user clicks on the title, it redirects him to the admin page
+document.querySelector('header button#redirectAdminPage').addEventListener('click', () => {
+    console.log('+++ cliqué');
+    document.location.href = '/admin';
+});
+
 /*********************************** DIALOG ***************************************/
 // To close the dialog
 sessionDialog.querySelector('button.close').addEventListener('click', () => {
