@@ -15,7 +15,7 @@
 
   </head>
 
-  <body>
+  <body onload="onLoadEnd()">
 
     <div id="container">
 
@@ -25,23 +25,51 @@
 
       <div id="text-box-intro">
 
-        <!-- Fin -->
-        <div id="end">
-            <div id="text">
+        <!-- Fin 1 -->
+        <div id="end1" style="display:none">
+            <div id="end_text">
               <h1>Conclusion</h1>
                 <p>
                   Le soulèvement populaire s’organise de manière auto-gérée, prend de l’ampleur  et parvient à renverser le pouvoir en place pour imposer une politique écolinguistique ouverte à la diversité des langues, des cultures et des espèces. Et on commence par limiter le recours au numérique, très coûteux pour l’environnement, en éteignant/détruisant la Matrice. 
                 </p>
                 <p>FIN</p>
             </div>
-            <button id="button-next" onclick="window.location.href = '/'">Recommencer</button>   
+            <button onclick="window.location.href = '/'">Recommencer</button>   
         </div> 
+
+        <!-- Fin 2 -->
+        <div id="end2" style="display:none">
+          <div id="end_text">
+            <h1>Conclusion</h1>
+              <p>
+                Le soulèvement populaire ne prend pas et la faible résistance conséquente à la loi conforte le gouvernement dans son action et idéologie monolingue. Il simplifie le Dictionnaire officiel à outrance, sur le modèle du Basic English (Ogden) et poursuit impunément ses exactions écologiques comme en témoigne la nouvelle Constitution.
+              </p>
+              <p>FIN</p>
+          </div>
+          <button onclick="window.location.href = '/'">Recommencer</button>   
+        </div>
+
+      <!-- Fin 3 -->
+      <div id="end3" style="display:none">
+        <div id="end_text">
+          <h1>Conclusion</h1>
+            <p>
+              Le soulèvement populaire s’organise de manière auto-gérée, prend de l’ampleur et parvient à renverser le pouvoir en place pour imposer une politique écolinguistique ouverte à la diversité des langues, des cultures et des espèces. 
+            </p>
+            <p>
+              Mais la balkanisation des langues rend la communication de plus en plus complexe et un doute émerge : et si l’instauration d’une/de langues partagées en parallèle à la revivification de toutes les langues n’était pas une solution ? Comment résoudre la tension entre l’intercompréhension en langue universelle et le respect des langues et des cultures ?
+            </p>
+            <p>FIN</p>
+        </div>
+        <button onclick="window.location.href = '/'">Recommencer</button>   
+      </div>
     
       </div>
 
 
 
     </div>
+    <script src="src/story.js"></script>
 
 
     </body>
