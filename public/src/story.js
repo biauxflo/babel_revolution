@@ -85,3 +85,26 @@ function onLoadStory() {
         d3.select("#intro").style("display", "block");
     }
 }
+
+function onLoadEnd() {
+    let nb_decree = 3;
+    let end = Math.floor(Math.random() * nb_decree); // 0, 1 ou 2
+    
+    switch(end) { //decree = '2' ou '3'
+        case 0 :
+            console.log("Première fin")
+            d3.select("#end1").style("display", "block");
+            break;
+        case 1 :
+            console.log("Deuxième fin")
+            d3.select("#end2").style("display", "block");
+            break;
+        case 2 :
+            console.log("Troisième fin")
+            d3.select("#end3").style("display", "block");
+            break;
+        default :
+            console.log("Par defaut - Deuxième fin")
+            d3.select("#end2").style("display", "block");
+    }
+}
