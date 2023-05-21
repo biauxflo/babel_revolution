@@ -38,6 +38,16 @@ export function createLinksData(nodes) {
                 value: value
             });
         }
+        if (nodes[i].type === "root"){
+            var decree = nodes.filter(d=>d.type === "decree")
+            for (let k = 0; k < decree.length; k++){
+                links.push({
+                    source: nodes[i].id,
+                    target: decree[k].id,
+                    value: 1
+                });
+            }
+        }
       }
 
       console.log(links);
@@ -55,7 +65,7 @@ export function createLinksData(nodes) {
       .enter().append("line")
       .attr("class", "link")
       .style("stroke", "gray")
-      .style("stroke-width", 1);
+      .style("stroke-width", 1).lower();
   
     // Return an array containing the links array and the SVG line elements
     return [links, link];

@@ -7,7 +7,7 @@ export function createLabels(svg, nodes) {
       .data(nodes)
       .enter()
       .append('text')
-      .style('fill', 'red')
+      .style('fill', 'white')
       .style('stroke', 'none')
       .attr('text-anchor', 'middle') 
       .text(function (d) {

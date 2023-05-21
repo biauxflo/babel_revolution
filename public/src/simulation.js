@@ -2,10 +2,8 @@
 export function forceSimulation(nodes, links, parameters) {
     let simulation = d3
         .forceSimulation(nodes)
-        .force('link',
-            d3.forceLink(links).id(d => d.id).strength(d => d.value)
-        )
-        .force('charge', d3.forceManyBody())
+        .force("link", d3.forceLink(links).id(d => d.id).distance(0).strength(1))
+        .force("charge", d3.forceManyBody().strength(-50))
         .force('center', d3.forceCenter(parameters.width / 2, parameters.height / 2))
         .force('collide',d3.forceCollide().radius(50))
 
