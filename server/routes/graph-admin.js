@@ -30,7 +30,7 @@ router.get('/get-examples', auth, (req, res) => {
     });
 });
 
-// Get decrees route
+// Get ends route
 router.get('/get-ends', auth, (req, res) => {
   db.End.findAll()
     .then(ends => {
@@ -39,6 +39,24 @@ router.get('/get-ends', auth, (req, res) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({ success: false, error: "Erreur lors de la récupération des fins : " + err });
+    });
+});
+
+// Get session decrees route
+router.get('/get-session-decrees/:id', auth, (req, res) => {
+  const idSession = req.params.id;
+  // We define the model connected to the correct table
+  const tableName = 'session-' + idSession;
+  const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
+  sessionModel.findAll({
+    where: { type: 'decree' }
+  })
+    .then(decrees => {
+      res.json({ success: true, decrees });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ success: false, error: "Erreur lors de la récupération des décrets de la session : " + err });
     });
 });
 
@@ -118,6 +136,34 @@ router.post('/end-session', auth, (req, res) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({ success: false, error: 'Erreur lors de la fin de la session : ' + err });
+    });
+});
+
+// Publish CMC message route
+router.post('/cmc-message', auth, async (req, res) => {
+  const idSession = req.body.idSession;
+  const message = req.body;
+  // We delete the attribute idSession, so we just keep the message info
+  delete message.idSession;
+  // We check if the session is already completed. If yes, no message can be added
+  checkCompleted(idSession)
+    .then(completed => {
+      if (completed) {
+        throw new Error('The session is completed, no message can be added.');
+      }
+      // We define the model connected to the correct table
+      const tableName = 'session-' + idSession;
+      const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
+      // 1. We add the decree to the table
+      sessionModel.create(message)
+        .then(() => {
+          // 2. We send success
+          res.json({ success: true });
+        })
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Erreur lors de la publication du message : ' + err });
     });
 });
 

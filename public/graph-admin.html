@@ -76,7 +76,25 @@
                 <h2>Message du CMC</h2>
             </div>
             <div class="body">
-
+                <form id="CMC_message_form">
+                    <label for="decree">En rapport au décret :
+                        <select class="decree" name="decree">
+                            <!-- The decrees are added by graph-admin.js -->
+                        </select>
+                    </label>
+                    <label for="title">Titre
+                        <input type="text" name="title">
+                    </label>
+                    <label for="texte">Message
+                        <textarea required type="text" name="text"></textarea>
+                    </label>
+                    <label for="hashtags">Hashtags
+                        <input type="text" name="hashtags">
+                    </label>
+                    <input type="hidden" name="author" value="CMC">
+                    <input type="hidden" name="type" value="announcement">
+                    <button type="submit">Publier le message</button>
+                </form>
             </div>
         </div>
         <div id="modify_message">

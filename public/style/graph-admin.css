@@ -9,7 +9,7 @@ header > p#application_message {
   font-style: italic;
   font-size: 16px;
   margin: 20px 15px;
-  caret-color: #0a0a0a;  /* hide the text cursor by giving it the same color than the background */
+  caret-color: #0a0a0a; /* hide the text cursor by giving it the same color than the background */
 }
 
 /* this button redirects on the login page, it is not visible since it corresponds to the title */
@@ -144,9 +144,41 @@ aside > div > div.body input[type="checkbox"] {
   margin-right: 10px;
 }
 
+aside > div > div.body > form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+aside > div > div.body > form label {
+  font-family: altertype;
+  font-size: 17px;
+  margin: 0;
+}
+
+aside > div > div.body > form input,
+aside > div > div.body > form textarea,
+aside > div > div.body > form select {
+  display: block;
+  margin-top: 5px;
+  width: 100%;
+  font-family: noto;
+  font-size: 15px;
+}
+
+aside > div > div.body > form textarea {
+  height: 15vh;
+}
+
 aside > div button {
   font-size: 18px;
   margin: 10px 4vw 0 4vw;
+}
+
+/*
+div#write_message div.body {
+  display: block;
 }
 
 /*********************************** GRAPH ***************************************/
@@ -158,7 +190,7 @@ main {
   width: 100%;
   height: 100%;
   caret-color: #0a0a0a;
-  }
+}
 
 div#graph {
   width: 100%;

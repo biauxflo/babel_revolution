@@ -6,7 +6,7 @@ import { Message } from "./adminElements.js";
 
 /*********************************** VARIABLES ***************************************/
 // We get the last element of the adress, which is the id of the session
-const idSession = document.location.href.split('/').pop();
+const idSession = document.location.href.split('/').pop().split('?').shift();
 
 const socket = io();
 
@@ -16,11 +16,11 @@ const sessionDialog = document.querySelector('dialog#session_dialog');
 const aside = new ToggleAside();
 const publishDecree = new AsideDiv('#publish_decree');
 const endSession = new AsideDiv('#end_session');
+const writeMessage = new AsideDiv('#write_message');
 
 /*********************************** TITLE REDIRECTION ***************************************/
 // When the user clicks on the title, it redirects him to the admin page
 document.querySelector('header button#redirectAdminPage').addEventListener('click', () => {
-    console.log('+++ cliqué');
     document.location.href = '/admin';
 });
 
@@ -177,5 +177,51 @@ endSession.submit.addEventListener('click', function () {
         .catch(error => {
             appMessage.showError("Erreur lors de la fin de la session.");
             console.error('Error session ending : ', error);
+        });
+});
+
+/*********************************** CMC MESSAGE ***************************************/
+// When the user clicks on the head "Terminer la session", it updates the list of decrees
+writeMessage.head.addEventListener('click', () => {
+    // Send a GET request to get the list of the decree published in this session
+    fetch('/graph-admin/get-session-decrees/' + idSession)
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                writeMessage.updateSelect(res.decrees);
+            } else {
+                throw new Error(res.error);
+            }
+        })
+        .catch(error => {
+            appMessage.showError("Les décrets n'ont pas été récupérées.");
+            console.error('Error fetching published decrees : ', error);
+        });
+});
+
+// When the user clicks button "Publier le message", it publishes the message
+const messageForm = writeMessage.body.querySelector("#CMC_message_form");
+messageForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const data = new URLSearchParams(new FormData(messageForm));
+    // We add to the data the id of the current session
+    data.append('idSession', idSession);
+    fetch('/graph-admin/cmc-message', {
+        method: 'post',
+        body: data
+    })
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                // We send the signal to the server, that will send it to the users
+                socket.emit('databaseUpdate');
+                appMessage.showMessage("Message publié.");
+            } else {
+                throw new Error(res.error);
+            }
+        })
+        .catch(error => {
+            appMessage.showError("Erreur lors de la publication du message.");
+            console.error('Error message publishing : ', error);
         });
 });
