@@ -101,10 +101,7 @@ export default async function updateGraph() {
       .append("circle")
       .attr("class", "node")
       .attr("r", 30)
-      .transition().duration(0)
-        .style("fill", "yellow")
-      .transition().duration(5000)
-        .style("fill", d => getNodeColor(d))
+      .style("fill", d => getNodeColor(d))
       .merge(node)
 
   let linkEnter = link
