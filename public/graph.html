@@ -20,15 +20,20 @@
     <div id="container">
 
       <header>
-        <h1>BⱯBEL<br>RËVOLUㅏION</h1>
+        <div class="logo" onclick="window.location.href = 'index.html?intro'">
+          <img src="img\logoV2.png" alt="image" title="Revenir au menu principal">
+        </div> 
       </header>
 
-      <button id="button-decree2" style="display:none" onclick="window.location.href = 'index.html?decree=2'">Décret 2</button>
-      <button id="button-decree3" style="display:none" onclick="window.location.href = 'index.html?decree=3'">Décret 3</button>
-      <button id="button-end" style="display:none" onclick="window.location.href = 'end.html'">Fin</button>
-      
+      <div id ="decree">
+        <button id="button-decree2" style="display:none" onclick="window.location.href = 'index.html?decree=2'">Décret 2</button>
+        <button id="button-decree3" style="display:none" onclick="window.location.href = 'index.html?decree=3'">Décret 3</button>
+        <button id="button-end" style="display:none" onclick="alert('Le soulèvement populaire s’organise de manière auto-gérée, prend de l’ampleur  et parvient à renverser le pouvoir en place pour imposer une politique écolinguistique ouverte à la diversité des langues, des cultures et des espèces. Et on commence par limiter le recours au numérique, très coûteux pour l’environnement, en éteignant/détruisant la Matrice. \n [fin temporaire] ')">Fin</button>
+    </div>
+        
       <div id="about">
-        <button type="button" id="button-about" onclick="toggle_simple('about-text')">à propos</button>
+        <button type="button" id="button-about-ouvert" onclick="OpenText()">à propos +</button>
+        <button type="button" id="button-about-ferme" onclick="OpenText()" style="display:none">à propos -</button>
         <div id="about-text" style="display:none">
           <p><i>« Une expression qui, il y a un instant à peine, vivait encore et semblait même indéracinable, pouvait brusquement s’évanouir : elle a disparu avec la situation qui l’avait engendrée et dont elle témoignera un jour tel un fossile » (Klemperer, LTI, la langue du Troisième Reich, 1947).</i></p>
           <p>BⱯBEL RËVOLUㅏION est un récit participatif dystopique, qui ressemble étrangement à notre monde contemporain. Cette création aborde la question du lien entre la dégradation de la biodiversité et la dégradation de la diversité linguistique et culturelle.</p>
@@ -56,8 +61,8 @@
                 <h5 id="title-with-toggle">écrire un message</h5>
                 <button type="button" id="button-toggle-writing" class="button-toggle-down" onclick="toggle(this.id, 'add-node-form')"></button>
                 <form id="add-node-form" style="display:none">
-                  <input required id="add-node-title" class="input" type="text" placeholder="Add a title...">
-                  <input required id="add-node-author" class="input" type="text" placeholder="Add an author...">
+                  <input required id="add-node-title" class="input" type="text" placeholder="Titre..." style="font-style:italic">
+                  <input required id="add-node-author" class="input" type="text" placeholder="Auteur..." style="font-style:italic">
                   <select id="add-node-decree">
                     <!-- options added for each decree in src/app.js-->
                   </select>
@@ -66,10 +71,10 @@
                     <option value="neutral">Partagé·e</option>
                     <option value="in_favor">Partisant·e</option>
                   </select>
-                  <input required id="add-node-text" class="input" type="text" placeholder="Ajouter du texte...">
-                  <input required id="add-node-hashtags" class="input" type="text" placeholder="Ajouter un hashtag...">
+                  <textarea required id="add-node-text" class="input" type="text" placeholder="Texte..." style="font-style:italic; font-family:Verdana"></textarea>
+                  <input required id="add-node-hashtags" class="input" type="text" placeholder="Hashtag..." style="font-style:italic">
                   <input id="add-node-type" class="input" type="hidden" value="contribution">
-                  <button id="add-node-button" type="submit">Add</button>
+                  <button id="add-node-button" type="submit">Publier</button>
                 </form>
 
                 <div id="node-info">
@@ -89,6 +94,10 @@
 
       </div>
 
+      <div id="zoom">
+          <span id="zoom-minus">-</span><span id="zoom-plus">+</span>
+      </div>
+
 
     </div>
 
@@ -99,6 +108,7 @@
     <script type="module">
       import updateGraph from "./src/app.js";
 
+      console.log("OUI");
       var socket = io();
 
       var form = document.getElementById('add-node-form');
@@ -110,6 +120,54 @@
       socket.on('databaseUpdate', async function(){
         await updateGraph();
       })
+    </script>
+    <script>
+      function OpenText() {
+        var btnferme = document.getElementById("button-about-ouvert");
+        var moreText = document.getElementById("about-text");
+        var btnouvert = document.getElementById("button-about-ferme");
+      
+        if (btnferme.style.display === "none") {
+          btnferme.style.display = "block";
+          moreText.style.display = "none";
+          btnouvert.style.display = "none";
+        } else {
+          btnferme.style.display = "none";
+          moreText.style.display = "block";
+          btnouvert.style.display = "block";
+        }
+      }
+    </script>
+    <script>
+      function addEvent(a,b,c,d) {
+        a.addEventListener?a.addEventListener(b,c,d||!1):a.attachEvent('on'+b,c);
+      }
+      
+      function changeZoom(zoom, e) {
+        currentZoom += coefficient * (e.detail < 0 || e.wheelDelta > 0 || zoom > 0 ? 1 : -1);
+        currentZoom < 0 && (currentZoom = 0); 
+        transform && (zoomArea.style[transform] = "scale("+ (currentZoom) +")");
+        ("zoom" in document.body.style && !transform) && (zoomArea.style.zoom = currentZoom);
+      }
+
+      var zoomArea = document.querySelector("#graph"),
+      currentZoom = 1,
+      coefficient = .2,
+      transform;
+
+    if ("transform" in document.body.style) {
+      transform = "transform";
+    }else {
+      for (var p in document.body.style) {
+        if (/^((Moz|(?:w|W)ebkit|ms|o)Transform)/.exec(p)) {
+          transform = RegExp.$1;
+          break;
+        }
+      }
+    }
+
+    addEvent(document.getElementById("zoom-plus"), "click", function(e){changeZoom(1, e)});
+    addEvent(document.getElementById("zoom-minus"), "click", function(e){changeZoom(-1, e)});
     </script>
     </body>
  </html>
