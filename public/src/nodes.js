@@ -1,3 +1,16 @@
+export function getNodeColor(node) {
+  if (node.type === "contribution") {
+    switch (String(node.belief)) {
+      case "in_favor":
+        return 'red';
+      case "against":
+        return 'blue';
+      default:
+        return 'gray';
+    }
+  }
+}
+
 // Nodes initialization
 export function createNodes(svg, nodes) {
 
@@ -8,7 +21,7 @@ export function createNodes(svg, nodes) {
         .append("circle")
         .attr("class", "node")
         .attr("r", 30)
-        .style("fill", "black")
+        .style("fill", d => getNodeColor(d))
 
     return node
 }
@@ -21,7 +34,7 @@ export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, n
   const svg = d3.select("svg");
   svg.on("click", function(event, d) {
     if(event.target.nodeName === "svg") {
-      node.style("fill", "black");
+      node.style("fill", d => getNodeColor(d));
       nodeTextDiv.html("");  //set text to empty to not show
       nodeTitle.html("");
       nodeAuthor.html("");
@@ -40,12 +53,15 @@ export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, n
     nodeAuthor.html("écrit par "+d.author);
     nodeTextDiv.html(d.text);
     nodeHashtagsDiv.html("# : " +hashtags);
-    d3.selectAll(".node").style("fill", "black") //reset color on all nodes
+    d3.selectAll(".node").style("fill", d => getNodeColor(d)) //reset color on all nodes
     d3.select(this).style("fill", "green");
     nodeTitle.style("display", "block") //show title, otherwise hidden
 
     //open side bar
+    d3.select("#add-node-form").style("display", "none")
     d3.select("#messages-inside").style("display", "block")
+    d3.select("#button-toggle-writing").classed("button-toggle-up", false)
+    d3.select("#button-toggle-writing").classed("button-toggle-down", true)
     d3.select("#button-toggle-messages").classed("button-toggle-down", false)
     d3.select("#button-toggle-messages").classed("button-toggle-up", true)
   })

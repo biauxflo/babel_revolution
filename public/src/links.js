@@ -15,12 +15,42 @@ export function createLinksData(nodes) {
             links.push({
               source: node1.id,
               target: node2.id,
-              value: numCommonHashtags
+              value: Math.round((1/numCommonHashtags) * 10) / 10
             });
           }
         }
+
+        if (nodes[i].type === "contribution"){
+            var value;
+            switch (String(nodes[i].belief)) {
+                case "in_favor":
+                    value = 0.9;
+                    break;
+                case "against":
+                    value = 0.1;
+                    break;
+                default:
+                    value = 0.4;
+            }
+            links.push({
+                source: nodes[i].id,
+                target: nodes[i].decree,
+                value: value
+            });
+        }
+        if (nodes[i].type === "root"){
+            var decree = nodes.filter(d=>d.type === "decree")
+            for (let k = 0; k < decree.length; k++){
+                links.push({
+                    source: nodes[i].id,
+                    target: decree[k].id,
+                    value: 1
+                });
+            }
+        }
       }
-    
+
+      console.log(links);
       return links;
     }    
     
@@ -35,7 +65,7 @@ export function createLinksData(nodes) {
       .enter().append("line")
       .attr("class", "link")
       .style("stroke", "gray")
-      .style("stroke-width", 1);
+      .style("stroke-width", 1).lower();
   
     // Return an array containing the links array and the SVG line elements
     return [links, link];

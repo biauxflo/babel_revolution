@@ -32,7 +32,7 @@ header {
   padding: 20px 0;
 }
 
-h1 {
+header > h1 {
   position: fixed;
   top: 15px;
   left: 10px;

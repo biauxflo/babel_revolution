@@ -1,6 +1,6 @@
 import {fetchData} from "./fetch_database.js";
 import {createNodeDragBehavior, forceSimulation, simulationTicked} from "./simulation.js";
-import {createNodes, displayNodeInfo} from "./nodes.js";
+import {createNodes, displayNodeInfo, getNodeColor} from "./nodes.js";
 import {createLinks} from "./links.js";
 import {createLabels} from "./labels.js";
 import {insertData} from "./insert_database.js";
@@ -101,7 +101,7 @@ export default async function updateGraph() {
       .append("circle")
       .attr("class", "node")
       .attr("r", 30)
-      .style("fill", "black")
+      .style("fill", d => getNodeColor(d))
       .merge(node)
 
   let linkEnter = link
@@ -115,7 +115,7 @@ export default async function updateGraph() {
   let labelEnter = label
       .enter()
       .append('text')
-      .style('fill', 'red')
+      .style('fill', 'white')
       .style('stroke', 'none')
       .attr('text-anchor', 'middle')
       .text(function (d) {
@@ -129,13 +129,14 @@ export default async function updateGraph() {
 
   simulation.nodes(nodes)
   simulation.force('link',
-      d3.forceLink(links).id(d => d.id).distance(300)
+          d3.forceLink(links).id(d => d.id).strength(d => d.value)
   )
   simulation.alpha(1).restart();
 
   simulation = simulationTicked(simulation, link, node, label)
   node.call(nodeDragBehavior);
   //elements-nodes
+  await new Promise(r => setTimeout(r, 5000));
   displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
 }
 

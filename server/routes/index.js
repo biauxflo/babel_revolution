@@ -3,6 +3,7 @@ const express = require('express');
 const nodeRoutes = require('./node');
 const loginRoutes = require('./login');
 const adminRoutes = require('./admin');
+const graphAdminRoutes = require('./graph-admin');
 const router = express.Router();
 
 // Home page
@@ -18,6 +19,9 @@ router.use('/login', loginRoutes);
 
 // Admin panel routes
 router.use('/admin', adminRoutes);
+
+// Admin session controls routes
+router.use('/graph-admin', graphAdminRoutes);
 
 // Block other access
 router.all('*', (req, res, next) =>

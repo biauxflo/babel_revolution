@@ -1,13 +1,15 @@
 const app = require('./app');
 const https = require('https');
+// const http = require('http');
 const fs = require('fs');
 
 const server = https.createServer({
     key: fs.readFileSync('certificate/key.pem'),
     cert: fs.readFileSync('certificate/cert.pem')
-  }, app);
+}, app);
+//const server = http.createServer(app)
 
-const io= require('socket.io')(server);
+const io = require('socket.io')(server);
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
@@ -20,7 +22,7 @@ const normalizePort = val => {
     }
     return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const errorHandler = error => {
@@ -50,11 +52,21 @@ server.on('listening', () => {
     console.log('Listening on ' + bind);
 });
 
-io.on('connection', (socket) =>{
-    socket.on("databaseUpdate", () =>{
+io.on('connection', (socket) => {
+    socket.on("databaseUpdate", () => {
         console.log("Database Updated");
         io.emit("databaseUpdate");
-    })
+    });
+    // When a decree is published
+    socket.on("decreePublished", decreeAndExamples => {
+        console.log("Decree is published");
+        io.emit("decreePublished", decreeAndExamples);
+    });
+    // When a session is completed 
+    socket.on("sessionCompleted", end => {
+        console.log("Session is completed");
+        io.emit("sessionCompleted", end);
+    });
 })
 
 server.listen(port);

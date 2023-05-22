@@ -1,0 +1,239 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*********************************** HEADER ***************************************/
+header > p#application_message {
+  font: noto;
+  font-style: italic;
+  font-size: 16px;
+  margin: 20px 15px;
+  caret-color: #0a0a0a; /* hide the text cursor by giving it the same color than the background */
+}
+
+/* this button redirects on the login page, it is not visible since it corresponds to the title */
+header > button {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: inherit;
+  height: inherit;
+  border: none;
+  background: none;
+}
+
+header > button:hover {
+  background: none;
+}
+
+/*********************************** CONTROL MENU ***************************************/
+aside {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 10;
+  width: 32vw;
+  height: fit-content;
+  caret-color: #0a0a0a;
+}
+
+aside > div {
+  border: 1px solid #f2f2f2;
+  border-radius: 15px;
+  padding: 5px 15px;
+  margin-bottom: 15px;
+  background-color: #0a0a0a;
+}
+
+aside > div > div.head {
+  font-size: 20px;
+}
+
+h2 {
+  display: inline;
+  font: inherit;
+}
+
+p.toggle_indicator {
+  display: inline;
+  float: right;
+  font: inherit;
+  font-family: pictosicons;
+}
+
+aside > div > div.body {
+  display: none;
+  height: 65vh;
+}
+
+aside > div > div.body > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+aside > div > div.body > div > div {
+  flex: 1;
+  overflow: auto;
+}
+
+h3 {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: lighter;
+  border-bottom: solid 1px #f2f2f2;
+}
+
+aside > div > div.body select {
+  margin-bottom: 10px;
+  padding: 2px 5px;
+  font: inherit;
+  font-family: noto;
+  font-size: 16px;
+  color: #f2f2f2;
+  background-color: #0a0a0a;
+}
+
+aside p {
+  font: inherit;
+  font-family: noto;
+  font-size: 16px;
+  font-style: italic;
+}
+
+aside > div > div.body p {
+  margin: 5px 0;
+}
+
+aside > div > div.body p.show_selected {
+  padding: 5px;
+  font: inherit;
+  font-family: noto;
+  font-size: 15px;
+  border: dashed 1px #f2f2f2;
+  overflow: auto;
+}
+
+aside > div > div.body div.checkboxes {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+}
+
+aside > div > div.body div.checkboxes input {
+  width: 15px;
+}
+
+aside > div > div.body div.checkboxes label {
+  margin: 10px 0;
+  font-family: noto;
+  font-size: 15px;
+  max-height: 7em;
+  overflow: auto;
+}
+
+aside > div > div.body label {
+  margin: 10px 20px;
+  font-family: noto;
+  font-size: 16px;
+}
+
+aside > div > div.body input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+aside > div > div.body > form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+aside > div > div.body > form label {
+  font-family: altertype;
+  font-size: 17px;
+  margin: 0;
+}
+
+aside > div > div.body > form input,
+aside > div > div.body > form textarea,
+aside > div > div.body > form select {
+  display: block;
+  margin-top: 5px;
+  width: 100%;
+  font-family: noto;
+  font-size: 15px;
+}
+
+aside > div > div.body > form textarea {
+  height: 15vh;
+}
+
+aside > div button {
+  font-size: 18px;
+  margin: 10px 4vw 0 4vw;
+}
+
+/*
+div#write_message div.body {
+  display: block;
+}
+
+/*********************************** GRAPH ***************************************/
+main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  caret-color: #0a0a0a;
+}
+
+div#graph {
+  width: 100%;
+  height: 100%;
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #0a0a0a;
+  caret-color: #0a0a0a;
+  color: #f2f2f2;
+  overflow: auto;
+}
+
+dialog::backdrop {
+  background-color: rgba(26, 26, 26, 0.3);
+}
+
+dialog > button.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: 0;
+  padding: 0;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+dialog > button.close:hover {
+  color: #a2a2a2;
+}
+
+dialog > h2 {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+dialog > p {
+  border-bottom: dashed 1px #f2f2f2;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}

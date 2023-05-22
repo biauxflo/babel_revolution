@@ -1,11 +1,24 @@
 const path = require('path')
-const {Node} = require(path.resolve('sequelize', 'models'))
+const { Node } = require(path.resolve('sequelize', 'models'))
 const db = require(path.resolve('sequelize', 'models', 'index.js'))
 
 exports.getNodes = (req, res, next) => {
     Node.findAll()
         .then(nodes => {
             console.log(nodes)
+            res.status(200).json(nodes)
+        })
+        .catch(error => res.status(400).json({ error }))
+}
+
+// To get the nodes of a specific session
+exports.getSessionNodes = (req, res, next) => {
+    const idSession = req.params.id;
+    // We define the model connected to the correct table
+    const tableName = 'session-' + idSession;
+    const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
+    sessionModel.findAll()
+        .then(nodes => {
             res.status(200).json(nodes)
         })
         .catch(error => res.status(400).json({ error }))
@@ -19,20 +32,20 @@ exports.addNewNode = (req, res, next) => {
         author: received.author,
         text: received.text,
         hashtags: hashtags,
-        belief:received.belief,
-        decree:received.decree,
-        title:received.title,
-        type:received.type
+        belief: received.belief,
+        decree: received.decree,
+        title: received.title,
+        type: received.type
     })
-        .then(()=>res.status(201).json("Objet crée"))
+        .then(() => res.status(201).json("Objet crée"))
         .catch(error => res.status(400).json({ error }));
 }
 
 exports.resetNodes = (req, res, next) => {
-    Node.destroy({where : {id : null}})
-        .then(ressource =>{
+    Node.destroy({ where: { id: null } })
+        .then(ressource => {
             if (ressource === 0) return res.status(404).json("Pas de ressources")
-            else return  res.status(201).json(ressource + " ressources supprimées")
+            else return res.status(201).json(ressource + " ressources supprimées")
         })
         .catch(err => console.log(err))
 }
