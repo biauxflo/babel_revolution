@@ -45,7 +45,7 @@ export class AsideDiv {
         this.selectedText = this.body.querySelector('p.show_selected');  // Depends on the div, this element may be null
         if (this.select) {
             // We add a listener that updates the text when the option change
-            this.select.addEventListener('change', function () {
+            this.select.addEventListener('change', () => {
                 this.selectedText.textContent = this.select.selectedOptions[0].element.text;
             });
         }
