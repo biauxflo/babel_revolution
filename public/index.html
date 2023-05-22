@@ -20,11 +20,15 @@
     <div id="container">
 
       <header>
-        <h1>BⱯBEL<br>RËVOLUㅏION</h1>
+        <div class="logo" onclick="window.location.href = 'index.html?intro'">
+          <img src="img\logoV2.png" alt="image" title="Revenir au menu principal">
+        </div> 
       </header>
 
       <div id="about">
-        <button type="button" id="button-about" onclick="toggle_simple('about-text')">à propos</button>
+
+        <button type="button" id="button-about-ouvert" onclick="OpenText()">à propos +</button>
+        <button type="button" id="button-about-ferme" onclick="OpenText()" style="display:none">à propos -</button>
         <div id="about-text" style="display:none">
           <p><i>« Une expression qui, il y a un instant à peine, vivait encore et semblait même indéracinable, pouvait brusquement s’évanouir : elle a disparu avec la situation qui l’avait engendrée et dont elle témoignera un jour tel un fossile » (Klemperer, LTI, la langue du Troisième Reich, 1947).</i></p>
           <p>BⱯBEL RËVOLUㅏION est un récit participatif dystopique, qui ressemble étrangement à notre monde contemporain. Cette création aborde la question du lien entre la dégradation de la biodiversité et la dégradation de la diversité linguistique et culturelle.</p>
@@ -75,11 +79,20 @@
             </p>
         </div>
         <button id="button-next" onclick="nextPageIntro('#intro3', '#intro2')">Retour</button> 
-        <button id="button-next" onclick="nextPageIntro('#intro3', '#firstDecree')">Entrer dans le monde</button>  
+        <button id="button-next" onclick="EnterWorld()">Entrer dans le monde</button>  
+    </div>
+
+    <div id="load" style="display:none">
+      <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+        <circle cx="170" cy="170" r="160" stroke="#f2f2f2"/>
+        <circle cx="170" cy="170" r="135" stroke="#404041"/>
+        <circle cx="170" cy="170" r="110" stroke="#f2f2f2"/>
+        <circle cx="170" cy="170" r="85" stroke="#404041"/>
+     </svg>
     </div>
         
         <!-- Premier décret -->
-        <div id="firstDecree" style="display:none">
+        <div id="firstDecree"  class="animate-bottom" style="display:none">
             <div id="text">
                 <h1>1er décret - plantes</h1>
                 <p>Il est désormais interdit d'utiliser des mots comme artichaut, lentille, oignon, radis, potiron, pomme de terre ou patate... Les termes scientifiques pour décrire une plante sont bannis, car inutiles. Vous devez utiliser des expressions génériques comme "légume vert" ou "petit légume rond". Tout usage non conventionnel sera sanctionné. -- Le CMC
@@ -87,7 +100,7 @@
             </div>
             <button id="button-next" onclick="nextPageIntro('#firstDecree', '#intro')">Retour</button>
             <button id="button-next" onclick="window.location.href = 'graph.html?decree=1&react=true'">Réagir</button>
-            <button id="button-next" onclick="window.location.href = 'graph.html?decree=1&react=false'">x</button>
+            <button id="button-hide" onclick="window.location.href = 'graph.html?decree=1&react=false'">x</button>
         </div>
 
         <!-- Deuxième décret -->
@@ -99,7 +112,7 @@
                 </p>
             </div>
             <button id="button-next" onclick="window.location.href = 'graph.html?decree=2&react=true'">Réagir</button>
-            <button id="button-next" onclick="window.location.href = 'graph.html?decree=2&react=false'">x</button>
+            <button id="button-hide" onclick="window.location.href = 'graph.html?decree=2&react=false'">x</button>
         </div>
 
         <!-- Troisième décret -->
@@ -109,7 +122,7 @@
                 <p>La simplicité et la compréhension sont les objectifs principaux du CMC. Ainsi, à partir d'aujourd'hui, l'usage de plusieurs langues est interdit. Cette interdiction s'étend à tous les patois. De plus, les termes inventés ou utilisant une règle non conforme au règlement (exemple : le "verlan") sont aussi interdits. Ces pratiques excluent en effet des communications les personnes qui ne peuvent les comprendre. Pour le bien commun, utilisons une seule langue épurée, gage de paix et d'intercompréhension. -- Le CMC</p>
             </div>
             <button id="button-next" onclick="window.location.href = 'graph.html?decree=3&react=true'">Réagir</button>
-            <button id="button-next" onclick="window.location.href = 'graph.html?decree=3&react=false'">x</button>
+            <button id="button-hide" onclick="window.location.href = 'graph.html?decree=3&react=false'">x</button>
         </div>
         
     
@@ -120,7 +133,30 @@
     </div>
     <script src="src/story.js"></script>
     <script src="src/interface.js"></script>
-
+    <script>
+      function OpenText() {
+        var btnferme = document.getElementById("button-about-ouvert");
+        var moreText = document.getElementById("about-text");
+        var btnouvert = document.getElementById("button-about-ferme");
+      
+        if (btnferme.style.display === "none") {
+          btnferme.style.display = "block";
+          moreText.style.display = "none";
+          btnouvert.style.display = "none";
+        } else {
+          btnferme.style.display = "none";
+          moreText.style.display = "block";
+          btnouvert.style.display = "block";
+        }
+      }
+    </script>
+    <script>
+      function EnterWorld() {
+        document.getElementById("intro3").style.display = "none";
+        document.getElementById("load").style.display = "block";
+        setTimeout(() => {document.getElementById("load").style.display = "none"; document.getElementById("firstDecree").style.display = "block";}, 2000);
+      }
+    </script>
 
     </body>
  </html>
