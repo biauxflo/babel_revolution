@@ -17,6 +17,7 @@ const aside = new ToggleAside();
 const publishDecree = new AsideDiv('#publish_decree');
 const endSession = new AsideDiv('#end_session');
 const writeMessage = new AsideDiv('#write_message');
+const modifyMessage = new AsideDiv('#modify_message');
 
 /*********************************** TITLE REDIRECTION ***************************************/
 // When the user clicks on the title, it redirects him to the admin page
@@ -199,9 +200,55 @@ writeMessage.head.addEventListener('click', () => {
         });
 });
 
-// When the user clicks button "Publier le message", it publishes the message
+// When the user clicks on the button "Publier le message", it publishes the message
 const messageForm = writeMessage.body.querySelector("#CMC_message_form");
 messageForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const data = new URLSearchParams(new FormData(messageForm));
+    // We add to the data the id of the current session
+    data.append('idSession', idSession);
+    fetch('/graph-admin/cmc-message', {
+        method: 'post',
+        body: data
+    })
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                // We send the signal to the server, that will send it to the users
+                socket.emit('databaseUpdate');
+                appMessage.showMessage("Message publié.");
+            } else {
+                throw new Error(res.error);
+            }
+        })
+        .catch(error => {
+            appMessage.showError("Erreur lors de la publication du message.");
+            console.error('Error message publishing : ', error);
+        });
+});
+
+/*********************************** MODIFY MESSAGE ***************************************/
+// When the user clicks on the head "Modifier une contribution", it unchecks the checkbox that enable to delete a message
+modifyMessage.head.addEventListener('click', () => {
+    // We uncheck the checkbox that enable to delete a message
+    endSession.body.querySelector('input#confirm_delete').checked = false;
+});
+
+// List of inputs of modify message form
+const modifiedMessageForm = modifyMessage.body.querySelector("form");
+const modifyMessageInputs = Array.from(modifiedMessageForm.querySelectorAll("label > input[type='text']"));
+modifyMessageInputs.push(modifiedMessageForm.querySelector("label > textarea"));
+
+// When the user clicks on the checkbox "Activer la modification", it enable or disables the inputs
+const modifyCheckbox = modifyMessage.body.querySelector("#able_modification");
+modifyCheckbox.addEventListener('click', () => {
+    modifyMessageInputs.forEach(input => {
+        input.disabled = !modifyCheckbox.checked;
+    })
+});
+
+// When the user clicks on the button "Modifier la contribution", it changes the contribution in the db
+modifiedMessageForm.addEventListener('submit', function (event) {
     event.preventDefault();
     const data = new URLSearchParams(new FormData(messageForm));
     // We add to the data the id of the current session
