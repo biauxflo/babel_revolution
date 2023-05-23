@@ -312,14 +312,18 @@ router.post('/delete-session', auth, (req, res) => {
   const privileges = req.session.user.privileges;
   let options = "error";
   if (privileges !== 0 && privileges !== 1) {
-    options = { where: { [Op.and]: [{ privileges }, { id }] } };
+    options = { where: { author: req.session.user.username, id } };
   } else {
     options = { where: { id } };
   }
   // Then we can delete the account
   db.SessionInfo.destroy(options)
-    .then(() => {
-      res.json({ success: true, message: "La session a bien été supprimé." });
+    .then(numDeletedRows => {
+      if (numDeletedRows === 1) {
+        res.json({ success: true, message: "La session a bien été supprimé." });
+      } else {
+        throw new Error("nombre de sessions supprimées = " + numDeletedRows);
+      }
     })
     .catch(err => {
       console.error(err);
