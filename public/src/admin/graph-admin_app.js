@@ -6,6 +6,7 @@ import { createNodes, displayNodeInfoAdmin } from "../nodes.js";
 import { createLinks } from "../links.js";
 import { createLabels } from "../labels.js";
 import { insertData } from "../insert_database.js";
+import { ToggleAside } from "./graph-adminElements.js";
 
 let result;
 try {
@@ -71,7 +72,9 @@ const nodeTitle = document.querySelector("#node_title_input");
 const nodeAuthor = document.querySelector("#node_author_input");
 const nodeText = document.querySelector("#node_text_input");
 const nodeHashtags = document.querySelector("#node_hashtags_input");
-displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeText, nodeHashtags);
+const nodeType = document.querySelector("#node_type");
+const aside = new ToggleAside();  // This one is used to toggle the menu and show the node content
+displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeText, nodeHashtags, nodeType, aside);
 
 // =================================== DRAGGING ===================================
 
@@ -201,7 +204,7 @@ export default async function updateGraph() {
     simulation = simulationTicked(simulation, link, node, label)
     node.call(nodeDragBehavior);
     //elements-nodes
-    displayNodeInfoAdmin(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
+    displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeText, nodeHashtags, nodeType, aside);
 }
 
 // ======== UPDATE DATA ===========

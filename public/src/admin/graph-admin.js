@@ -14,6 +14,8 @@ const appMessage = new Message('#application_message');
 const sessionDialog = document.querySelector('dialog#session_dialog');
 
 const aside = new ToggleAside();
+aside.addDivListeners();
+
 const publishDecree = new AsideDiv('#publish_decree');
 const endSession = new AsideDiv('#end_session');
 const writeMessage = new AsideDiv('#write_message');
@@ -241,19 +243,19 @@ modifyMessageInputs.push(modifiedMessageForm.querySelector("label > textarea"));
 
 // When the user clicks on the checkbox "Activer la modification", it enable or disables the inputs
 const modifyCheckbox = modifyMessage.body.querySelector("#able_modification");
-modifyCheckbox.addEventListener('click', () => {
+modifyCheckbox.addEventListener('change', () => {
     modifyMessageInputs.forEach(input => {
         input.disabled = !modifyCheckbox.checked;
-    })
+    });
 });
 
 // When the user clicks on the button "Modifier la contribution", it changes the contribution in the db
 modifiedMessageForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    const data = new URLSearchParams(new FormData(messageForm));
+    const data = new URLSearchParams(new FormData(modifiedMessageForm));
     // We add to the data the id of the current session
     data.append('idSession', idSession);
-    fetch('/graph-admin/cmc-message', {
+    fetch('/graph-admin/modify-message', {
         method: 'post',
         body: data
     })
@@ -262,13 +264,60 @@ modifiedMessageForm.addEventListener('submit', function (event) {
             if (res.success) {
                 // We send the signal to the server, that will send it to the users
                 socket.emit('databaseUpdate');
-                appMessage.showMessage("Message publié.");
+                appMessage.showMessage("Message modifié.");
+                // We uncheck the modification checkbox
+                modifyCheckbox.checked = false;
+                modifyMessageInputs.forEach(input => {
+                    input.disabled = true;
+                });
             } else {
                 throw new Error(res.error);
             }
         })
         .catch(error => {
-            appMessage.showError("Erreur lors de la publication du message.");
-            console.error('Error message publishing : ', error);
+            appMessage.showError("Erreur lors de la modification du message.");
+            console.error('Error message modification : ', error);
+        });
+});
+
+// When the user clicks on the button "Supprimer la contribution", it deletes the contribution
+const deleteCheckbox = modifyMessage.body.querySelector('input#confirm_delete');
+modifyMessage.body.querySelector('#delete_contribution_button').addEventListener('click', function () {
+    // We first verify that the checkbox 'J'ai compris' is checked
+    if (!deleteCheckbox.checked) {
+        appMessage.showMessage("Vous devez cocher la case pour supprimer la contribution");
+        return;
+    }
+    // Then we verify that it's not a decree, which cannot be deleted
+    if (modifiedMessageForm.querySelector('#node_type').value === 'decree') {
+        appMessage.showError("Un décret ne peut pas être supprimé");
+        return;
+    }
+    // We get the selected contribution id
+    const idMessage = modifiedMessageForm.querySelector('#node_id').value;
+    const data = new URLSearchParams({ idSession, idMessage });
+    // We send the data to the server
+    fetch('/graph-admin/delete-message', {
+        method: 'post',
+        body: data
+    })
+        .then(response => response.json())
+        .then(res => {
+            if (res.success) {
+                // We send the signal to the server, that will send it to the users
+                socket.emit('databaseUpdate');
+                appMessage.showMessage("Message supprimé.");
+                // We reset the inputs values and the delete checkbox
+                deleteCheckbox.checked = false;
+                modifyMessageInputs.forEach(input => {
+                    input.value = null;
+                });
+            } else {
+                throw new Error(res.error);
+            }
+        })
+        .catch(error => {
+            appMessage.showError("Erreur lors de la suppression de la contribution.");
+            console.error('Error message deletion : ', error);
         });
 });

@@ -3,21 +3,32 @@
 // This class is for the aside menu and make its elements toggle
 export class ToggleAside {
     constructor() {
-        this.element = document.querySelector('aside');
         // divsBodiesList is a list with each div body of the aside's div
         this.divsList = [];
         // For each div head, we add a listener
         document.querySelectorAll('aside > div').forEach(div => {
-            const toggleIndicator = div.querySelector('p.toggle_indicator');
+            const divHead = div.querySelector('div.head');
+            const toggleIndicator = divHead.querySelector('p.toggle_indicator');
             const divBody = div.querySelector('div.body');
-            this.divsList.push({ body: divBody, toggleIndicator: toggleIndicator });
-            // When we click on the head, it toggles
-            div.querySelector('div.head').addEventListener('click', () => this.toggleOne(divBody, toggleIndicator));
+            this.divsList.push({ head: divHead, body: divBody, toggleIndicator: toggleIndicator });
+        });
+
+        // We save the div "modify_message" to make it toggle when the user clicks on a node
+        this.modifyMessageDiv = {};
+        this.modifyMessageDiv.toggleIndicator = document.querySelector('aside > div#modify_message > div.head p.toggle_indicator');
+        this.modifyMessageDiv.body = document.querySelector('aside > div#modify_message > div.body');
+        this.modifyMessageDiv.confirmDelete = this.modifyMessageDiv.body.querySelector('input#confirm_delete');
+    }
+
+    // This method must be called only once by html. It adds listeners to the divs to make them toggle
+    addDivListeners() {
+        this.divsList.forEach(div => {
+            div.head.addEventListener('click', () => this.toggleOne(div.body, div.toggleIndicator));
         });
     }
 
     // This method show only one body, or hide them all
-    toggleOne(divBody, toggleIndicator) {
+    toggleOne(divBody, toggleIndicator, openByDefault = false) {
         // We check the divBody's display :  'none' -> we show it,   'block' -> we hide it
         const showDiv = (divBody.style.display === 'none');
         // We hide all the divs bodies
@@ -26,10 +37,16 @@ export class ToggleAside {
             div.body.style.display = "none";
         });
         // Then, we may show divBody
-        if (showDiv) {
+        if (showDiv || openByDefault) {
             toggleIndicator.textContent = "▼";
             divBody.style.display = "block";
         }
+    }
+
+    // This method is called when the user clicks on a node
+    toggleModifyMessageDiv() {
+        this.toggleOne(this.modifyMessageDiv.body, this.modifyMessageDiv.toggleIndicator, true);
+        this.modifyMessageDiv.confirmDelete.checked = false;
     }
 }
 

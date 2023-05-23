@@ -167,6 +167,7 @@ aside > div > div.body > form textarea,
 aside > div > div.body > form select {
   display: block;
   margin-top: 5px;
+  padding: 0 3px;
   width: 100%;
   font-family: noto;
   font-size: 15px;
@@ -184,6 +185,11 @@ aside > div > div.body > form textarea {
 
 aside > div#modify_message > div.body > form textarea {
   height: 12vh;
+}
+
+aside > div > div.body > form input:disabled,
+aside > div > div.body > form textarea:disabled {
+  color: white;
 }
 
 aside > div button {
