@@ -103,7 +103,32 @@
                 <h2>Modifier une contribution</h2>
             </div>
             <div class="body">
-
+                <form id="modify_message_form">
+                    <label for="able_modification">
+                        <input type="checkbox" id="able_modification" name="able_modification">
+                        Activer la modification
+                    </label>
+                    <label for="title">Titre
+                        <input type="text" id="node_title_input" name="title">
+                    </label>
+                    <label for="author">Auteur
+                        <input type="text" id="node_author_input" name="author">
+                    </label>
+                    <label for="texte">Message
+                        <textarea required type="text" id="node_text_input" name="text">aaaa</textarea>
+                    </label>
+                    <label for="hashtags">Hashtags
+                        <input type="text" id="node_hashtags_input" name="hashtags">
+                    </label>
+                    <input type="hidden" id="node_id" name="id">
+                    <button type="submit">Modifier la contribution</button>
+                    <label for="confirm_delete" id="confirm_delete_label">
+                        La suppression est irréversible : 
+                        <input type="checkbox" id="confirm_delete" name="confirm_delete">
+                        J'ai compris.
+                    </label>
+                    <button type="button" id="delete_contribution_button">Supprimer la contribution</button>
+                </form>
             </div>
         </div>
     </aside>

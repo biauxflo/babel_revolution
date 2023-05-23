@@ -157,6 +157,11 @@ aside > div > div.body > form label {
   margin: 0;
 }
 
+aside > div > div.body > form label#confirm_delete_label {
+  margin-top: 10px;
+  font-family: noto;
+}
+
 aside > div > div.body > form input,
 aside > div > div.body > form textarea,
 aside > div > div.body > form select {
@@ -167,8 +172,18 @@ aside > div > div.body > form select {
   font-size: 15px;
 }
 
+aside > div > div.body > form input[type="checkbox"] {
+  display: inline;
+  width: auto;
+  margin: 0 10px;
+}
+
 aside > div > div.body > form textarea {
   height: 15vh;
+}
+
+aside > div#modify_message > div.body > form textarea {
+  height: 12vh;
 }
 
 aside > div button {
@@ -176,8 +191,7 @@ aside > div button {
   margin: 10px 4vw 0 4vw;
 }
 
-/*
-div#write_message div.body {
+div#modify_message div.body {
   display: block;
 }
 
