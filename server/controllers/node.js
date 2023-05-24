@@ -5,7 +5,7 @@ const db = require(path.resolve('sequelize', 'models', 'index.js'))
 exports.getNodes = (req, res, next) => {
     Node.findAll()
         .then(nodes => {
-            console.log(nodes)
+            //console.log(nodes)
             res.status(200).json(nodes)
         })
         .catch(error => res.status(400).json({ error }))
