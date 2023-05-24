@@ -197,10 +197,6 @@ aside > div button {
   margin: 10px 4vw 0 4vw;
 }
 
-div#modify_message div.body {
-  display: block;
-}
-
 /*********************************** GRAPH ***************************************/
 main {
   position: fixed;
