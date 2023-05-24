@@ -53,19 +53,29 @@ server.on('listening', () => {
 });
 
 io.on('connection', (socket) => {
+    // We get url of the connection request
+    const url = socket.handshake.headers.referer;
+    // We use a regex to get the '/session/x' (with x a number) in the url, if any
+    const sessionId = url.match(/\/session\/\d+/);
+    // If the regex is found, the user join the session room
+    if (sessionId && sessionId.length === 1) {
+        socket.join(sessionId[0]);
+    }
+
+    // When there is a change in the graph
     socket.on("databaseUpdate", () => {
         console.log("Database Updated");
         io.emit("databaseUpdate");
     });
-    // When a decree is published
+    // When a decree is published (emit only to the concerned room)
     socket.on("decreePublished", decreeAndExamples => {
         console.log("Decree is published");
-        io.emit("decreePublished", decreeAndExamples);
+        io.to(sessionId[0]).emit("decreePublished", decreeAndExamples);
     });
-    // When a session is completed 
+    // When a session is completed (emit only to the concerned room)
     socket.on("sessionCompleted", end => {
         console.log("Session is completed");
-        io.emit("sessionCompleted", end);
+        io.to(sessionId[0]).emit("sessionCompleted", end);
     });
 })
 
