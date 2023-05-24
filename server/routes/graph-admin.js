@@ -127,9 +127,13 @@ router.post('/end-session', auth, (req, res) => {
           db.SessionInfo.update({ completed: true }, {
             where: { id: idSession }
           })
-            .then(() => {
-              // 3. We send success
-              res.json({ success: true });
+            .then(numUpdatedRows => {
+              if (numUpdatedRows[0] === 1) {
+                // 3. We send success
+                res.json({ success: true });
+              } else {
+                throw new Error("nombre de modifications = " + numUpdatedRows);
+              }
             })
         })
     })
@@ -180,9 +184,13 @@ router.post('/modify-message', auth, (req, res) => {
   sessionModel.update(modifiedMessage, {
     where: { id: modifiedMessage.id }
   })
-    .then(() => {
-      // 2. We send success
-      res.json({ success: true });
+    .then(numUpdatedRows => {
+      if (numUpdatedRows[0] === 1) {
+        // 2. We send success
+        res.json({ success: true });
+      } else {
+        throw new Error("nombre de modifications = " + numUpdatedRows);
+      }
     })
     .catch(err => {
       console.error(err);
