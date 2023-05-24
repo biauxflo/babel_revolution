@@ -107,7 +107,7 @@ publishDecree.submit.addEventListener('click', function () {
         }
     });
     const data = JSON.stringify({ idSession, decree, examples });
-    // We send the data to the server
+    // We send the data to the server in json format to be able to send the objects 'decree' and 'examples'
     fetch('/graph-admin/publish-decree', {
         method: 'post',
         headers: {
@@ -161,10 +161,13 @@ endSession.submit.addEventListener('click', function () {
     }
     // We get the selected end
     const end = endSession.select.selectedOptions[0].element;
-    const data = new URLSearchParams({ idSession, end });
-    // We send the data to the server
+    const data = JSON.stringify({ idSession, end });
+    // We send the data to the server in json format to be able to send the object 'end'
     fetch('/graph-admin/end-session', {
         method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: data
     })
         .then(response => response.json())

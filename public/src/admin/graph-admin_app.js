@@ -144,7 +144,7 @@ socket.on('sessionCompleted', async function (end) {
     endDialog.showModal();
     // We update the graph
     await updateGraph();
-    console.log("+++ decreePublished done");
+    console.log("+++ sessionCompleted done");
 });
 
 // =================================== UPDATE GRAPH ==================================
