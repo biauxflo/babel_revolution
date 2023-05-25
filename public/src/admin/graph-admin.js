@@ -23,7 +23,7 @@ const modifyMessage = new AsideDiv('#modify_message');
 
 /*********************************** TITLE REDIRECTION ***************************************/
 // When the user clicks on the title, it redirects him to the admin page
-document.querySelector('header button#redirectAdminPage').addEventListener('click', () => {
+document.querySelector('header h1').addEventListener('click', () => {
     document.location.href = '/admin';
 });
 
