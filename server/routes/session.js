@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
     const sessionId = req.params.id;
     // If 'sessionId' corresponds to a number, we send the session page
     if (!isNaN(sessionId) && !(await checkCompleted(sessionId))) {
-        res.sendFile('graph.html', { root: '../public' });
+        res.sendFile('graph.html', { root: '../public' });  //graph.html?decree=1&react=false
     } else {
         res.status(404).json({ message: 'Session not found' });
     }
