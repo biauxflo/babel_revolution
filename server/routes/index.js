@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const nodeRoutes = require('./node');
 const sessionRoutes = require('./session');
+const completedRoutes = require('./completed');
 const loginRoutes = require('./login');
 const adminRoutes = require('./admin');
 const graphAdminRoutes = require('./graph-admin');
@@ -15,8 +16,11 @@ router.get('/', (req, res, next) =>
 // Node get and post
 router.use('/node', nodeRoutes);
 
-// Session route, to connect as a normal user
+// Ongoing session route, to connect as a normal user
 router.use('/session', sessionRoutes);
+
+// Completed visible session route, to connect as a normal user
+router.use('/completed', completedRoutes);
 
 // Admin login routes
 router.use('/login', loginRoutes);

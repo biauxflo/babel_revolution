@@ -58,8 +58,10 @@ function onLoadGraph() {
             break;
         default :
             //si erreur ou changement manuelle -> retour à l'intro
-            console.log("Paramètre inconnu - redirection introduction")
-            window.location.href = 'index.html'
+            //console.log("Paramètre inconnu - redirection introduction")
+            //window.location.href = 'index.html'
+            console.log("Paramètre inconnu - redirection 1er graph")
+            window.location.href += '?decree=1&react=false';
     }
 }
 
