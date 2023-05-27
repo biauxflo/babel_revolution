@@ -48,7 +48,7 @@ export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, n
    });
 
   node.on("click", function(event, d) {
-    let hashtags = d.hashtags.join(" / ")
+    let hashtags = d.hashtags.join(", ")
     nodeTitle.html(d.title);
     nodeAuthor.html("écrit par "+d.author);
     nodeTextDiv.html(d.text);

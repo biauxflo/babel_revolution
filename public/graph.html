@@ -61,8 +61,8 @@
                 <h5 id="title-with-toggle">écrire un message</h5>
                 <button type="button" id="button-toggle-writing" class="button-toggle-down" onclick="toggle(this.id, 'add-node-form')"></button>
                 <form id="add-node-form" style="display:none">
-                  <input required id="add-node-title" class="input" type="text" placeholder="Titre..." style="font-style:italic">
-                  <input required id="add-node-author" class="input" type="text" placeholder="Auteur..." style="font-style:italic">
+                  <input required id="add-node-title" class="input" type="text" placeholder="Titre" style="font-style:italic">
+                  <input required id="add-node-author" class="input" type="text" placeholder="Pseudo" style="font-style:italic">
                   <select id="add-node-decree">
                     <!-- options added for each decree in src/app.js-->
                   </select>
@@ -71,8 +71,8 @@
                     <option value="neutral">Partagé·e</option>
                     <option value="in_favor">Partisant·e</option>
                   </select>
-                  <textarea required id="add-node-text" class="input" type="text" placeholder="Texte..." style="font-style:italic; font-family:Verdana"></textarea>
-                  <input required id="add-node-hashtags" class="input" type="text" placeholder="Hashtag..." style="font-style:italic">
+                  <textarea required id="add-node-text" class="input" type="text" placeholder="Texte du message" style="font-style:italic; font-family:Verdana"></textarea>
+                  <input required id="add-node-hashtags" class="input" type="text" placeholder="Mots-clés (séparés par des virgules)" style="font-style:italic">
                   <input id="add-node-type" class="input" type="hidden" value="contribution">
                   <button id="add-node-button" type="submit">Publier</button>
                 </form>
