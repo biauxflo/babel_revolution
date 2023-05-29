@@ -26,43 +26,25 @@
       </header>
 
       <div id="about">
-
         <button type="button" id="button-about-ouvert" onclick="OpenText()">à propos +</button>
         <button type="button" id="button-about-ferme" onclick="OpenText()" style="display:none">à propos -</button>
-        <div id="about-text" style="display:none">
-          <p><i>« Une expression qui, il y a un instant à peine, vivait encore et semblait même indéracinable, pouvait brusquement s’évanouir : elle a disparu avec la situation qui l’avait engendrée et dont elle témoignera un jour tel un fossile » (Klemperer, LTI, la langue du Troisième Reich, 1947).</i></p>
-          <p>BⱯBEL RËVOLUㅏION est un récit participatif dystopique, qui ressemble étrangement à notre monde contemporain. Cette création aborde la question du lien entre la dégradation de la biodiversité et la dégradation de la diversité linguistique et culturelle.</p>
-          <p>Il s'agit d'un projet transdisciplinaire en cours qui implique des chercheuses et chercheurs (didactique des langues, littérature, design, sciences de l'information et de la communication) et des élèves-ingénieur·es en informatique.</p>
-          <p>
-            <b>Crédits</b><br>
-            Conception et supervision du projet : Isabelle Cros, Erika Fülöp, Simon Renaud, Serge Bouchardon, Adrien Charannat
-            <br>
-            Conception et développement : Mathilde Lange, Solène Desvaux de Marigny, Claire Malgonne, Florestan Biaux, Lucas D'Aquaro, Ismaïl Kadiri</p>
-        </div>
+        <div id="about-text" style="display:none"></div>
       </div>
 
       <div id="text-box-intro">
-
         <!-- Explications / début -->
         <div id="intro" style="display:none">
             <div id="text">
-                <h1>Prologue</h1>
-                <p>
-                  Un mouvement populaire spontané émerge suite à l’édiction d’une nouvelle épuration linguistique. Sous l’impulsion du <i>Centre de la monoculture (CMC)</i>, la toute puissante institution agro-culturelle régissant à la fois l’agroforesterie et la vie intellectuelle, des centaines de noms de plantes, de fleurs, d’arbres ont été supprimés du <i>Dictionnaire officiel de la CMC</i>. Cette dernière d’une longue série de lois et amendements vise à expurger la langue commune pour « l’actualiser et la mettre mieux en adéquation avec l’environnement » (extrait du <i>Dictionnaire officiel de la CMC)</i>, dans lequel la biodiversité végétale s’est drastiquement réduite. 
-                </p>
+                <h1 id="intro_title1"></h1>
+                <div id="intro_page1"></div>
             </div>
             <button id="button-next" onclick="nextPageIntro('#intro', '#intro2')">Poursuivre</button>   
         </div>
 
         <div id="intro2" style="display:none">
           <div id="text">
-              <h1>Prologue</h1>
-              <p>
-                Le blog  publié dans la Dark Machine d’une anonyme rend témoignage, dans le langage même, de l’appauvrissement et la colonisation de la nature et du savoir par l’humain (et par son prolongement, la Machine, mais aussi de la résistance qui s’organise contre cet étiolement conjoint de la nature et de l'esprit.
-              </p>
-              <p>
-                Assignées derrière leurs écrans par la pollution qui gangrène la ville, les seuls moyens d’action des populations pour résister : les posts plurilingues émis au cœur même codé de la Machine, organisme dématérialisé où s’agence désormais la vie sociale, professionnelle et civique. Ainsi, spontanément, des voix y germent, d’abord balbutiantes et isolées, bientôt articulées, en des langues éradiquées au Coup d’État : naguères florissantes, comme l’anglais, le mandarin, l’hindi, l’espagnol, l’arabe, l’espagnol, le bengali, le russe ; mais aussi de cultures désormais bien lointaines, comme l’étrusque, le trégorois ou les créoles... 
-              </p>
+            <h1 id="intro_title2"></h1>
+            <div id="intro_page2"></div>
           </div>
           <button id="button-next" onclick="nextPageIntro('#intro2', '#intro')">Retour</button> 
           <button id="button-next" onclick="nextPageIntro('#intro2', '#intro3')">Poursuivre</button>   
@@ -70,13 +52,8 @@
 
       <div id="intro3" style="display:none">
         <div id="text">
-            <h1>Prologue</h1>
-            <p>
-              Suite à l’actualisation du dictionnaire et en dépit de l’interdiction de parler ces langues interdites,  le mur de la Machine se couvre de graphes et de glyphes numériques ; de technotextes, de poèmes sonores et d’éclats de voix hypermédiatisés ; de fenêtres ouvertes sur un ailleurs hypertextuel plurilingue devenu zone prohibée ; de souvenirs de rencontres hétérolingues hétérodoxes ; d’exhortations à cultiver son jardin, là, maintenant, même dans la plus infime fissure de la langue et du bitume. Et qu’importe si les langues se défont ou se fondent, s’intriquent à s’en empêtrer les consonnes...
-            </p>
-            <p>
-              Il y a urgence à dire en présence de toutes les langues de ce monde multiple et divers dont vous avez encore souvenir, avant que ces – que vos langues ne meurent définitivement, à l’instar des espèces végétales menacées. Hâtez-vous : sauvons ce qui est déjà en voix d’extinction ! 
-            </p>
+          <h1 id="intro_title3"></h1>
+          <div id="intro_page3"></div>
         </div>
         <button id="button-next" onclick="nextPageIntro('#intro3', '#intro2')">Retour</button> 
         <button id="button-next" onclick="EnterWorld()">Entrer dans le monde</button>  
@@ -133,8 +110,12 @@
 
 
     </div>
-    <script src="/src/story.js"></script>
-    <script src="/src/interface.js"></script>
+
+    <script src="src/story.js"></script>
+    <script src="src/interface.js"></script>
+    <script src="texts/intro_text.js"></script>
+    <script src="texts/about_text.js"></script>
+
     <script>
       function OpenText() {
         var btnferme = document.getElementById("button-about-ouvert");
@@ -159,6 +140,15 @@
         setTimeout(() => {document.getElementById("load").style.display = "none"; document.getElementById("firstDecree").style.display = "block";}, 2000);
       }
     </script>
-    
+
+    <script>
+      //load texts from json (texts in js variable)
+      for (var key in intro_text){
+          document.getElementById(key).innerHTML = intro_text[key]; //textes introductifs
+      }
+      for (var key in about_text){
+          document.getElementById(key).innerHTML = about_text[key]; //à propos
+      }
+    </script>
     </body>
  </html>

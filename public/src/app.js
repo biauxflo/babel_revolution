@@ -160,6 +160,7 @@ export default async function updateGraph() {
     if (h.charAt(0) == "#") {
       h = h.substring(1);
     } 
+    h = h.toLowerCase()
     return h.trim()
     
   }
