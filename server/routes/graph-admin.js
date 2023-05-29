@@ -127,9 +127,13 @@ router.post('/end-session', auth, (req, res) => {
           db.SessionInfo.update({ completed: true }, {
             where: { id: idSession }
           })
-            .then(() => {
-              // 3. We send success
-              res.json({ success: true });
+            .then(numUpdatedRows => {
+              if (numUpdatedRows[0] === 1) {
+                // 3. We send success
+                res.json({ success: true });
+              } else {
+                throw new Error("nombre de modifications = " + numUpdatedRows);
+              }
             })
         })
     })
@@ -140,7 +144,7 @@ router.post('/end-session', auth, (req, res) => {
 });
 
 // Publish CMC message route
-router.post('/cmc-message', auth, async (req, res) => {
+router.post('/cmc-message', auth, (req, res) => {
   const idSession = req.body.idSession;
   const message = req.body;
   // We delete the attribute idSession, so we just keep the message info
@@ -154,7 +158,7 @@ router.post('/cmc-message', auth, async (req, res) => {
       // We define the model connected to the correct table
       const tableName = 'session-' + idSession;
       const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
-      // 1. We add the decree to the table
+      // 1. We add the message to the table
       sessionModel.create(message)
         .then(() => {
           // 2. We send success
@@ -164,6 +168,61 @@ router.post('/cmc-message', auth, async (req, res) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({ success: false, error: 'Erreur lors de la publication du message : ' + err });
+    });
+});
+
+// Modify message route
+router.post('/modify-message', auth, (req, res) => {
+  const idSession = req.body.idSession;
+  const modifiedMessage = req.body;
+  // We delete the attribute idSession, so we just keep the modified message info
+  delete modifiedMessage.idSession;
+  // We define the model connected to the correct table
+  const tableName = 'session-' + idSession;
+  const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
+  // 1. We modify the message in the table
+  sessionModel.update(modifiedMessage, {
+    where: { id: modifiedMessage.id }
+  })
+    .then(numUpdatedRows => {
+      if (numUpdatedRows[0] === 1) {
+        // 2. We send success
+        res.json({ success: true });
+      } else {
+        throw new Error("nombre de modifications = " + numUpdatedRows);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Erreur lors de la modification du message : ' + err });
+    });
+});
+
+// Delete message route
+router.post('/delete-message', auth, (req, res) => {
+  const { idSession, idMessage } = req.body;
+  // We define the model connected to the correct table
+  const tableName = 'session-' + idSession;
+  const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
+  // 1. We delete the message in the table (if it is not a decree)
+  sessionModel.destroy({
+    where: {
+      id: idMessage,
+      type: { [Op.ne]: 'decree' }
+    }
+  })
+    .then(numDeletedRows => {
+      // 2. We check the number of deleted rows
+      if (numDeletedRows === 1) {
+        // 3. We send success
+        res.json({ success: true });
+      } else {
+        throw new Error("nombre de messages supprimés = " + numDeletedRows);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Erreur lors de la suppression du message : ' + err });
     });
 });
 

@@ -146,8 +146,12 @@ router.post('/change-password', auth, (req, res) => {
         db.User.update({ password: hash }, {
           where: { username: currentUsername }
         })
-          .then(() => {
-            res.json({ success: true, message: "Le mot de passe a été mis à jour avec succès." });
+          .then(numUpdatedRows => {
+            if (numUpdatedRows[0] === 1) {
+              res.json({ success: true, message: "Le mot de passe a été mis à jour avec succès." });
+            } else {
+              throw new Error("nombre de modifications = " + numUpdatedRows);
+            }
           })
           .catch(err => {
             console.error(err);
@@ -216,8 +220,12 @@ router.post('/delete-account', auth, (req, res) => {
   db.User.destroy({
     where: { username }
   })
-    .then(() => {
-      res.json({ success: true, message: "Le compte a bien été supprimé." });
+    .then(numDeletedRows => {
+      if (numDeletedRows === 1) {
+        res.json({ success: true, message: "L'utilisateur a bien été supprimé." });
+      } else {
+        throw new Error("nombre de suppressions = " + numDeletedRows);
+      }
     })
     .catch(err => {
       console.error(err);
@@ -256,8 +264,12 @@ router.post('/change-visibility', auth, (req, res) => {
   db.SessionInfo.update({ visible }, {
     where: { id }
   })
-    .then(() => {
-      res.json({ success: true, message: "La visibilité de la session a été mise à jour avec succès." });
+    .then(numUpdatedRows => {
+      if (numUpdatedRows[0] === 1) {
+        res.json({ success: true, message: "La visibilité de la session a été mise à jour avec succès." });
+      } else {
+        throw new Error("nombre de modifications = " + numUpdatedRows);
+      }
     })
     .catch(err => {
       console.error(err);
@@ -293,11 +305,15 @@ router.post('/create-session', auth, (req, res) => {
 // rename session route
 router.post('/rename-session', auth, (req, res) => {
   const { id, newTitle } = req.body;
-  db.SessionInfo.update({ newTitle }, {
+  db.SessionInfo.update({ title: newTitle }, {
     where: { id }
   })
-    .then(() => {
-      res.json({ success: true, message: "Le titre de la session a été mis à jour avec succès." });
+    .then(numUpdatedRows => {
+      if (numUpdatedRows[0] === 1) {
+        res.json({ success: true, message: "Le titre de la session a été mis à jour avec succès." });
+      } else {
+        throw new Error("nombre de sessions renommées = " + numUpdatedRows);
+      }
     })
     .catch(err => {
       console.error(err);
@@ -312,14 +328,18 @@ router.post('/delete-session', auth, (req, res) => {
   const privileges = req.session.user.privileges;
   let options = "error";
   if (privileges !== 0 && privileges !== 1) {
-    options = { where: { [Op.and]: [{ privileges }, { id }] } };
+    options = { where: { author: req.session.user.username, id } };
   } else {
     options = { where: { id } };
   }
   // Then we can delete the account
   db.SessionInfo.destroy(options)
-    .then(() => {
-      res.json({ success: true, message: "La session a bien été supprimé." });
+    .then(numDeletedRows => {
+      if (numDeletedRows === 1) {
+        res.json({ success: true, message: "La session a bien été supprimé." });
+      } else {
+        throw new Error("nombre de sessions supprimées = " + numDeletedRows);
+      }
     })
     .catch(err => {
       console.error(err);

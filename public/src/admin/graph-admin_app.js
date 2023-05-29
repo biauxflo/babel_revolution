@@ -2,10 +2,11 @@
 
 import { fetchData } from "../fetch_database.js";
 import { createNodeDragBehavior, forceSimulation, simulationTicked } from "../simulation.js";
-import { createNodes, displayNodeInfo } from "../nodes.js";
+import { createNodes, displayNodeInfoAdmin } from "../nodes.js";
 import { createLinks } from "../links.js";
 import { createLabels } from "../labels.js";
 import { insertData } from "../insert_database.js";
+import { ToggleAside } from "./graph-adminElements.js";
 
 let result;
 try {
@@ -64,15 +65,16 @@ let label = createLabels(svg, nodes)
 let simulation = forceSimulation(nodes, links, parameters)
 
 // =================================== TOOLTIP ===================================
-/*
-//elements-nodes
-const nodeTextDiv = d3.select("#node-text");
-const nodeHashtagsDiv = d3.select("#node-hashtags");
-const nodeTitle = d3.select("#node-title")
-const nodeAuthor = d3.select("#node-author")
 
-displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
-*/
+// When an user clicks on a node, it shows its text, hashtags, title and author
+const nodeId = document.querySelector("#node_id");
+const nodeTitle = document.querySelector("#node_title_input");
+const nodeAuthor = document.querySelector("#node_author_input");
+const nodeText = document.querySelector("#node_text_input");
+const nodeHashtags = document.querySelector("#node_hashtags_input");
+const nodeType = document.querySelector("#node_type");
+const aside = new ToggleAside();  // This one is used to toggle the menu and show the node content
+displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeText, nodeHashtags, nodeType, aside);
 
 // =================================== DRAGGING ===================================
 
@@ -142,7 +144,7 @@ socket.on('sessionCompleted', async function (end) {
     endDialog.showModal();
     // We update the graph
     await updateGraph();
-    console.log("+++ decreePublished done");
+    console.log("+++ sessionCompleted done");
 });
 
 // =================================== UPDATE GRAPH ==================================
@@ -202,7 +204,7 @@ export default async function updateGraph() {
     simulation = simulationTicked(simulation, link, node, label)
     node.call(nodeDragBehavior);
     //elements-nodes
-    displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
+    displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeText, nodeHashtags, nodeType, aside);
 }
 
 // ======== UPDATE DATA ===========

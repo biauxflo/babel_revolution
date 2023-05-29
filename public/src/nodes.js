@@ -68,6 +68,24 @@ export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, n
   
 }
 
+// displayNodeInfo for graph-admin
+// The toggle of the menu is done by a listener on nodeTitle in graph-admin.js
+export function displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeText, nodeHashtags, nodeType, aside) {
+  node.on("click", function(event, selectedNode) {
+    // We set the values of the inputs
+    nodeId.value = selectedNode.id;
+    nodeTitle.value = selectedNode.title;
+    nodeAuthor.value = selectedNode.author;
+    nodeText.value = selectedNode.text;
+    nodeHashtags.value = selectedNode.hashtags.join(" / ");
+    nodeType.value = selectedNode.type;
+    // We show the inputs (aside class is defined in graph-adminElements.js)
+    aside.toggleModifyMessageDiv();
+    // We set the colors of the graph nodes
+    d3.selectAll(".node").style("fill", graphNode => getNodeColor(graphNode)); //reset color on all nodes
+    d3.select(this).style("fill", "green");
+  });
+}
   
 // function tooltip_2() {
 // // Créer un élément SVG pour la fenêtre contextuelle

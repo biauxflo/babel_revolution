@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>BⱯBEL Rëvoluθion</title>
+    <title>BⱯBEL RËVOLUㅏION</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <link rel="icon" href="/img/icone-babel.png" type="image/png">
@@ -14,7 +14,6 @@
 <body>
     <header>
         <h1>BⱯBEL<br>RËVOLUㅏION</h1>
-        <button id="redirectAdminPage"></button>
         <p id="application_message"></p>
     </header>
     <aside>
@@ -103,7 +102,33 @@
                 <h2>Modifier une contribution</h2>
             </div>
             <div class="body">
-
+                <form id="modify_message_form">
+                    <label for="able_modification">
+                        <input type="checkbox" id="able_modification" name="able_modification">
+                        Activer la modification
+                    </label>
+                    <label for="title">Titre
+                        <input type="text" id="node_title_input" name="title" disabled>
+                    </label>
+                    <label for="author">Auteur
+                        <input type="text" id="node_author_input" name="author" disabled>
+                    </label>
+                    <label for="texte">Message
+                        <textarea required type="text" id="node_text_input" name="text" disabled></textarea>
+                    </label>
+                    <label for="hashtags">Hashtags
+                        <input type="text" id="node_hashtags_input" name="hashtags" disabled>
+                    </label>
+                    <input type="hidden" id="node_id" name="id">
+                    <input type="hidden" id="node_type" name="type">
+                    <button type="submit">Modifier la contribution</button>
+                    <label for="confirm_delete" id="confirm_delete_label">
+                        La suppression est irréversible : 
+                        <input type="checkbox" id="confirm_delete" name="confirm_delete">
+                        J'ai compris.
+                    </label>
+                    <button type="button" id="delete_contribution_button">Supprimer la contribution</button>
+                </form>
             </div>
         </div>
     </aside>
