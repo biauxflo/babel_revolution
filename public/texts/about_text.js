@@ -7,7 +7,7 @@ var about_text = {
         <p>Il s'agit d'un projet transdisciplinaire en cours qui implique des chercheuses et chercheurs (didactique des langues, littérature, \
         design, sciences de l'information et de la communication) et des élèves-ingénieur·es en informatique.</p>\
         <p><b>Crédits</b><br>\
-        Conception et supervision du projet : Isabelle Cros, Erika Fülöp, Simon Renaud, Serge Bouchardon, Adrien Charannat\
+        Conception et supervision du projet : Serge Bouchardon, Isabelle Cros, Adrien Charannat, Erika Fülöp, Simon Renaud\
         <br>\
-        Conception et développement : Mathilde Lange, Solène Desvaux de Marigny, Claire Malgonne, Florestan Biaux, Lucas D'Aquaro, Ismaïl Kadiri</p>"
+        Conception et développement : Florestan Biaux, Lucas D'Aquaro, Solène Desvaux de Marigny, Ismaïl Kadiri, Mathilde Lange, Claire Malgonne</p>"
 }
