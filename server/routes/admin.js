@@ -292,8 +292,12 @@ router.post('/create-session', auth, (req, res) => {
       const sessionModel = db.sequelize.define(newTableName, db.Node.rawAttributes, { timestamps: false });
       sessionModel.sync().
         then(() => {
-          // 3. We send the info of the session
-          res.json({ success: true, session });
+          // 3. Add root node
+          sessionModel.create({ title: "Centre de la Monoculture", author: 'CMC', text: "Merci de respecter nos décrets", type: 'root'})
+              .then(()=>{
+                // 4. We send the info of the session
+                res.json({ success: true, session });
+              })
         })
     })
     .catch(err => {

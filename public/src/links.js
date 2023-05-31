@@ -55,10 +55,9 @@ export function createLinksData(nodes) {
     }    
     
  // Function to create links between nodes in an SVG element
- export function createLinks(svg, nodes) {
+ export function createLinks(svg, links) {
     // Call the createLinksData function to get the links array
 
-    let links = createLinksData(nodes);
     // Bind the links array to a set of SVG lines, setting their class, stroke color, and stroke width
     let link = svg.selectAll(".link")
       .data(links)
@@ -70,4 +69,26 @@ export function createLinksData(nodes) {
     // Return an array containing the links array and the SVG line elements
     return [links, link];
   }
+
+  export function createHierarchicalLinks(svg, datas){
+      let links = svg.append("g")
+          .selectAll("line")
+          .data(datas)
+          .join("line")
+          .attr("stroke", "#999")
+          .attr("stroke-opacity", 0.6);
+
+      return links;
+  }
+
+export function joinHierarchicalLinks(svg, datas){
+    let links = svg
+        .selectAll("line")
+        .data(datas)
+        .join("line")
+        .attr("stroke", "#999")
+        .attr("stroke-opacity", 0.6);
+
+    return links;
+}
   

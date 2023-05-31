@@ -16,7 +16,7 @@ exports.getSessionNodes = (req, res, next) => {
     const idSession = req.params.id;
     // We define the model connected to the correct table
     const tableName = 'session-' + idSession;
-    const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
+    const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: false });
     sessionModel.findAll()
         .then(nodes => {
             res.status(200).json(nodes)

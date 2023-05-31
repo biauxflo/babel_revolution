@@ -106,9 +106,8 @@
     <script src="/src/interface.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="module">
-      import updateGraph from "./src/app.js";
+      import {updateGraph} from "./src/app.js";
 
-      console.log("OUI");
       var socket = io();
 
       var form = document.getElementById('add-node-form');
