@@ -20,25 +20,7 @@ export function getNodeColor(node) {
   }
 }
 
-// Nodes initialization
-export function createNodes(svg, nodes) {
-
-    var node = svg.append("g")
-        .selectAll(".node")
-        .data(nodes)
-        .enter()
-        .append("circle")
-        .attr("class", "node")
-        .attr("r", 30)
-        .style("fill", function(d){
-          var datas = getNodeDatas(d, nodes);
-          getNodeColor(datas);
-        })
-
-    return node
-}
-
-export function createNodesHierarchical(svg, datas, fetchedNodes){
+export function createNodes(svg, datas, fetchedNodes){
   let nodes = svg.append("g")
       .attr("stroke-width", 1.5)
       .selectAll("circle")
@@ -54,7 +36,7 @@ export function createNodesHierarchical(svg, datas, fetchedNodes){
   return nodes;
 }
 
-export function joinNodesHierarchical(svg, datas, fetchedNodes){
+export function joinNodes(svg, datas, fetchedNodes){
   let nodes = svg
       .selectAll("circle")
       .data(datas)

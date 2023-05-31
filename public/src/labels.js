@@ -31,33 +31,12 @@ function onLabelClick(event, d, fetchedNodes, nodeSelection) {
     d3.select("#button-toggle-messages").classed("button-toggle-up", true)
 }
 
-export function createLabels(svg, nodes) {
-
-    let label = svg
-      .append('g')
-      .attr('class', 'labels')
-      .selectAll('text')
-      .data(nodes)
-      .enter()
-      .append('text')
-      .style('fill', 'white')
-      .style('stroke', 'none')
-      .attr('text-anchor', 'middle')
-      .text(function (d) {
-        return d.author
-      })
-        // Display node infos
-      .on("click", onLabelClick)
-
-    return label
-}
-
 // Create label when using d3-hierarchy
 // svg : svg element
 // node : svg selection of nodes
 // nodes : hierarchy datas for the graph
 // fetchedNodes : nodes as stored in DB
-export function createLabelsHierarchy(svg, nodeSelection, nodes, fetchedNodes) {
+export function createLabels(svg, nodeSelection, nodes, fetchedNodes) {
 
     let label = svg
         .append('g')
@@ -81,7 +60,7 @@ export function createLabelsHierarchy(svg, nodeSelection, nodes, fetchedNodes) {
     return label;
 }
 
-export function joinLabelsHierarchy(svg, nodeSelection, nodes, fetchedNodes) {
+export function joinLabels(svg, nodeSelection, nodes, fetchedNodes) {
 
     let label = svg
         .selectAll('text')
