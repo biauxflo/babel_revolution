@@ -1,10 +1,10 @@
 import {fetchData} from "./fetch_database.js";
 import {createNodeDragBehavior} from "./simulation.js";
-import {createNodesHierarchical, displayNodeInfo, joinNodesHierarchical} from "./nodes.js";
-import {createLabelsHierarchy, joinLabelsHierarchy} from "./labels.js";
+import {createNodes, displayNodeInfo, joinNodes} from "./nodes.js";
+import {createLabels, joinLabels} from "./labels.js";
 import {insertData} from "./insert_database.js";
 import {createHierarchy} from "./hierarchy.js";
-import {createHierarchicalLinks, joinHierarchicalLinks} from "./links.js";
+import {createLinks, joinLinks} from "./links.js";
 
 /** Constantes */
 
@@ -92,13 +92,13 @@ function generateGraph(){
       .tick(ticked)
 
   /** Mise en place des liens */
-    linkSelection = createHierarchicalLinks(svg, links);
+    linkSelection = createLinks(svg, links);
 
   /** Mise en place des noeuds */
-    nodeSelection = createNodesHierarchical(svg, nodes, fetchedNodes);
+    nodeSelection = createNodes(svg, nodes, fetchedNodes);
 
   /** Mise en place des labels */
-    labelSelection = createLabelsHierarchy(svg, nodeSelection, nodes, fetchedNodes);
+    labelSelection = createLabels(svg, nodeSelection, nodes, fetchedNodes);
 
   simulation.on('tick', ticked);
 
@@ -112,11 +112,11 @@ function generateGraph(){
 export async function updateGraph(){
   await updateData();
 
-  linkSelection = joinHierarchicalLinks(svg, links);
+  linkSelection = joinLinks(svg, links);
 
-  nodeSelection = joinNodesHierarchical(svg, nodes, fetchedNodes);
+  nodeSelection = joinNodes(svg, nodes, fetchedNodes);
 
-  labelSelection = joinLabelsHierarchy(svg, nodeSelection, nodes, fetchedNodes);
+  labelSelection = joinLabels(svg, nodeSelection, nodes, fetchedNodes);
 
   simulation.nodes(nodes)
             .force("link", d3.forceLink(decreeLinks).id(d => d.id).distance(0).strength(1))
