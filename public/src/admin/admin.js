@@ -222,16 +222,16 @@ createAccountForm.addEventListener('submit', function (event) {
     // We check the info from the form
     if (formInfo.get('username').length < 1) {
         createAccountMessage.textContent = "Le nom d'utilisateur ne peut pas être nul.";
-        return;
+
     } else if (formInfo.get('password').length < 5) {
         createAccountMessage.textContent = "Le mot de passe doit avoir 5 caractères ou plus.";
-        return;
+
     } else if (formInfo.get('password') !== formInfo.get('password_verification')) {
         createAccountMessage.textContent = "Les mots de passe doivent correspondre.";
-        return;
+
     } else if (formInfo.get('privilege') !== '1' && formInfo.get('privilege') !== '2') {
         createAccountMessage.textContent = "Le niveau admin doit être 1 ou 2.";
-        return;
+
     } else {
         // If everything until now is ok, we now check if the username is already taken
         fetch('admin/all-accounts-list')
@@ -241,7 +241,7 @@ createAccountForm.addEventListener('submit', function (event) {
                     // We check for the elements in res.users if the username is already included
                     if (res.users.some(element => element.username === formInfo.get('username'))) {
                         createAccountMessage.textContent = "Ce nom d'utilisateur est déjà utilisé.";
-                        return;
+
                     } else {
                         sendAccountCreationData(formInfo);
                     }

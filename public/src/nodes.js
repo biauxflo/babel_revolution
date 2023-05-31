@@ -1,3 +1,12 @@
+// Function to fetch datas of a node when using d3-hierarchy
+// Node : d3-hierarchy element
+// Nodes : Nodes stored in DB
+export function getNodeDatas(node, nodes){
+  let nodeId = node.data.data.id;
+  let nodeDatas = nodes.find(z => String(z.id) === nodeId)
+  return nodeDatas
+}
+
 export function getNodeColor(node) {
   if (node.type === "contribution") {
     switch (String(node.belief)) {
@@ -21,20 +30,58 @@ export function createNodes(svg, nodes) {
         .append("circle")
         .attr("class", "node")
         .attr("r", 30)
-        .style("fill", d => getNodeColor(d))
+        .style("fill", function(d){
+          var datas = getNodeDatas(d, nodes);
+          getNodeColor(datas);
+        })
 
     return node
+}
+
+export function createNodesHierarchical(svg, datas, fetchedNodes){
+  let nodes = svg.append("g")
+      .attr("stroke-width", 1.5)
+      .selectAll("circle")
+      .data(datas)
+      .join("circle")
+      .style("fill", function(d){
+        var datas = getNodeDatas(d, fetchedNodes);
+        var color =  getNodeColor(datas);
+        return color;
+      })
+      .attr("stroke", d => d.children ? "#fff" : null)
+      .attr("r", 15);
+  return nodes;
+}
+
+export function joinNodesHierarchical(svg, datas, fetchedNodes){
+  let nodes = svg
+      .selectAll("circle")
+      .data(datas)
+      .join("circle")
+      .style("fill", function(d){
+        var datas = getNodeDatas(d, fetchedNodes);
+        var color =  getNodeColor(datas);
+        return color;
+      })
+      .attr("stroke", d => d.children ? "#fff" : null)
+      .attr("r", 15);
+  return nodes;
 }
 
 // Displaying node text on a div
 //elements-nodes
 // Displaying the text and hashtags of a node on a div
-export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor) {
+export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor) {
   //if click on graph but outside a node
   const svg = d3.select("svg");
   svg.on("click", function(event, d) {
     if(event.target.nodeName === "svg") {
-      node.style("fill", d => getNodeColor(d));
+      node.style("fill", function(d){
+        var datas = getNodeDatas(d, nodes);
+        var color =  getNodeColor(datas);
+        return color;
+      });
       nodeTextDiv.html("");  //set text to empty to not show
       nodeTitle.html("");
       nodeAuthor.html("");
@@ -48,12 +95,17 @@ export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, n
    });
 
   node.on("click", function(event, d) {
-    let hashtags = d.hashtags.join(", ")
-    nodeTitle.html(d.title);
-    nodeAuthor.html("écrit par "+d.author);
-    nodeTextDiv.html(d.text);
+    let nodeDatas = getNodeDatas(d, nodes)
+    let hashtags = nodeDatas.hashtags.join(", ")
+    nodeTitle.html(nodeDatas.title);
+    nodeAuthor.html("écrit par "+nodeDatas.author);
+    nodeTextDiv.html(nodeDatas.text);
     nodeHashtagsDiv.html("# : " +hashtags);
-    d3.selectAll(".node").style("fill", d => getNodeColor(d)) //reset color on all nodes
+    node.style("fill", function(d){
+      var datas = getNodeDatas(d, nodes);
+      var color =  getNodeColor(datas);
+      return color;
+    }) //reset color on all nodes
     d3.select(this).style("fill", "green");
     nodeTitle.style("display", "block") //show title, otherwise hidden
 
@@ -71,6 +123,7 @@ export function displayNodeInfo(node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, n
 // displayNodeInfo for graph-admin
 // The toggle of the menu is done by a listener on nodeTitle in graph-admin.js
 export function displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeText, nodeHashtags, nodeType, aside) {
+  // TODO fix
   node.on("click", function(event, selectedNode) {
     // We set the values of the inputs
     nodeId.value = selectedNode.id;

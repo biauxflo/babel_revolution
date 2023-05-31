@@ -85,7 +85,7 @@ router.post('/publish-decree', auth, async (req, res) => {
       }
       // We define the model connected to the correct table
       const tableName = 'session-' + idSession;
-      const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
+      const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: false });
       // 1. We add the decree to the table
       sessionModel.create({ title: decree.title, author: 'CMC', text: decree.text, type: 'decree' })
         .then(dbDecree => {
