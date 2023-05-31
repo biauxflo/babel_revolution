@@ -16,7 +16,7 @@ var intro_text = {
         <p>Assignées derrière leurs écrans par la pollution qui gangrène la ville, les seuls moyens d’action des populations pour résister : \
         les posts plurilingues émis au cœur même codé de la Machine, organisme dématérialisé où s’agence désormais la vie sociale, \
         professionnelle et civique. Ainsi, spontanément, des voix y germent, d’abord balbutiantes et isolées, bientôt articulées, \
-        en des langues éradiquées au Coup d’État : naguères florissantes, comme l’anglais, le mandarin, l’hindi, l’espagnol, l’arabe, l’espagnol, le bengali, le russe ; \
+        en des langues éradiquées au Coup d’État : naguères florissantes, comme l’anglais, le mandarin, l’hindi, l’espagnol, l’arabe, le bengali, le russe ; \
         mais aussi de cultures désormais bien lointaines, comme l’étrusque, le trégorois ou les créoles... </p>",
     
     "intro_title3" : "Prologue",
@@ -27,6 +27,6 @@ var intro_text = {
         d’exhortations à cultiver son jardin, là, maintenant, même dans la plus infime fissure de la langue et du bitume. \
         Et qu’importe si les langues se défont ou se fondent, s’intriquent à s’en empêtrer les consonnes...</p>\
         <p>Il y a urgence à dire en présence de toutes les langues de ce monde multiple et divers dont vous avez encore souvenir, \
-        avant que ces – que vos langues ne meurent définitivement, à l’instar des espèces végétales menacées. Hâtez-vous : \
+        avant que ces – que vos – langues ne meurent définitivement, à l’instar des espèces végétales menacées. Hâtez-vous : \
         sauvons ce qui est déjà en voix d’extinction ! </p>"
 }
