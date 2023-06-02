@@ -1,6 +1,13 @@
+/* old
 @font-face {
   font-family: "altertype";
   src: url("../fonts/altertype_DOUBLE_JE-Regular.woff2") format("woff2");
+}
+*/
+
+@font-face {
+  font-family:"altertype";
+  src: url("../fonts/altertype_V2-Regular.otf") format("opentype");
 }
 
 @font-face {

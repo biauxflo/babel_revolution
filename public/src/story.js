@@ -30,16 +30,14 @@ function onLoadGraph() {
     if(react == "true") {
         //open side bar
         d3.select("#messages-inside").style("display", "block")
-        d3.select("#button-toggle-messages").classed("button-toggle-down", false)
-        d3.select("#button-toggle-messages").classed("button-toggle-up", true)
+        d3.select("#span-toggle-messages").html("⇧")
 
         //open message box
         //open side bar & message box
         d3.select("#add-node-form").style("display", "block")
-        d3.select("#button-toggle-writing").classed("button-toggle-down", false)
-        d3.select("#button-toggle-writing").classed("button-toggle-up", true)
+        d3.select("#span-toggle-writing").html("⇧")
 
-        document.getElementById("add-node-author").focus();
+        document.getElementById("add-node-title").focus();
     }
 
     
