@@ -12,6 +12,7 @@ const nodeTextDiv = d3.select("#node-text");
 const nodeHashtagsDiv = d3.select("#node-hashtags");
 const nodeTitle = d3.select("#node-title");
 const nodeAuthor = d3.select("#node-author");
+const selectReact = document.getElementById("add-node-react");
 
 /** Variables */
 
@@ -73,6 +74,18 @@ async function updateData() {
   nodes = root.descendants();
 
   links = decreeLinks;
+
+  /** Récupération des options pour la séléction de la réaction */
+  let decrees = fetchedNodes.filter(d=> d.type == "decree");
+  let contributions = fetchedNodes.filter(d=> d.type == "contribution");
+  if(selectReact.options.length != fetchedNodes.length) {
+    for (const decree of decrees) {
+      selectReact.add(new Option(decree.title, decree.id)) //add an option for each decree
+    }
+    for (const contribution of contributions) {
+      selectReact.add(new Option(contribution.title, contribution.id)) //add an option for each decree
+    }
+  }
 }
 
 function generateGraph(){
@@ -102,7 +115,7 @@ function generateGraph(){
 
   simulation.on('tick', ticked);
 
-  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
+  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact)
 
   nodeDragBehavior = createNodeDragBehavior(simulation);
 
@@ -137,16 +150,6 @@ export async function updateGraph(){
 
 await updateData();
 
-/** Récupération des décrets */
-
-let decrees = fetchedNodes.filter(e => e.type == "decree")
-let select = document.getElementById("add-node-decree");
-if(select.options.length != decrees.length) {
-  for (const decree of decrees) {
-    select.add(new Option(decree.title, decree.id)) //add an option for each decree
-  }
-}
-
 /** Graph settings */
 
 // Set the parameters for the graph (dimensions, margins, etc.)
@@ -175,25 +178,27 @@ myForm.addEventListener("submit", function (event) {
   const inputAuthor = document.getElementById("add-node-author");
   const inputText = document.getElementById("add-node-text");
   const inputHashtag = document.getElementById("add-node-hashtags");
-  const inputDecree = document.getElementById("add-node-decree");
+  const inputReact = document.getElementById("add-node-react");
   const inputBelief = document.getElementById("add-node-belief");
   const inputType = document.getElementById("add-node-type");
 
   const inputTitleValue = inputTitle.value;
   const inputAuthorValue = inputAuthor.value;
   const inputTextValue = inputText.value;
-  const inputDecreeValue = inputDecree.value;
+  const inputDecreeValue = inputReact.value;
   const inputBeliefValue = inputBelief.value;
   const inputHashTagArray = inputHashtag.value.split(',').map(hashtag => removeHashtag(hashtag));
   const nextNodeId = nodes.length + 1;
   const inputTypeValue = inputType.value;
+
+  console.log(inputDecreeValue);
 
   const nodeData = {
     "author": inputAuthorValue,
     "hashtags": inputHashTagArray,
     "id": nextNodeId,
     "text": inputTextValue,
-    "decree": inputDecreeValue,
+    "react": inputDecreeValue,
     "belief": inputBeliefValue,
     "title": inputTitleValue,
     "type": inputTypeValue

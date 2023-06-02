@@ -18,7 +18,7 @@ export function createHierarchy(nodes){
         if (nodes[i].type === "contribution") {
             datas.push({
                 id: nodes[i].id,
-                parent: nodes[i].decree,
+                parent: nodes[i].react,
             });
         }
         else if (nodes[i].type === "decree"){

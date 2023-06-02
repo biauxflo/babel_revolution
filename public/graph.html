@@ -9,7 +9,7 @@
     <script src="https://apis.google.com/js/api.js"></script>
 
     <link rel="icon" href="/img/icone-babel.png" type="image/png">
-    
+
     <link rel="stylesheet" href="/style/style.css" type="text/css">
     <link rel="stylesheet" href="/style/graph.css" type="text/css">
 
@@ -63,7 +63,7 @@
                 <form id="add-node-form" style="display:none">
                   <input required id="add-node-title" class="input" type="text" placeholder="Titre" style="font-style:italic">
                   <input required id="add-node-author" class="input" type="text" placeholder="Pseudo" style="font-style:italic">
-                  <select id="add-node-decree">
+                  <select id="add-node-react">
                     <!-- options added for each decree in src/app.js-->
                   </select>
                   <select id="add-node-belief">
@@ -108,9 +108,9 @@
     <script type="module">
       import {updateGraph} from "./src/app.js";
 
-      var socket = io();
+      const socket = io();
 
-      var form = document.getElementById('add-node-form');
+      const form = document.getElementById('add-node-form');
 
       form.addEventListener('submit', function() {
         socket.emit('databaseUpdate');

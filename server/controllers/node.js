@@ -5,7 +5,6 @@ const db = require(path.resolve('sequelize', 'models', 'index.js'))
 exports.getNodes = (req, res, next) => {
     Node.findAll()
         .then(nodes => {
-            //console.log(nodes)
             res.status(200).json(nodes)
         })
         .catch(error => res.status(400).json({ error }))
@@ -33,7 +32,7 @@ exports.addNewNode = (req, res, next) => {
         text: received.text,
         hashtags: hashtags,
         belief: received.belief,
-        decree: received.decree,
+        react: received.react,
         title: received.title,
         type: received.type
     })

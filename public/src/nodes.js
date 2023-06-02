@@ -54,7 +54,7 @@ export function joinNodes(svg, datas, fetchedNodes){
 // Displaying node text on a div
 //elements-nodes
 // Displaying the text and hashtags of a node on a div
-export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor) {
+export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact) {
   //if click on graph but outside a node
   const svg = d3.select("svg");
   svg.on("click", function(event, d) {
@@ -98,6 +98,7 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
     d3.select("#button-toggle-writing").classed("button-toggle-down", true)
     d3.select("#button-toggle-messages").classed("button-toggle-down", false)
     d3.select("#button-toggle-messages").classed("button-toggle-up", true)
+    selectReact.value = nodeDatas.id;
   })
   
 }

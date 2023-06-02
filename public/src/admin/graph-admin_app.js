@@ -13,6 +13,7 @@ const nodeTextDiv = d3.select("#node-text");
 const nodeHashtagsDiv = d3.select("#node-hashtags");
 const nodeTitle = d3.select("#node-title");
 const nodeAuthor = d3.select("#node-author");
+const selectReact = document.getElementById("add-node-react");
 
 /** Variables */
 
@@ -61,16 +62,12 @@ function ticked(){
 
 async function updateData() {
     try {
-        // We get the number of the session in the url to send it
-        const idSession = document.location.href.split('/').pop();
-        result = await fetchData('/node/session/' + idSession);
+        result = await fetchData();
         console.log("Les données ont été récuperées avec succès.");
+    } catch (e) {
+        console.log("Error while fetching datas:", e);
+        return;
     }
-    catch (e) {
-        console.log("Error :", e);
-    }
-    console.log(result);
-
     fetchedNodes = result.nodes;
     strats = createHierarchy(fetchedNodes);
     root = d3.hierarchy(strats);
@@ -78,6 +75,7 @@ async function updateData() {
     nodes = root.descendants();
 
     links = decreeLinks;
+
 }
 
 function generateGraph(){
@@ -107,7 +105,7 @@ function generateGraph(){
 
     simulation.on('tick', ticked);
 
-    displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
+    displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact)
 
     nodeDragBehavior = createNodeDragBehavior(simulation);
 

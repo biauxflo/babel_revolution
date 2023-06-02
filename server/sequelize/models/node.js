@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     // text: DataTypes.LONGTEXT,
     text: DataTypes.TEXT({ length: 'long' }),
     hashtags: DataTypes.STRING,
-    decree: DataTypes.INTEGER,
+    react: DataTypes.INTEGER,
     belief: DataTypes.STRING,
     title: DataTypes.STRING,
     type: DataTypes.STRING,
