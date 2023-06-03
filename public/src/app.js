@@ -13,6 +13,8 @@ const nodeHashtagsDiv = d3.select("#node-hashtags");
 const nodeTitle = d3.select("#node-title");
 const nodeAuthor = d3.select("#node-author");
 const selectReact = document.getElementById("add-node-react");
+const sessionId = document.location.href.split('/').pop().split('?').shift();
+console.log(sessionId);
 
 /** Variables */
 
@@ -61,7 +63,7 @@ function ticked(){
 
 async function updateData() {
   try {
-    result = await fetchData();
+    result = await fetchData(sessionId);
     console.log("Les données ont été récuperées avec succès.");
   } catch (e) {
     console.log("Error while fetching datas:", e);
@@ -208,7 +210,7 @@ myForm.addEventListener("submit", function (event) {
   var form = document.getElementById("add-node-form");
   form.reset();
   //UPDATE DB
-  insertData(nodeData);
+  insertData(nodeData, sessionId);
 });
 
 

@@ -57,6 +57,16 @@ export function joinNodes(svg, datas, fetchedNodes){
 export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact) {
   //if click on graph but outside a node
   const svg = d3.select("svg");
+  let tooltip = svg.append("div")
+      .attr("class", "tooltip")
+      .style("position", "absolute")
+      .style("visibility", "hidden")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "1px")
+      .style("border-radius", "5px")
+      .style("padding", "10px");
+
   svg.on("click", function(event, d) {
     if(event.target.nodeName === "svg") {
       node.style("fill", function(d){
@@ -76,7 +86,22 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
     }
    });
 
-  node.on("click", function(event, d) {
+  node
+  .on("mouseover", function(event, d){
+    let nodeDatas = getNodeDatas(d, nodes);
+    tooltip.text(nodeDatas.title);
+    tooltip.style("visibility", "visible");
+  })
+  .on("mousemove", function(event, d){
+    return tooltip
+        .style("top",  (d3.mouse(this)[1]) + "px")
+        .style("left", (d3.mouse(this)[0]) + "px");
+  })
+  .on("mouseout", function(event, d){
+    tooltip.style("visibility", "hidden");
+    tooltip.text("");
+  })
+  .on("click", function(event, d) {
     let nodeDatas = getNodeDatas(d, nodes)
     let hashtags = nodeDatas.hashtags.join(", ")
     nodeTitle.html(nodeDatas.title);
@@ -88,6 +113,7 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
       var color =  getNodeColor(datas);
       return color;
     }) //reset color on all nodes
+
     d3.select(this).style("fill", "green");
     nodeTitle.style("display", "block") //show title, otherwise hidden
 
@@ -99,7 +125,7 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
     d3.select("#button-toggle-messages").classed("button-toggle-down", false)
     d3.select("#button-toggle-messages").classed("button-toggle-up", true)
     selectReact.value = nodeDatas.id;
-  })
+  });
   
 }
 
