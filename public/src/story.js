@@ -13,9 +13,13 @@ function nextPageIntro(current, next) {
 
 //gestion de l'affichage des noeuds avec les décrets déjà lus + boutons
 function onLoadGraph() {
-    // ex of URL : graph.html?decree=2&react=true
+    // ex of URL : /session/39?intro
 
-    var parameters = location.search.substring(1).split("&");
+    var parameter = location.search.substring(1).split("?");
+    if(parameter == "intro") {
+        d3.select("#text-box-intro").style("display", "block");
+    }
+    /*
     var temp = parameters[0].split("=");
     var decree = decodeURI(temp[1]);
 
@@ -29,7 +33,7 @@ function onLoadGraph() {
 
     if(react == "true") {
         //open side bar
-        d3.select("#messages-inside").style("display", "block")
+        d3.select("#intro").style("display", "block")
         d3.select("#button-toggle-messages").classed("button-toggle-down", false)
         d3.select("#button-toggle-messages").classed("button-toggle-up", true)
 
@@ -60,9 +64,10 @@ function onLoadGraph() {
             //si erreur ou changement manuelle -> retour à l'intro
             //console.log("Paramètre inconnu - redirection introduction")
             //window.location.href = 'index.html'
-            console.log("Paramètre inconnu - redirection 1er graph")
-            window.location.href += '?decree=1&react=false';
+            console.log("Route inconnue")
+        
     }
+    */
 }
 
 function onLoadStory() {

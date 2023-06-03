@@ -20,8 +20,8 @@
     <div id="container">
 
       <header>
-        <div class="logo" onclick="window.location.href = 'index.html?intro'">
-          <img src="img\logoV2.png" alt="image" title="Revenir au menu principal">
+        <div class="logo" onclick="window.location.href = window.location.href">
+          <img src="\img\logoV2.png" alt="image" title="Revenir au menu principal">
         </div> 
       </header>
 
@@ -34,15 +34,44 @@
       <div id="about">
         <button type="button" id="button-about-ouvert" onclick="OpenText()">à propos +</button>
         <button type="button" id="button-about-ferme" onclick="OpenText()" style="display:none">à propos -</button>
-        <div id="about-text" style="display:none">
-          <p><i>« Une expression qui, il y a un instant à peine, vivait encore et semblait même indéracinable, pouvait brusquement s’évanouir : elle a disparu avec la situation qui l’avait engendrée et dont elle témoignera un jour tel un fossile » (Klemperer, LTI, la langue du Troisième Reich, 1947).</i></p>
-          <p>BⱯBEL RËVOLUㅏION est un récit participatif dystopique, qui ressemble étrangement à notre monde contemporain. Cette création aborde la question du lien entre la dégradation de la biodiversité et la dégradation de la diversité linguistique et culturelle.</p>
-          <p>Il s'agit d'un projet transdisciplinaire en cours qui implique des chercheuses et chercheurs (didactique des langues, littérature, design, sciences de l'information et de la communication) et des élèves-ingénieur·es en informatique.</p>
-          <p>
-            <b>Crédits</b><br>
-            Conception et supervision du projet : Isabelle Cros, Erika Fülöp, Simon Renaud, Serge Bouchardon, Adrien Charannat
-            <br>
-            Conception et développement : Mathilde Lange, Solène Desvaux de Marigny, Claire Malgonne, Florestan Biaux, Lucas D'Aquaro, Ismaïl Kadiri</p>
+        <div id="about-text" style="display:none"></div>
+      </div>
+
+      <div id="text-box-intro" style="display:none">
+        <!-- Explications / début -->
+        <div id="intro" style="display:block">
+            <div id="text">
+                <h1 id="intro_title1"></h1>
+                <div id="intro_page1"></div>
+            </div>
+            <button id="button-next" onclick="nextPageIntro('#intro', '#intro2')">Poursuivre</button>   
+        </div>
+
+        <div id="intro2" style="display:none">
+          <div id="text">
+            <h1 id="intro_title2"></h1>
+            <div id="intro_page2"></div>
+          </div>
+          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro')">Retour</button> 
+          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro3')">Poursuivre</button>   
+        </div>
+
+        <div id="intro3" style="display:none">
+          <div id="text">
+            <h1 id="intro_title3"></h1>
+            <div id="intro_page3"></div>
+          </div>
+          <button id="button-next" onclick="nextPageIntro('#intro3', '#intro2')">Retour</button> 
+          <button id="button-next" onclick="EnterWorld()">Entrer dans le monde</button>  
+        </div>
+
+        <div id="load" style="display:none">
+          <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+            <circle cx="170" cy="170" r="160" stroke="#f2f2f2"/>
+            <circle cx="170" cy="170" r="135" stroke="#404041"/>
+            <circle cx="170" cy="170" r="110" stroke="#f2f2f2"/>
+            <circle cx="170" cy="170" r="85" stroke="#404041"/>
+        </svg>
         </div>
       </div>
 
@@ -105,6 +134,8 @@
     <script src="/src/story.js"></script>
     <script src="/src/interface.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/texts/intro_text.js"></script>
+    <script src="/texts/about_text.js"></script>
     <script type="module">
       import {updateGraph} from "./src/app.js";
 
@@ -167,6 +198,31 @@
 
     addEvent(document.getElementById("zoom-plus"), "click", function(e){changeZoom(1, e)});
     addEvent(document.getElementById("zoom-minus"), "click", function(e){changeZoom(-1, e)});
+    </script>
+    <script>
+      //load texts from json (texts in js variable)
+      for (var key in intro_text){
+          document.getElementById(key).innerHTML = intro_text[key]; //textes introductifs
+      }
+      for (var key in about_text){
+          document.getElementById(key).innerHTML = about_text[key]; //à propos
+      }
+    </script>
+    <script>
+      function EnterWorld() {
+        document.getElementById("intro3").style.display = "none";
+        document.getElementById("load").style.display = "block";
+        setTimeout(() => {document.getElementById("text-box-intro").style.display = "none"; window.location.href = window.location.href.split("?")[0];}, 2000);
+      }
+    </script>
+    <script>
+      //load texts from json (texts in js variable)
+      for (var key in intro_text){
+          document.getElementById(key).innerHTML = intro_text[key]; //textes introductifs
+      }
+      for (var key in about_text){
+          document.getElementById(key).innerHTML = about_text[key]; //à propos
+      }
     </script>
     </body>
  </html>
