@@ -29,8 +29,6 @@ export function createHierarchy(nodes){
         }
     }
 
-    console.log(datas);
-
     let res = d3.stratify()
         .id(function(d) { return d.id; })
         .parentId(function(d) { return d.parent; })

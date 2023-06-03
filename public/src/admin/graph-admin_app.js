@@ -14,6 +14,7 @@ const nodeHashtagsDiv = d3.select("#node-hashtags");
 const nodeTitle = d3.select("#node-title");
 const nodeAuthor = d3.select("#node-author");
 const selectReact = document.getElementById("add-node-react");
+const sessionId = document.location.href.split('/').pop().split('?').shift();
 
 /** Variables */
 
@@ -62,7 +63,7 @@ function ticked(){
 
 async function updateData() {
     try {
-        result = await fetchData();
+        result = await fetchData(sessionId);
         console.log("Les données ont été récuperées avec succès.");
     } catch (e) {
         console.log("Error while fetching datas:", e);

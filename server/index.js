@@ -1,13 +1,13 @@
 const app = require('./app');
-//const https = require('https');
+const https = require('https');
 const http = require('http');
-//const fs = require('fs');
+const fs = require('fs');
 
-/*const server = https.createServer({
+const server = https.createServer({
     key: fs.readFileSync('certificate/key.pem'),
     cert: fs.readFileSync('certificate/cert.pem')
-}, app);*/
-const server = http.createServer(app)
+}, app);
+//const server = http.createServer(app)
 
 const io = require('socket.io')(server);
 
@@ -65,16 +65,18 @@ io.on('connection', (socket) => {
     // When there is a change in the graph
     socket.on("databaseUpdate", () => {
         console.log("Database Updated");
-        io.emit("databaseUpdate");
+        if (socket.rooms.size > 0){
+            io.to(sessionId[0]).emit("databaseUpdate");
+        }else{
+            io.emit("databaseUpdate");
+        }
     });
     // When a decree is published (emit only to the concerned room)
     socket.on("decreePublished", decreeAndExamples => {
-        console.log("Decree is published");
         io.to(sessionId[0]).emit("decreePublished", decreeAndExamples);
     });
     // When a session is completed (emit only to the concerned room)
     socket.on("sessionCompleted", end => {
-        console.log("Session is completed");
         io.to(sessionId[0]).emit("sessionCompleted", end);
     });
 })

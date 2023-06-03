@@ -49,7 +49,17 @@
       <div id="main">
 
         <div id="graph"></div>
-        
+
+        <dialog id="session_dialog">
+          <button type="button" class="close">X</button>
+          <h3 id="dialog_type">Nouveau décret</h3>
+          <h2 id="dialog_title"></h2>
+          <p id="dialog_text"></p>
+          <div id="dialog_examples">
+            <!-- The examples are added by graph-admin.js -->
+          </div>
+        </dialog>
+
           <div id="text-box" style="display:flex"> <!-- right zone-->
 
             <div id="messages">
@@ -84,11 +94,9 @@
                   <div id="node-hashtags"></div>
                 </div>
 
-
               </div>
               
             </div>
-            
 
           </div>
 
@@ -108,6 +116,8 @@
     <script type="module">
       import {updateGraph} from "/src/app.js";
 
+      const sessionDialog = document.querySelector('dialog#session_dialog');
+
       const socket = io();
 
       const form = document.getElementById('add-node-form');
@@ -118,7 +128,60 @@
 
       socket.on('databaseUpdate', async function(){
         await updateGraph();
-      })
+      });
+
+      socket.on('decreePublished', async function (decreeAndExamples) {
+        // We add the decree type, title and text
+        sessionDialog.querySelector('#dialog_type').textContent = 'Nouveau décret';
+        sessionDialog.querySelector('#dialog_title').textContent = decreeAndExamples.decree.title;
+        sessionDialog.querySelector('#dialog_text').textContent = decreeAndExamples.decree.text;
+
+        const dialogExamples = sessionDialog.querySelector('div#dialog_examples');
+        // We delete the precedent examples
+        dialogExamples.innerHTML = '';
+        // Then we add the current examples
+        decreeAndExamples.examples.forEach(example => {
+          let paragraphText = '';
+          if (example.title) {
+            paragraphText += '[ ' + example.title + ' ] ';
+          }
+          if (example.author) {
+            paragraphText += '[ ' + example.author + ' ] : ';
+          }
+          paragraphText += example.text;
+          if (example.hashtags) {
+            paragraphText += ' [ #' + example.hashtags + ' ]';
+          }
+          const paragraph = document.createElement('p');
+          paragraph.textContent = paragraphText;
+          dialogExamples.appendChild(paragraph);
+        });
+        // We show the dialog
+        sessionDialog.showModal();
+        // We update the graph
+        await updateGraph();
+        console.log("+++ sessionCompleted done");
+      });
+
+      // The event 'sessionCompleted' is received when the session ends
+      socket.on('sessionCompleted', async function (end) {
+        // We add the decree title and text
+        sessionDialog.querySelector('#dialog_type').textContent = null;
+        sessionDialog.querySelector('#dialog_title').textContent = end.title;
+        sessionDialog.querySelector('#dialog_text').textContent = end.text;
+        // We delete the examples
+        sessionDialog.querySelector('div#dialog_examples').innerHTML = '';
+        // We show the dialog
+        sessionDialog.showModal();
+        // We update the graph
+        await updateGraph();
+        console.log("+++ sessionCompleted done");
+      });
+
+      sessionDialog.querySelector('button.close').addEventListener('click', () => {
+        sessionDialog.close();
+      });
+
     </script>
     <script>
       function OpenText() {

@@ -23,9 +23,6 @@ function onLoadGraph() {
         temp = parameters[1].split("=");
     var react = decodeURI(temp[1]);
     }
-    
-    //react = true or false
-    console.log("react : "+react)
 
     if(react == "true") {
         //open side bar
@@ -43,22 +40,18 @@ function onLoadGraph() {
     
     switch(decree) { //decree = '1' ou '2' ou '3'
         case '1' :
-            console.log("Premier décret - graphe")
             d3.select("#button-decree2").style("display", "block");
             break;
         case '2' :
-            console.log("Deuxième décret - graphe")
             d3.select("#button-decree3").style("display", "block");
             break;
         case '3' :
-            console.log("Troisitème décret - graphe")
             d3.select("#button-end").style("display", "block");
             break;
         default :
             //si erreur ou changement manuelle -> retour à l'intro
             //console.log("Paramètre inconnu - redirection introduction")
             //window.location.href = 'index.html'
-            console.log("Paramètre inconnu - redirection 1er graph")
             window.location.href += '?decree=1&react=false';
     }
 }
@@ -72,12 +65,10 @@ function onLoadStory() {
     
     switch(decree) { //decree = '2' ou '3'
         case '2' :
-            console.log("Deuxième décret - lecture")
             let secondDecreeDiv = d3.select("#secondDecree");
             secondDecreeDiv.style("display", "block")
             break;
         case '3' :
-            console.log("Troisitème décret")
             let thirdDecreeDiv = d3.select("#thirdDecree");
             thirdDecreeDiv.style("display", "block")
             break;
@@ -92,19 +83,15 @@ function onLoadEnd() {
     
     switch(end) { //decree = '2' ou '3'
         case 0 :
-            console.log("Première fin")
             d3.select("#end1").style("display", "block");
             break;
         case 1 :
-            console.log("Deuxième fin")
             d3.select("#end2").style("display", "block");
             break;
         case 2 :
-            console.log("Troisième fin")
             d3.select("#end3").style("display", "block");
             break;
         default :
-            console.log("Par defaut - Deuxième fin")
             d3.select("#end2").style("display", "block");
     }
 }

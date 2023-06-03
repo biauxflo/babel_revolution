@@ -87,11 +87,11 @@ router.post('/publish-decree', auth, async (req, res) => {
       const tableName = 'session-' + idSession;
       const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: false });
       // 1. We add the decree to the table
-      sessionModel.create({ title: decree.title, author: 'CMC', text: decree.text, type: 'decree' })
+      sessionModel.create({ title: decree.title, author: 'CMC', text: decree.text, react: "1", type: 'decree' })
         .then(dbDecree => {
           // 2. We 'link' each example to the decree
           examples.forEach(example => {
-            example.decree = dbDecree.id;
+            example.react = dbDecree.id;
             delete example.id;
           });
           // 3. We add the examples to the table
@@ -119,7 +119,7 @@ router.post('/end-session', auth, (req, res) => {
       }
       // We define the model connected to the correct table
       const tableName = 'session-' + idSession;
-      const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: true });
+      const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: false });
       // 1. We add the end to the table
       sessionModel.create({ title: end.title, text: end.text, type: 'end' })
         .then(() => {
