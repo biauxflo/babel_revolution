@@ -19,6 +19,9 @@ function onLoadGraph() {
     if(parameter == "intro") {
         d3.select("#text-box-intro").style("display", "block");
     }
+    else {
+        d3.select("#right").style("display", "block");
+    }
     /*
     var temp = parameters[0].split("=");
     var decree = decodeURI(temp[1]);
