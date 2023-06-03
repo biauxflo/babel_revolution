@@ -53,25 +53,25 @@
           <div id="text-box" style="display:flex"> <!-- right zone-->
 
             <div id="messages">
-              <h3 id="title-with-toggle">messages</h3>
-              <button type="button" id="button-toggle-messages" class="button-toggle-down" onclick="toggle(this.id, 'messages-inside')"></button>
+              <h3 id="title-with-toggle" onclick="toggle('span-toggle-messages', 'messages-inside')">messages <span id="span-toggle-messages" class="arrow-toggle">⇩</span></h3>
 
               <div id="messages-inside" style="display:none">
 
-                <h5 id="title-with-toggle">écrire un message</h5>
-                <button type="button" id="button-toggle-writing" class="button-toggle-down" onclick="toggle(this.id, 'add-node-form')"></button>
+                <h3 id="title-with-toggle" onclick="toggle('span-toggle-writing', 'add-node-form')">écrire un message <span id="span-toggle-writing" class="arrow-toggle">⇩</span></h3>
                 <form id="add-node-form" style="display:none">
-                  <input required id="add-node-title" class="input" type="text" placeholder="Titre" style="font-style:italic">
+                  <input required id="add-node-title" class="input" type="text" placeholder="Titre du message" style="font-style:italic">
                   <input required id="add-node-author" class="input" type="text" placeholder="Pseudo" style="font-style:italic">
-                  <select id="add-node-react">
+                  <label>En réaction à :</label>
+                  <select id="add-node-react" class="input">
                     <!-- options added for each decree in src/app.js-->
                   </select>
-                  <select id="add-node-belief">
+                  <label>Position :</label>
+                  <select id="add-node-belief" class="input">
                     <option value="against" selected>Dissident·e</option>
                     <option value="neutral">Partagé·e</option>
                     <option value="in_favor">Partisant·e</option>
                   </select>
-                  <textarea required id="add-node-text" class="input" type="text" placeholder="Texte du message" style="font-style:italic; font-family:Verdana"></textarea>
+                  <textarea required id="add-node-text" class="input" type="text" placeholder="Texte du message" style="font-style:italic;"></textarea>
                   <input required id="add-node-hashtags" class="input" type="text" placeholder="Mots-clés (séparés par des virgules)" style="font-style:italic">
                   <input id="add-node-type" class="input" type="hidden" value="contribution">
                   <button id="add-node-button" type="submit">Publier</button>

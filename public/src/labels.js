@@ -25,10 +25,8 @@ function onLabelClick(event, d, fetchedNodes, nodeSelection) {
     //open side bar
     d3.select("#add-node-form").style("display", "none")
     d3.select("#messages-inside").style("display", "block")
-    d3.select("#button-toggle-writing").classed("button-toggle-up", false)
-    d3.select("#button-toggle-writing").classed("button-toggle-down", true)
-    d3.select("#button-toggle-messages").classed("button-toggle-down", false)
-    d3.select("#button-toggle-messages").classed("button-toggle-up", true)
+    d3.select("#span-toggle-writing").html("⇩")
+    d3.select("#span-toggle-messages").html("⇧")
 }
 
 // Create label when using d3-hierarchy
