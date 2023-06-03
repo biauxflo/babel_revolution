@@ -1,4 +1,9 @@
-export function fetchData(fetchUrl = '/node') {
+export function fetchData(sessionId) {
+    let fetchUrl = "/node/";
+    if (parseInt(sessionId)){
+        fetchUrl += "session/" + sessionId;
+    }
+    console.log(fetchUrl);
     return fetch(fetchUrl)
         .then((response) => {
             if (!response.ok) { // Before parsing (i.e. decoding) the JSON data,

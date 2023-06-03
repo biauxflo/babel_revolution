@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/', nodesCtrl.getNodes);
 router.get('/session/:id', nodesCtrl.getSessionNodes);
 router.post('/', nodesCtrl.addNewNode);
+router.post('/session/:id', nodesCtrl.addNewSessionNode);
 router.get('/del', nodesCtrl.resetNodes);
 
 module.exports = router;

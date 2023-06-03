@@ -1,6 +1,10 @@
-export function insertData(node){
+export function insertData(node, sessionId){
     console.log(JSON.stringify(node));
-    fetch('/node',{
+    let fetchUrl = "/node/";
+    if (parseInt(sessionId)){
+        fetchUrl += "session/" + sessionId;
+    }
+    fetch(fetchUrl,{
         method: "POST",
         headers: {
             'Accept': 'application/json',

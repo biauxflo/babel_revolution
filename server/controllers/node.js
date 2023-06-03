@@ -40,6 +40,26 @@ exports.addNewNode = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 }
 
+exports.addNewSessionNode = (req, res, next) => {
+    const idSession = req.params.id;
+    // We define the model connected to the correct table
+    const tableName = 'session-' + idSession;
+    const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: false });
+    let received = req.body;
+    let hashtags = received.hashtags.join(';');
+    const node = sessionModel.create({
+        author: received.author,
+        text: received.text,
+        hashtags: hashtags,
+        belief: received.belief,
+        react: received.react,
+        title: received.title,
+        type: received.type
+    })
+        .then(() => res.status(201).json("Objet crée"))
+        .catch(error => res.status(400).json({ error }));
+}
+
 exports.resetNodes = (req, res, next) => {
     Node.destroy({ where: { id: null } })
         .then(ressource => {
