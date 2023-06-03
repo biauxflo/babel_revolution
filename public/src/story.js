@@ -20,7 +20,7 @@ function onLoadGraph() {
         d3.select("#text-box-intro").style("display", "block");
     }
     else {
-        d3.select("#right").style("display", "block");
+        d3.select("#main").style("display", "block");
     }
     /*
     var temp = parameters[0].split("=");
