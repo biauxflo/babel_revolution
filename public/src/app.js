@@ -105,7 +105,7 @@ function generateGraph(){
       .tick(ticked)
 
   /** Mise en place des liens */
-    linkSelection = createLinks(svg, links);
+    linkSelection = createLinks(svg, links, fetchedNodes);
 
   /** Mise en place des noeuds */
     nodeSelection = createNodes(svg, nodes, fetchedNodes);
@@ -115,7 +115,7 @@ function generateGraph(){
 
   simulation.on('tick', ticked);
 
-  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact)
+  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
 
   nodeDragBehavior = createNodeDragBehavior(simulation);
 
@@ -125,7 +125,7 @@ function generateGraph(){
 export async function updateGraph(){
   await updateData();
 
-  linkSelection = joinLinks(svg, links);
+  linkSelection = joinLinks(svg, links, fetchedNodes);
 
   nodeSelection = joinNodes(svg, nodes, fetchedNodes);
 
@@ -139,7 +139,7 @@ export async function updateGraph(){
 
   simulation.on('tick', ticked);
 
-  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor)
+  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
 
   nodeDragBehavior = createNodeDragBehavior(simulation);
 

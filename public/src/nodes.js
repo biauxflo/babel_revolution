@@ -1,3 +1,7 @@
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 // Function to fetch datas of a node when using d3-hierarchy
 // Node : d3-hierarchy element
 // Nodes : Nodes stored in DB
@@ -7,32 +11,72 @@ export function getNodeDatas(node, nodes){
   return nodeDatas
 }
 
-export function getNodeColor(node) {
+export function getNodeColor(node, prof) {
   if (node.type === "contribution") {
     switch (String(node.belief)) {
       case "in_favor":
-        return 'red';
+        return '#960000';
       case "against":
-        return 'blue';
+        let color;
+        let choice;
+        switch (prof){
+          case 1:
+            color = ['#005a00','#025d3c', '#00832c', '#007000'];
+          case 2:
+            color = ['#00b42c','#00cd3c', '#00ff3c'];
+          case 3:
+            color = ['#97ff30','#b5ff30', '#97ff6a'];
+          default:
+            return '#ddff6a';
+        }
+        choice = getRandomInt(color.length);
+        return color[choice]
       default:
-        return 'gray';
+        return '#000000';
     }
   }
+  return '#ff4600';
 }
+
+export function getNodeStroke(node) {
+    if (node.type === "contribution") {
+      return '#69ffc8';
+    }
+    return '#ff00ff';
+  }
 
 export function createNodes(svg, datas, fetchedNodes){
   let nodes = svg.append("g")
-      .attr("stroke-width", 1.5)
       .selectAll("circle")
       .data(datas)
       .join("circle")
       .style("fill", function(d){
         var datas = getNodeDatas(d, fetchedNodes);
-        var color =  getNodeColor(datas);
+        var color =  getNodeColor(datas, d.depth);
         return color;
       })
-      .attr("stroke", d => d.children ? "#fff" : null)
-      .attr("r", 15);
+      .attr("stroke", function(d){
+        var datas = getNodeDatas(d, fetchedNodes);
+        var color = getNodeStroke(datas, d.depth);
+        return color;
+      })
+      .attr("stroke-width", function (d){
+        var datas = getNodeDatas(d, fetchedNodes);
+        if (datas.type === "decree") {
+          return 4;
+        }else{
+          return 1;
+        }
+      })
+      .attr("r", function (d){
+        var datas = getNodeDatas(d, fetchedNodes);
+        if (datas.type === "decree") {
+          return 40;
+        }else if (d.children){
+          return 30;
+        }
+        return 20;
+      });
   return nodes;
 }
 
@@ -43,7 +87,7 @@ export function joinNodes(svg, datas, fetchedNodes){
       .join("circle")
       .style("fill", function(d){
         var datas = getNodeDatas(d, fetchedNodes);
-        var color =  getNodeColor(datas);
+        var color =  getNodeColor(datas, d.depth);
         return color;
       })
       .attr("stroke", d => d.children ? "#fff" : null)
@@ -54,24 +98,15 @@ export function joinNodes(svg, datas, fetchedNodes){
 // Displaying node text on a div
 //elements-nodes
 // Displaying the text and hashtags of a node on a div
-export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact) {
+export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact, labelSelection) {
   //if click on graph but outside a node
   const svg = d3.select("svg");
-  let tooltip = svg.append("div")
-      .attr("class", "tooltip")
-      .style("position", "absolute")
-      .style("visibility", "hidden")
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "1px")
-      .style("border-radius", "5px")
-      .style("padding", "10px");
 
   svg.on("click", function(event, d) {
     if(event.target.nodeName === "svg") {
       node.style("fill", function(d){
         var datas = getNodeDatas(d, nodes);
-        var color =  getNodeColor(datas);
+        var color =  getNodeColor(datas, d.depth);
         return color;
       });
       nodeTextDiv.html("");  //set text to empty to not show
@@ -87,18 +122,13 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
 
   node
   .on("mouseover", function(event, d){
-    let nodeDatas = getNodeDatas(d, nodes);
-    tooltip.text(nodeDatas.title);
-    tooltip.style("visibility", "visible");
+
   })
   .on("mousemove", function(event, d){
-    return tooltip
-        .style("top",  (d3.mouse(this)[1]) + "px")
-        .style("left", (d3.mouse(this)[0]) + "px");
+
   })
   .on("mouseout", function(event, d){
-    tooltip.style("visibility", "hidden");
-    tooltip.text("");
+
   })
   .on("click", function(event, d) {
     let nodeDatas = getNodeDatas(d, nodes)
@@ -109,7 +139,7 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
     nodeHashtagsDiv.html("# : " +hashtags);
     node.style("fill", function(d){
       var datas = getNodeDatas(d, nodes);
-      var color =  getNodeColor(datas);
+      var color =  getNodeColor(datas, d.depth);
       return color;
     }) //reset color on all nodes
 

@@ -15,7 +15,7 @@ function onLabelClick(event, d, fetchedNodes, nodeSelection) {
     nodeHashtagsDiv.html("# : " +hashtags);
     nodeSelection.style("fill", function(d){
         var datas = getNodeDatas(d, fetchedNodes);
-        var color =  getNodeColor(datas);
+        var color =  getNodeColor(datas, d.depth);
         return color;
     }) //reset color on all nodes
     nodeSelection.filter(d => String(id) === d.data.data.id)
@@ -38,13 +38,14 @@ export function createLabels(svg, nodeSelection, nodes, fetchedNodes) {
 
     let label = svg
         .append('g')
-        .attr('class', 'label')
         .selectAll('text')
         .data(nodes)
         .join('text')
+        .attr('class', 'label')
         .style('fill', 'white')
         .style('stroke', 'none')
         .attr('text-anchor', 'middle')
+        .attr('id', d => d.data.data.id)
         .text(function (d) {
             let datas = getNodeDatas(d, fetchedNodes);
             let label = datas.author;

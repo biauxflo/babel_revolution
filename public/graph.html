@@ -116,6 +116,8 @@
     <script type="module">
       import {updateGraph} from "/src/app.js";
 
+      let ended = false;
+
       const sessionDialog = document.querySelector('dialog#session_dialog');
 
       const socket = io();
@@ -173,13 +175,15 @@
         sessionDialog.querySelector('div#dialog_examples').innerHTML = '';
         // We show the dialog
         sessionDialog.showModal();
-        // We update the graph
-        await updateGraph();
-        console.log("+++ sessionCompleted done");
+        // Redirect to this page but in visualisation mode
+        ended = true;
       });
 
       sessionDialog.querySelector('button.close').addEventListener('click', () => {
         sessionDialog.close();
+        if (ended) {
+          form.disabled = true;
+        }
       });
 
     </script>

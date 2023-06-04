@@ -1,3 +1,5 @@
+import {getNodeDatas} from "./nodes.js";
+
 export function createLinksData(nodes) {
 
       let links = [];
@@ -53,24 +55,38 @@ export function createLinksData(nodes) {
       return links;
     }    
 
-  export function createLinks(svg, datas){
+  export function createLinks(svg, datas, fetchedNodes){
       let links = svg.append("g")
           .selectAll("line")
           .data(datas)
           .join("line")
-          .attr("stroke", "#999")
-          .attr("stroke-opacity", 0.6);
+          .attr("stroke", function (d){
+              let dataSource = getNodeDatas(d.source, fetchedNodes);
+              let dataTarget = getNodeDatas(d.target, fetchedNodes);
+              if (dataSource.belief === "against" && dataTarget.belief === "against") {
+                  return "#69ffc8";
+              }
+              return "#ff00ff";
+          })
+          .attr("stroke-opacity", 1);
 
       return links;
   }
 
-export function joinLinks(svg, datas){
+export function joinLinks(svg, datas, fetchedNodes){
     let links = svg
         .selectAll("line")
         .data(datas)
         .join("line")
-        .attr("stroke", "#999")
-        .attr("stroke-opacity", 0.6);
+        .attr("stroke", function (d){
+            let dataSource = getNodeDatas(d.source, fetchedNodes);
+            let dataTarget = getNodeDatas(d.target, fetchedNodes);
+            if (dataSource.belief === "against" && dataTarget.belief === "against") {
+                return "#69ffc8";
+            }
+            return "#ff00ff";
+        })
+        .attr("stroke-opacity", 1);
 
     return links;
 }

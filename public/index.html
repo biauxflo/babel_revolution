@@ -12,140 +12,75 @@
     
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/index.css">
-
   </head>
+  <body>
 
-  <body onload="onLoadStory()">
+  <header>
+      <div class="logo" onclick="window.location.href = '/'">
+          <img src="/img/logoV2.PNG" alt="image" title="Revenir au menu principal">
+      </div>
+  </header>
 
     <div id="container">
-
-      <header>
-        <div class="logo" onclick="window.location.href = 'index.html?intro'">
-          <img src="img\logoV2.png" alt="image" title="Revenir au menu principal">
-        </div> 
-      </header>
-
-      <div id="about">
-        <button type="button" id="button-about-ouvert" onclick="OpenText()">à propos +</button>
-        <button type="button" id="button-about-ferme" onclick="OpenText()" style="display:none">à propos -</button>
-        <div id="about-text" style="display:none"></div>
-      </div>
-
-      <div id="text-box-intro">
-        <!-- Explications / début -->
-        <div id="intro" style="display:none">
-            <div id="text">
-                <h1 id="intro_title1"></h1>
-                <div id="intro_page1"></div>
-            </div>
-            <button id="button-next" onclick="nextPageIntro('#intro', '#intro2')">Poursuivre</button>   
+        <div id="title">
+          <h1>WHAT IS BⱯBEL RËVOLUㅏION ?</h1>
         </div>
-
-        <div id="intro2" style="display:none">
-          <div id="text">
-            <h1 id="intro_title2"></h1>
-            <div id="intro_page2"></div>
-          </div>
-          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro')">Retour</button> 
-          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro3')">Poursuivre</button>   
       </div>
-
-      <div id="intro3" style="display:none">
+      <div id="content">
         <div id="text">
-          <h1 id="intro_title3"></h1>
-          <div id="intro_page3"></div>
-        </div>
-        <button id="button-next" onclick="nextPageIntro('#intro3', '#intro2')">Retour</button> 
-        <button id="button-next" onclick="EnterWorld()">Entrer dans le monde</button>  
-    </div>
+          <p>
+              BⱯBEL Rëvoluθion is an online contributive ecopoetic work in favor of biodiversity from an ecological, linguistic and cultural perspective.
+              It is based on a collaborative research-action approach informed by research in sociolinguistics and didactics of plurilingualism.
+              It examines the connection between the loss of flora and the disappearance of languages through a multi-voiced narrative.
 
-    <div id="load" style="display:none">
-      <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
-        <circle cx="170" cy="170" r="160" stroke="#f2f2f2"/>
-        <circle cx="170" cy="170" r="135" stroke="#404041"/>
-        <circle cx="170" cy="170" r="110" stroke="#f2f2f2"/>
-        <circle cx="170" cy="170" r="85" stroke="#404041"/>
-     </svg>
-    </div>
-        
-        <!-- Premier décret -->
-        <div id="firstDecree"  class="animate-bottom" style="display:none">
-            <div id="text">
-                <h1>1er décret - plantes</h1>
-                <p>Il est désormais interdit d'utiliser des mots comme artichaut, lentille, oignon, radis, potiron, pomme de terre ou patate... Les termes scientifiques pour décrire une plante sont bannis, car inutiles. Vous devez utiliser des expressions génériques comme "légume vert" ou "petit légume rond". Tout usage non conventionnel sera sanctionné. -- Le CMC
-                </p>
+              In a dystopian world, a resistance movement is growing against a political regime
+              which applies a monolingual policy that impoverishes both the language and the natural world,
+              and that contributes to the disappearance of words as well as the reality that they shape and reflect.
+
+              Voices are raised in multimodal posts, in any language: yours.
+              The posts interconnect instantaneously into a network and draw an organic and dynamic graph.
+              Will this polyphonic collective of rebels succeed in overturning monoculture and monolingualism?
+              It depends on you!
+
+              The objective of BⱯBEL Rëvoluθion is to raise awareness of the dangers
+              which threaten the environment and the languages
+              and offer you a digital space of linguistic and cultural revival.
+          </p>
+            <h1>SESSIONS PUBLIQUES EN COURS</h1>
+            <div id="public_sessions">
+                <div id="session_template" onclick="window.location.href = '/session/43'">
+                    <div class="image">
+                        <img src="/img/graphe1.png" alt="graph" class="graph">
+                    </div>
+                    <p class="session_title">Session publique en cours</p>
+                </div>
             </div>
-            <button id="button-next" onclick="nextPageIntro('#firstDecree', '#intro')">Retour</button>
-            <button id="button-next" onclick="window.location.href = 'graph.html?decree=1&react=true'">Réagir</button>
-            <button id="button-hide" onclick="window.location.href = 'graph.html?decree=1&react=false'">x</button>
-        </div>
 
-        <!-- Deuxième décret -->
-        <div id="secondDecree" style="display:none">
-            <div id="text">
-                <h1>2e décret - adjectifs</h1>
-                <p>En se fondant sur une étude scientifique poussée, le CMC a constaté un nombre trop important d'adjectifs pour décrire les individus. Dans une démarche de simplicité et d'efficacité, il est désormais interdit de qualifier quelqu'un par un adjectif différent de la liste des adjectifs autorisés (liste consultable sur le site du CMC), tels que gentil, méchant, bon, mauvais. Les superlatifs (très, fort, extrêmement...) restent utilisables avec modération. 
-                  Le CMC condamne notamment les adjectifs  trop précis, et donc souvent désuets et incompris, comme "caustique", "acrimonieux", "affable", "prévenant"... 
-                  Il faut éviter un langage trop fleuri… ainsi que les adjectifs qui pourraient caractériser des fleurs et des plantes et sont désormais sans objet, tels que floral, odorant, printanier, ornemental…
-                  Une sanction supplémentaire s'appliquera concernant les mots à double sens, qui nuisent à la clarté de la compréhension et donc à l'efficacité de la communication. -- Le CMC               
-                </p>
+            <h1>SESSIONS TERMINEES</h1>
+            <div id="completed_sessions">
+                <!-- TODO : Populate with completed sessions -->
             </div>
-            <button id="button-next" onclick="window.location.href = 'graph.html?decree=2&react=true'">Réagir</button>
-            <button id="button-hide" onclick="window.location.href = 'graph.html?decree=2&react=false'">x</button>
         </div>
-
-        <!-- Troisième décret -->
-        <div id="thirdDecree" style="display:none">
-            <div id="text">
-                <h1>3e décret - langues</h1>
-                <p>La simplicité et la compréhension sont les objectifs principaux du CMC. Ainsi, à partir d'aujourd'hui, l'usage de plusieurs langues est interdit. Cette interdiction s'étend à tous les patois. De plus, les termes inventés ou utilisant une règle non conforme au règlement (exemple : le "verlan") sont aussi interdits. Ces pratiques excluent en effet des communications les personnes qui ne peuvent les comprendre. Pour le bien commun, utilisons une seule langue épurée, gage de paix et d'intercompréhension. -- Le CMC</p>
-            </div>
-            <button id="button-next" onclick="window.location.href = 'graph.html?decree=3&react=true'">Réagir</button>
-            <button id="button-hide" onclick="window.location.href = 'graph.html?decree=3&react=false'">x</button>
-        </div>
-        
-    
-      </div>
-
-
-
-    </div>
-    <script src="src/story.js"></script>
-    <script src="src/interface.js"></script>
-    <script src="texts/intro_text.js"></script>
-    <script src="texts/about_text.js"></script>
-    <script>
-      function OpenText() {
-        var btnferme = document.getElementById("button-about-ouvert");
-        var moreText = document.getElementById("about-text");
-        var btnouvert = document.getElementById("button-about-ferme");
-      
-        if (btnferme.style.display === "none") {
-          btnferme.style.display = "block";
-          moreText.style.display = "none";
-          btnouvert.style.display = "none";
-        } else {
-          btnferme.style.display = "none";
-          moreText.style.display = "block";
-          btnouvert.style.display = "block";
+  </body>
+<script type="module">
+    const sessionTemplate = document.querySelector("div#session_template");
+    const completedSessionsDiv = document.querySelector("div#completed_sessions");
+    // Get all the sessions that the current user is allowed to see and display them
+    fetch('/session/get-visible-sessions', {
+        method: 'get',
+    }).then(res => {
+        let sessions = res.json();
+        // Create the HTML element for each session
+        for (let session in sessions){
+            let newSession = sessionTemplate.cloneNode(true);
+            newSession.querySelector('.session_title').textContent = session.title;
+            newSession.setAttribute('id', session.id);
+            newSession.setAttributes('href', '/completed/' + session.id);
+            console.log(newSession);
+            completedSessionsDiv.appendChild(newSession);
         }
-      }
-    </script>
-    <script>
-      function EnterWorld() {
-        document.getElementById("intro3").style.display = "none";
-        document.getElementById("load").style.display = "block";
-        setTimeout(() => {document.getElementById("load").style.display = "none"; document.getElementById("firstDecree").style.display = "block";}, 2000);
-      }
-    </script>
-    <script>
-      //load texts from json (texts in js variable)
-      for (var key in intro_text){
-          document.getElementById(key).innerHTML = intro_text[key]; //textes introductifs
-      }
-      for (var key in about_text){
-          document.getElementById(key).innerHTML = about_text[key]; //à propos
-      }
-    </script>
-    </body>
+    }).catch(error => {
+        console.error('Error getting sessions : ', error);
+    });
+</script>
  </html>

@@ -10,7 +10,7 @@ const router = express.Router();
 
 // Home page
 router.get('/', (req, res, next) =>
-  res.status(200).sendFile(path.resolve("../graph.html"))
+  res.status(200).sendFile(path.resolve("../index.html"))
 );
 
 // Node get and post
