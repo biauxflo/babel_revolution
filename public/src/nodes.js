@@ -51,17 +51,17 @@ export function createNodes(svg, datas, fetchedNodes){
       .data(datas)
       .join("circle")
       .style("fill", function(d){
-        var datas = getNodeDatas(d, fetchedNodes);
-        var color =  getNodeColor(datas, d.depth);
+        let datas = getNodeDatas(d, fetchedNodes);
+        let color =  getNodeColor(datas, d.depth);
         return color;
       })
       .attr("stroke", function(d){
-        var datas = getNodeDatas(d, fetchedNodes);
-        var color = getNodeStroke(datas, d.depth);
+        let datas = getNodeDatas(d, fetchedNodes);
+        let color = getNodeStroke(datas, d.depth);
         return color;
       })
       .attr("stroke-width", function (d){
-        var datas = getNodeDatas(d, fetchedNodes);
+        let datas = getNodeDatas(d, fetchedNodes);
         if (datas.type === "decree") {
           return 4;
         }else{
@@ -69,14 +69,15 @@ export function createNodes(svg, datas, fetchedNodes){
         }
       })
       .attr("r", function (d){
-        var datas = getNodeDatas(d, fetchedNodes);
+        let datas = getNodeDatas(d, fetchedNodes);
         if (datas.type === "decree") {
           return 40;
         }else if (d.children){
           return 30;
         }
         return 20;
-      });
+      })
+      .style('z-index', 1);
   return nodes;
 }
 
@@ -86,12 +87,33 @@ export function joinNodes(svg, datas, fetchedNodes){
       .data(datas)
       .join("circle")
       .style("fill", function(d){
-        var datas = getNodeDatas(d, fetchedNodes);
-        var color =  getNodeColor(datas, d.depth);
+        let datas = getNodeDatas(d, fetchedNodes);
+        let color =  getNodeColor(datas, d.depth);
         return color;
       })
-      .attr("stroke", d => d.children ? "#fff" : null)
-      .attr("r", 15);
+      .attr("stroke", function(d){
+        let datas = getNodeDatas(d, fetchedNodes);
+        let color = getNodeStroke(datas, d.depth);
+        return color;
+      })
+      .attr("stroke-width", function (d){
+        let datas = getNodeDatas(d, fetchedNodes);
+        if (datas.type === "decree") {
+          return 4;
+        }else{
+          return 1;
+        }
+      })
+      .attr("r", function (d){
+        let datas = getNodeDatas(d, fetchedNodes);
+        if (datas.type === "decree") {
+          return 40;
+        }else if (d.children){
+          return 30;
+        }
+        return 20;
+      })
+        .style('z-index', 1);
   return nodes;
 }
 
@@ -122,13 +144,12 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
 
   node
   .on("mouseover", function(event, d){
-
-  })
-  .on("mousemove", function(event, d){
-
+    labelSelection.filter(f => String(f.data.data.id) === d.data.data.id).style('opacity', 1)
+        .style('z-index', 10)
   })
   .on("mouseout", function(event, d){
-
+    labelSelection.filter(f => String(f.data.data.id) === d.data.data.id).style('opacity', 0)
+        .style('z-index', 0)
   })
   .on("click", function(event, d) {
     let nodeDatas = getNodeDatas(d, nodes)
@@ -143,7 +164,7 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
       return color;
     }) //reset color on all nodes
 
-    d3.select(this).style("fill", "green");
+    d3.select(this).style("fill", "#ffffff");
     nodeTitle.style("display", "block") //show title, otherwise hidden
 
     //open side bar

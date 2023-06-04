@@ -18,8 +18,7 @@ function onLabelClick(event, d, fetchedNodes, nodeSelection) {
         var color =  getNodeColor(datas, d.depth);
         return color;
     }) //reset color on all nodes
-    nodeSelection.filter(d => String(id) === d.data.data.id)
-        .style("fill", "green");
+    nodeSelection.filter(d => String(id) === d.data.data.id).style("fill", "#ffffff");
     nodeTitle.style("display", "block") //show title, otherwise hidden
 
     //open side bar
@@ -44,6 +43,8 @@ export function createLabels(svg, nodeSelection, nodes, fetchedNodes) {
         .attr('class', 'label')
         .style('fill', 'white')
         .style('stroke', 'none')
+        .style('opacity', 0)
+        .style('z-index', 0)
         .attr('text-anchor', 'middle')
         .attr('id', d => d.data.data.id)
         .text(function (d) {
@@ -67,6 +68,8 @@ export function joinLabels(svg, nodeSelection, nodes, fetchedNodes) {
         .join('text')
         .style('fill', 'white')
         .style('stroke', 'none')
+        .style('opacity', 0)
+        .style('z-index', 0)
         .attr('text-anchor', 'middle')
         .text(function (d) {
             let datas = getNodeDatas(d, fetchedNodes);
