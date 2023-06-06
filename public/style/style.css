@@ -116,11 +116,14 @@ button:hover {
 
 
 /*********************************** HEADER WITH TITLE: BABEL REVOLUTION ***************************************/
+#graph_header {
+  position:fixed;
+}
+
 header {
   display: block;
   width: 650px;
   height: fit-content;
-  position:fixed;
 }
 
 header > div > img {
