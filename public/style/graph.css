@@ -33,9 +33,12 @@
 }
 
 #messages {
-  height: fit-content;
-  border-left: 3px solid #f2f2f2;
-  border-bottom: 3px solid #f2f2f2;
+  border-left: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+element.style {
+  margin-top:30px;
 }
 
 div > h3{
@@ -46,6 +49,14 @@ div > h3{
 #messages-inside{
   border-top: 1px solid #f2f2f2;
   padding: 0px 10px;
+}
+
+#node-title {
+  border-top: 3px solid white;
+  margin-top: 20px;
+  padding-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #node-info {
@@ -65,9 +76,12 @@ div > h3{
 }
 
 #node-text {
-  margin: 10px;
-  height: fit-content;
-  text-align: center;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+#node-hashtags {
+  margin-bottom: 30px;
 }
 
 /* Style the form */
@@ -145,7 +159,7 @@ textarea{
 
 #zoom {
   margin: 20px;
-  position: absolute;
+  position: fixed;
   width: 29px;
   bottom: 33px;
   right: 20px;

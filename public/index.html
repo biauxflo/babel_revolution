@@ -15,40 +15,22 @@
   </head>
   <body>
 
-      <header>
+      <header style="position:relative">
         <div class="logo" onclick="window.location.href = window.location.href">
           <img src="\img\logoV2.png" alt="image" title="Revenir au menu principal">
         </div> 
       </header>
 
     <div id="container">
-        <div id="title">
-          <h1>WHAT IS BⱯBEL RËVOLUㅏION ?</h1>
+        <div id="title_presentation">
         </div>
       </div>
       <div id="content">
-        <div id="text">
-          <p>
-              BⱯBEL Rëvoluθion is an online contributive ecopoetic work in favor of biodiversity from an ecological, linguistic and cultural perspective.
-              It is based on a collaborative research-action approach informed by research in sociolinguistics and didactics of plurilingualism.
-              It examines the connection between the loss of flora and the disappearance of languages through a multi-voiced narrative.
-
-              In a dystopian world, a resistance movement is growing against a political regime
-              which applies a monolingual policy that impoverishes both the language and the natural world,
-              and that contributes to the disappearance of words as well as the reality that they shape and reflect.
-
-              Voices are raised in multimodal posts, in any language: yours.
-              The posts interconnect instantaneously into a network and draw an organic and dynamic graph.
-              Will this polyphonic collective of rebels succeed in overturning monoculture and monolingualism?
-              It depends on you!
-
-              The objective of BⱯBEL Rëvoluθion is to raise awareness of the dangers
-              which threaten the environment and the languages
-              and offer you a digital space of linguistic and cultural revival.
-          </p>
-            <h1>SESSIONS PUBLIQUES EN COURS</h1>
+        <div id="text_presentation">
+        </div>
+            <h1>SESSION PUBLIQUE EN COURS</h1>
             <div id="public_sessions">
-                <div id="session_template" onclick="window.location.href = '/session/43'">
+                <div id="session_template" onclick="window.location.href = '/session/43?intro'" style="cursor:pointer">
                     <div class="image">
                         <img src="/img/graphe1.png" alt="graph" class="graph">
                     </div>
@@ -62,6 +44,7 @@
             </div>
         </div>
   </body>
+  <script src="/texts/presentation_text.js"></script>
 <script type="module">
     const sessionTemplate = document.querySelector("div#session_template");
     const completedSessionsDiv = document.querySelector("div#completed_sessions");
@@ -83,4 +66,10 @@
         console.error('Error getting sessions : ', error);
     });
 </script>
- </html>
+ <script>
+      //load texts from json (texts in js variable)
+      for (var key in presentation_texts){
+          document.getElementById(key).innerHTML = presentation_texts[key];
+      }
+  </script>
+</html>
