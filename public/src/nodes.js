@@ -148,8 +148,10 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
         .style('z-index', 10)
   })
   .on("mouseout", function(event, d){
-    labelSelection.filter(f => String(f.data.data.id) === d.data.data.id).style('opacity', 0)
-        .style('z-index', 0)
+    if(!document.getElementById('toggle_checkbox').checked) {
+      labelSelection.filter(f => String(f.data.data.id) === d.data.data.id).style('opacity', 0)
+          .style('z-index', 0);
+    }
   })
   .on("click", function(event, d) {
     let nodeDatas = getNodeDatas(d, nodes)

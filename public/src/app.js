@@ -146,6 +146,10 @@ export async function updateGraph(){
   nodeSelection.call(nodeDragBehavior);
 }
 
+export function getLabelSelection() {
+  return labelSelection;
+}
+
 /** Récupération initale des données */
 
 await updateData();
