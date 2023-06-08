@@ -14,7 +14,7 @@
 
 /* Set the size of the graph network */
 #graph {
-  height: 78vh;
+  height: 90vh;
   width: 70vw;
   /* border: 1px solid red; */
 }
@@ -29,12 +29,13 @@
   
   height: 78vh;
   width: 25vw;
-  /*border: 1px solid black;*/
+  /* border: 1px solid blue; */
 }
 
 #messages {
   border-left: 1px solid #f2f2f2;
   border-bottom: 1px solid #f2f2f2;
+  overflow-y: auto;
 }
 
 element.style {
@@ -156,6 +157,32 @@ textarea{
   height: 100px;
   padding-right: 50px;
 }
+
+/* style for the scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black; 
+  box-shadow: inset 0 0 1px rgb(204, 207, 206); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(204, 207, 206); 
+}
+
+
+/* style for the zoom */
 
 #title_for_zoom {
   position: fixed;
