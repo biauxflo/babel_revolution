@@ -157,11 +157,17 @@ textarea{
   padding-right: 50px;
 }
 
+#title_for_zoom {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+}
+
 #zoom {
   margin: 20px;
   position: fixed;
   width: 29px;
-  bottom: 33px;
+  bottom: 30px;
   right: 20px;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
@@ -188,6 +194,77 @@ textarea{
 
 #zoom span:hover {
   font-weight: bold;
+}
+
+/* style for the toggle */
+
+#title_for_toggle {
+  position:fixed;
+  bottom: 115px;
+  right: 30px;
+}
+
+#toggle-titles .switch {
+  position: fixed;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  bottom: 100px;
+  right: 20px;
+}
+
+#toggle-titles .switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#toggle-titles .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+#toggle-titles .slider:before {
+  position: absolute;
+  content: "";
+  height: 25px;
+  width: 25px;
+  left: 2px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+#toggle-titles input:checked + .slider {
+  background-color: #025d3c;
+}
+
+#toggle-titles input:focus + .slider {
+  box-shadow: 0 0 1px black;
+}
+
+#toggle-titles input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+#toggle-titles .slider.round {
+  border-radius: 34px;
+  border: solid 2px white;
+}
+
+#toggle-titles .slider.round:before {
+  border-radius: 50%;
 }
 
 

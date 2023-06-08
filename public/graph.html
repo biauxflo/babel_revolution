@@ -123,6 +123,15 @@
 
           </div>
 
+          <div id="toggle-titles">
+            <h6 id="title_for_toggle">titres</h6>
+            <label class="switch">
+              <input type="checkbox" id="toggle_checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <h6 id="title_for_zoom">taille</h6>
           <div id="zoom">
             <span id="zoom-minus">-</span><span id="zoom-plus">+</span>
           </div>
@@ -143,6 +152,7 @@
     <script src="/texts/about_text.js"></script>
     <script type="module">
       import {updateGraph} from "/src/app.js";
+      import {getLabelSelection} from "/src/app.js"
 
       let ended = false;
 
@@ -151,6 +161,16 @@
       const socket = io();
 
       const form = document.getElementById('add-node-form');
+
+      const toggle = document.querySelector('#toggle-titles');
+      toggle.addEventListener('click', () => {
+        let labelSelection = getLabelSelection()
+        if(document.getElementById('toggle_checkbox').checked) {
+          labelSelection.style('opacity', 1)
+        } else {
+          labelSelection.style('opacity', 0)
+        }
+      })
 
       form.addEventListener('submit', function() {
         socket.emit('databaseUpdate');
@@ -262,15 +282,6 @@
 
     addEvent(document.getElementById("zoom-plus"), "click", function(e){changeZoom(1, e)});
     addEvent(document.getElementById("zoom-minus"), "click", function(e){changeZoom(-1, e)});
-    </script>
-    <script>
-      //load texts from json (texts in js variable)
-      for (var key in intro_text){
-          document.getElementById(key).innerHTML = intro_text[key]; //textes introductifs
-      }
-      for (var key in about_text){
-          document.getElementById(key).innerHTML = about_text[key]; //à propos
-      }
     </script>
     <script>
       function EnterWorld() {
