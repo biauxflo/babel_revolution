@@ -259,10 +259,10 @@
     </script>
     <script>
       //load texts from json (texts in js variable)
-      for (var key in intro_text){
+      for (let key in intro_text){
           document.getElementById(key).innerHTML = intro_text[key]; //textes introductifs
       }
-      for (var key in about_text){
+      for (let key in about_text){
           document.getElementById(key).innerHTML = about_text[key]; //à propos
       }
     </script>
