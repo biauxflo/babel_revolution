@@ -31,6 +31,31 @@
         <div id="about-text" style="display:none"></div>
       </div>
 
+      <div id="text-box-intro" style="display:none"><!-- Explications / début -->
+        <div id="intro" style="display:block">
+          <div id="text">
+            <h1 id="intro_title1"></h1>
+            <div id="intro_page1"></div>
+          </div>
+          <button id="button-next" onclick="nextPageIntro('#intro', '#intro2')">Poursuivre</button>
+        </div>
+        <div id="intro2" style="display:none">
+          <div id="text">
+            <h1 id="intro_title2"></h1>
+            <div id="intro_page2"></div>
+          </div>
+          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro')">Retour</button>
+          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro3')">Poursuivre</button>
+        </div>
+        <div id="intro3" style="display:none">
+          <div id="text">
+            <h1 id="intro_title3"></h1>
+            <div id="intro_page3"></div>
+          </div>
+          <button id="button-next" onclick="nextPageIntro('#intro3', '#intro2')">Retour</button>
+          <button id="button-next" onclick="EnterWorld()">Entrer dans le monde</button>
+        </div>
+
         <div id="load" style="display:none">
           <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
             <circle cx="170" cy="170" r="160" stroke="#f2f2f2"/>
