@@ -53,7 +53,6 @@ export function createNodes(svg, datas, fetchedNodes){
       .join("circle")
       .style("fill", function(d){
         let datas = getNodeDatas(d, fetchedNodes);
-        console.log(d);
         let color =  getNodeColor(datas, d.depth);
         return color;
       })
@@ -128,7 +127,6 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeTitle, nodeAuthor,
 
   //TODO : fix this
   svg.on("click", function(event, d) {
-    console.log("ouyi");
       node.style("fill", d => {
         let datas = getNodeDatas(d, nodes);
         return getNodeColor(datas, d.depth);
