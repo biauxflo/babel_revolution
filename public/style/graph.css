@@ -81,10 +81,6 @@ div > h3{
   text-align: left;
 }
 
-#node-hashtags {
-  margin-bottom: 30px;
-}
-
 /* Style the form */
 #add-node-form {
   display: block;

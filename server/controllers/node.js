@@ -30,7 +30,6 @@ exports.addNewNode = (req, res, next) => {
     const node = Node.create({
         author: received.author,
         text: received.text,
-        hashtags: hashtags,
         belief: received.belief,
         react: received.react,
         title: received.title,
@@ -46,11 +45,9 @@ exports.addNewSessionNode = (req, res, next) => {
     const tableName = 'session-' + idSession;
     const sessionModel = db.sequelize.define(tableName, db.Node.rawAttributes, { timestamps: false });
     let received = req.body;
-    let hashtags = received.hashtags.join(';');
     const node = sessionModel.create({
         author: received.author,
         text: received.text,
-        hashtags: hashtags,
         belief: received.belief,
         react: received.react,
         title: received.title,

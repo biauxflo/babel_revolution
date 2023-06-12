@@ -12,6 +12,7 @@ export function getNodeDatas(node, nodes){
 }
 
 export function getNodeColor(node, prof) {
+  prof = prof - 2;
   if (node.type === "contribution") {
     switch (String(node.belief)) {
       case "in_favor":
@@ -19,16 +20,16 @@ export function getNodeColor(node, prof) {
       case "against":
         let color;
         let choice;
-        switch (prof){
-          case 1:
-            color = ['#005a00','#025d3c', '#00832c', '#007000'];
-          case 2:
-            color = ['#00b42c','#00cd3c', '#00ff3c'];
-          case 3:
+        if (prof === 0) {
+          color = ['#005a00', '#025d3c', '#00832c', '#007000'];
+        }else if (prof === 1) {
+          color = ['#00b42c', '#00cd3c', '#00ff3c'];
+        }else if (prof === 2) {
             color = ['#97ff30','#b5ff30', '#97ff6a'];
-          default:
-            return '#ddff6a';
+        }else{
+          return '#ddff6a'
         }
+
         choice = getRandomInt(color.length);
         return color[choice]
       default:
@@ -52,6 +53,7 @@ export function createNodes(svg, datas, fetchedNodes){
       .join("circle")
       .style("fill", function(d){
         let datas = getNodeDatas(d, fetchedNodes);
+        console.log(d);
         let color =  getNodeColor(datas, d.depth);
         return color;
       })
@@ -68,11 +70,11 @@ export function createNodes(svg, datas, fetchedNodes){
           return 1;
         }
       })
-      .attr("r", function (d){
+      .attr("r", function (d) {
         let datas = getNodeDatas(d, fetchedNodes);
-        if (datas.type === "decree") {
+        if (datas.type === "root") {
           return 40;
-        }else if (d.children){
+        } else if (datas.type === "decree") {
           return 30;
         }
         return 20;
@@ -106,9 +108,9 @@ export function joinNodes(svg, datas, fetchedNodes){
       })
       .attr("r", function (d){
         let datas = getNodeDatas(d, fetchedNodes);
-        if (datas.type === "decree") {
+        if (datas.type === "root") {
           return 40;
-        }else if (d.children){
+        }else if (datas.type === "decree"){
           return 30;
         }
         return 20;
@@ -119,28 +121,27 @@ export function joinNodes(svg, datas, fetchedNodes){
 
 // Displaying node text on a div
 //elements-nodes
-// Displaying the text and hashtags of a node on a div
-export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact, labelSelection) {
+// Displaying the text of a node on a div
+export function displayNodeInfo(nodes, node, nodeTextDiv, nodeTitle, nodeAuthor, selectReact, labelSelection) {
   //if click on graph but outside a node
   const svg = d3.select("svg");
 
+  //TODO : fix this
   svg.on("click", function(event, d) {
-    if(event.target.nodeName === "svg") {
-      node.style("fill", function(d){
-        var datas = getNodeDatas(d, nodes);
-        var color =  getNodeColor(datas, d.depth);
-        return color;
+    console.log("ouyi");
+      node.style("fill", d => {
+        let datas = getNodeDatas(d, nodes);
+        return getNodeColor(datas, d.depth);
       });
       nodeTextDiv.html("");  //set text to empty to not show
       nodeTitle.html("");
       nodeAuthor.html("");
-      nodeHashtagsDiv.html("");
 
       //close side bar
       d3.select("#messages-inside").style("display", "none")
       d3.select("#span-toggle-messages").html("⇩");
     }
-   });
+   );
 
   node
   .on("mouseover", function(event, d){
@@ -155,14 +156,12 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
   })
   .on("click", function(event, d) {
     let nodeDatas = getNodeDatas(d, nodes)
-    let hashtags = nodeDatas.hashtags.join(", ")
     nodeTitle.html(nodeDatas.title);
     nodeAuthor.html("écrit par "+nodeDatas.author);
     nodeTextDiv.html(nodeDatas.text);
-    nodeHashtagsDiv.html("# : " +hashtags);
     node.style("fill", function(d){
-      var datas = getNodeDatas(d, nodes);
-      var color =  getNodeColor(datas, d.depth);
+      let datas = getNodeDatas(d, nodes);
+      let color =  getNodeColor(datas, d.depth);
       return color;
     }) //reset color on all nodes
 
@@ -182,7 +181,7 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeHashtagsDiv, nodeT
 
 // displayNodeInfo for graph-admin
 // The toggle of the menu is done by a listener on nodeTitle in graph-admin.js
-export function displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeText, nodeHashtags, nodeType, aside) {
+export function displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeText, nodeType, aside) {
   // TODO fix
   node.on("click", function(event, selectedNode) {
     // We set the values of the inputs
@@ -190,7 +189,6 @@ export function displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeTe
     nodeTitle.value = selectedNode.title;
     nodeAuthor.value = selectedNode.author;
     nodeText.value = selectedNode.text;
-    nodeHashtags.value = selectedNode.hashtags.join(" / ");
     nodeType.value = selectedNode.type;
     // We show the inputs (aside class is defined in graph-adminElements.js)
     aside.toggleModifyMessageDiv();
@@ -199,41 +197,3 @@ export function displayNodeInfoAdmin(node, nodeId, nodeTitle, nodeAuthor, nodeTe
     d3.select(this).style("fill", "green");
   });
 }
-  
-// function tooltip_2() {
-// // Créer un élément SVG pour la fenêtre contextuelle
-// const tooltip = d3.select("body").append("svg")
-//   .style('position', 'absolute')
-//   .style('z-index', '10')
-//   .style('visibility', 'hidden')
-//   .style('border', '1px solid black')
-//   .style('padding', '30px')
-//   .style('margin', '30px')
-
-// // Ajouter un élément texte à la fenêtre contextuelle
-// tooltip.append("text")
-//     .attr("id", "tooltip-text")
-//     .style("position", "relative")
-//     .style("font-size", "20px")
-//     .style("color", "black")
-//     .style('text-align', 'center')
-
-// // Ajouter une fonctionnalité de survol pour afficher la fenêtre contextuelle
-// node.on("mouseover", function(event, d) {
-//         // Définir le contenu de l'élément texte de la fenêtre contextuelle
-//         tooltip.select("#tooltip-text").text(d.label);
-//         d3.select(this).style("fill", "red");
-
-//         // Définir la position de la fenêtre contextuelle
-//         tooltip.style("left", (d.x + 100) + "px")
-//             .style("top", (d.y - 50) + "px")
-//             .style("visibility", "visible");
-//     })
-//     .on("mouseout", function(d) {
-//         // Masquer la fenêtre contextuelle
-//         tooltip.style("visibility", "hidden");
-//         d3.select(this).style("fill", "blue");
-//     });
-// }
-
-// tooltip_2()

@@ -20,7 +20,7 @@
     <div id="container">
 
       <header id="graph_header">
-        <div class="logo" onclick="window.location.href = window.location.href">
+        <div class="logo" onclick="window.location.href ='/'">
           <img src="\img\logoV2.png" alt="image" title="Revenir au menu principal">
         </div> 
       </header>
@@ -30,34 +30,6 @@
         <button type="button" id="button-about-ferme" onclick="OpenText()" style="display:none">à propos -</button>
         <div id="about-text" style="display:none"></div>
       </div>
-
-      <div id="text-box-intro" style="display:none">
-        <!-- Explications / début -->
-        <div id="intro" style="display:block">
-            <div id="text">
-                <h1 id="intro_title1"></h1>
-                <div id="intro_page1"></div>
-            </div>
-            <button id="button-next" onclick="nextPageIntro('#intro', '#intro2')">Poursuivre</button>   
-        </div>
-
-        <div id="intro2" style="display:none">
-          <div id="text">
-            <h1 id="intro_title2"></h1>
-            <div id="intro_page2"></div>
-          </div>
-          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro')">Retour</button> 
-          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro3')">Poursuivre</button>   
-        </div>
-
-        <div id="intro3" style="display:none">
-          <div id="text">
-            <h1 id="intro_title3"></h1>
-            <div id="intro_page3"></div>
-          </div>
-          <button id="button-next" onclick="nextPageIntro('#intro3', '#intro2')">Retour</button> 
-          <button id="button-next" onclick="EnterWorld()">Entrer dans le monde</button>  
-        </div>
 
         <div id="load" style="display:none">
           <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
@@ -105,7 +77,6 @@
                     <option value="in_favor">Partisan·e</option>
                   </select>
                   <textarea required id="add-node-text" class="input" type="text" placeholder="Texte du message" style="font-style:italic;"></textarea>
-                  <input required id="add-node-hashtags" class="input" type="text" placeholder="Mots-clés (séparés par des virgules)" style="font-style:italic">
                   <input id="add-node-type" class="input" type="hidden" value="contribution">
                   <button id="add-node-button" type="submit">Publier</button>
                 </form>
@@ -114,7 +85,6 @@
                   <h4><div id="node-title"></div></h4> 
                   <h5><div id="node-author"></div></h5>
                   <div id="node-text"></div>
-                  <div id="node-hashtags"></div>
                 </div>
 
               </div>
@@ -199,9 +169,6 @@
             paragraphText += '[ ' + example.author + ' ] : ';
           }
           paragraphText += example.text;
-          if (example.hashtags) {
-            paragraphText += ' [ #' + example.hashtags + ' ]';
-          }
           const paragraph = document.createElement('p');
           paragraph.textContent = paragraphText;
           dialogExamples.appendChild(paragraph);
