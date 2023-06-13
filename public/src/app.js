@@ -65,14 +65,27 @@ async function updateData() {
   links = decreeLinks;
 
   /** Récupération des options pour la séléction de la réaction */
+
+  while (selectReact.options.length > 0) {
+    selectReact.remove(0);
+  }
+
   let decrees = fetchedNodes.filter(d=> d.type == "decree");
   let contributions = fetchedNodes.filter(d=> d.type == "contribution");
-  if(selectReact.options.length != fetchedNodes.length) {
+
+  if(selectReact.options.length !== fetchedNodes.length) {
     for (const decree of decrees) {
-      selectReact.add(new Option(decree.title, decree.id)) //add an option for each decree
+
+      let option = new Option(decree.title, decree.id)
+      selectReact.add(option) //add an option for each decree
+
     }
+
     for (const contribution of contributions) {
-      selectReact.add(new Option(contribution.title, contribution.id)) //add an option for each decree
+
+      let option = new Option(contribution.title, contribution.id);
+      selectReact.add(option) //add an option for each decree
+
     }
   }
 }
@@ -193,7 +206,7 @@ myForm.addEventListener("submit", function (event) {
   }
 
   //Reset form
-  var form = document.getElementById("add-node-form");
+  let form = document.getElementById("add-node-form");
   form.reset();
   //UPDATE DB
   insertData(nodeData, sessionId);
