@@ -65,6 +65,7 @@ async function updateData() {
   links = decreeLinks;
 
   /** Récupération des options pour la séléction de la réaction */
+  let preselectedOption = selectReact.selectedIndex;
 
   while (selectReact.options.length > 0) {
     selectReact.remove(0);
@@ -87,6 +88,8 @@ async function updateData() {
       selectReact.add(option) //add an option for each decree
 
     }
+
+    selectReact.selectedIndex = preselectedOption;
   }
 }
 

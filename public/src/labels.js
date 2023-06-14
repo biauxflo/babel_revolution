@@ -41,7 +41,6 @@ export function createLabels(svg, nodeSelection, nodes, fetchedNodes) {
         .style('fill', 'white')
         .style('stroke', 'none')
         .style('opacity', 0)
-        .style('z-index', 0)
         .attr('text-anchor', 'middle')
         .attr('id', d => d.data.data.id)
         .text(function (d) {
@@ -66,7 +65,6 @@ export function joinLabels(svg, nodeSelection, nodes, fetchedNodes) {
         .style('fill', 'white')
         .style('stroke', 'none')
         .style('opacity', 0)
-        .style('z-index', 0)
         .attr('text-anchor', 'middle')
         .text(function (d) {
             let datas = getNodeDatas(d, fetchedNodes);
