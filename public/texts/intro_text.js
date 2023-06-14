@@ -18,8 +18,7 @@ var intro_text = {
         Assignées derrière leurs écrans, les dissidents résistent à coups de posts, dont le plurilinguisme même est déjà résistance, au cœur même codé \
         de la Machine. Ainsi, spontanément, des voix y germent, d’abord balbutiantes et isolées, bientôt articulées, en des langues éradiquées au \
         Coup d’État : naguères florissantes, comme l’anglais, le mandarin, l’hindi, l’espagnol, l’arabe, le bengali, le russe ; mais aussi de cultures \
-        désormais bien lointaines, comme l’étrusque, le trégorois ou les créoles…
-</p>",
+        désormais bien lointaines, comme l’étrusque, le trégorois ou les créoles…</p>",
     
     "intro_title3" : "Prologue",
 
