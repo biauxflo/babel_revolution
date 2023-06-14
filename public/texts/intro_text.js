@@ -3,8 +3,8 @@ var intro_text = {
 
     "intro_page1" : "<p>« R-Pollëynisez la vi(ll)e ! » Malgré la censure, ce mystérieux tag fleurit sur les murs de la ville comme \
         sur ceux des réseaux sociaux, à chaque nouveau décret du Centre de la Monoculture, le CMC, toute puissante institution \
-        agro-culturelle régissant à la fois l’agroforesterie et la vie intellectuelle. À quoi exhorte-il exactement ? Nul ne le sait \
-        précisément. Certains affirment que ce sont simplement des poètes qui veulent replanter des roses dans le bitume d’autres que \
+        agro-culturelle régissant à la fois l’agroforesterie et la vie intellectuelle. À quoi exhorte-t-il exactement ? Nul ne le sait \
+        précisément. Certains affirment que ce sont simplement des poètes qui veulent replanter des roses dans le bitume, d’autres que \
         ce sont des nostalgiques de la polyculture archaïque ; d’autres enfin que ce sont des insurgés fomentant un coup d’État… \
         Le tag se multiplie à l’annonce prochaine d’un nouveau décret qui supprimerait des centaines de noms de fleurs, de plantes, d’arbres \
         du Dictionnaire officiel du CMC, dernier d’une longue série de lois et amendements visant à expurger la Langue commune pour \
