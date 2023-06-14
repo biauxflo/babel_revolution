@@ -141,10 +141,11 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeTitle, nodeAuthor,
 
   node
   .on("mouseover", function(event, d){
+    document.getElementById("toggle_checkbox").checked = true;
     labelSelection.filter(f => String(f.data.data.id) === d.data.data.id).style('opacity', 1)
-  })
-  .on("mouseout", function(event, d){
-    labelSelection.filter(f => String(f.data.data.id) === d.data.data.id).style('opacity', 0)
+    labelSelection.on("mouseover", function(event, d2){
+      labelSelection.filter(f => String(f.data.data.id) === d.data.data.id && d.data.data.id === d2.data.data.id).style('opacity', 1)
+    })
   })
   .on("click", function(event, d) {
     let nodeDatas = getNodeDatas(d, nodes)
@@ -157,7 +158,7 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeTitle, nodeAuthor,
       return color;
     }) //reset color on all nodes
 
-    d3.select(this).style("fill", "#ffffff");
+    d3.select(this).style("fill", "#1c027e");
     nodeTitle.style("display", "block") //show title, otherwise hidden
 
     //open side bar
