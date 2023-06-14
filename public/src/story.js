@@ -21,22 +21,3 @@ function onLoadGraph() {
         d3.select("#main").style("display", "block");
     }
 }
-
-function onLoadEnd() {
-    let nb_decree = 3;
-    let end = Math.floor(Math.random() * nb_decree); // 0, 1 ou 2
-    
-    switch(end) { //decree = '2' ou '3'
-        case 0 :
-            d3.select("#end1").style("display", "block");
-            break;
-        case 1 :
-            d3.select("#end2").style("display", "block");
-            break;
-        case 2 :
-            d3.select("#end3").style("display", "block");
-            break;
-        default :
-            d3.select("#end2").style("display", "block");
-    }
-}
