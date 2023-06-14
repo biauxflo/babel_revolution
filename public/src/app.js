@@ -90,6 +90,8 @@ async function updateData() {
     }
 
     selectReact.selectedIndex = preselectedOption;
+
+    document.getElementById("toggle_checkbox").checked = true;
   }
 }
 
