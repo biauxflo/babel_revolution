@@ -6,7 +6,7 @@ var presentation_texts = {
         collaborative informée par la recherche en sociolinguistique et en didactique du plurilinguisme. \
         Elle aborde le lien entre la perte de la flore et la disparition des langues par le biais d'un récit à plusieurs voix.\
         </p>\
-        Dans un monde dystopique, un mouvement populaire de résistance se développe contre une institution toute puissante, le CMC, \
+        <p>Dans un monde dystopique, un mouvement populaire de résistance se développe contre une institution toute puissante, le CMC, \
         en réaction à des mesures politiques qui révèlent et accélèrent l’appauvrissement culturel, tant naturel que linguistique. \
         Cette institution contribue en effet à la disparition des langues et de leur vocabulaire, ainsi que de la réalité écologique \
         que les mots façonnent. Toutefois des voix s'élèvent dans des messages publiés en ligne, dans des langues dont la diversité \
