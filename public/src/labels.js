@@ -45,7 +45,7 @@ export function createLabels(svg, nodeSelection, nodes, fetchedNodes) {
         .attr('id', d => d.data.data.id)
         .text(function (d) {
             let datas = getNodeDatas(d, fetchedNodes);
-            let label = datas.author;
+            let label = datas.title;
             return label
         })
         // Display node infos
@@ -68,7 +68,7 @@ export function joinLabels(svg, nodeSelection, nodes, fetchedNodes) {
         .attr('text-anchor', 'middle')
         .text(function (d) {
             let datas = getNodeDatas(d, fetchedNodes);
-            let label = datas.author;
+            let label = datas.title;
             return label
         })
         // Display node infos
