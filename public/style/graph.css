@@ -33,9 +33,10 @@
 }
 
 #messages {
-  border-left: 1px solid #f2f2f2;
-  border-bottom: 1px solid #f2f2f2;
+  border: 1px solid #f2f2f2;
   overflow-y: auto;
+  background: black;
+  margin: 10px;
 }
 
 element.style {
@@ -56,8 +57,12 @@ div > h3{
   border-top: 3px solid white;
   margin-top: 20px;
   padding-top: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#node-author {
+  font-size: 16px;
 }
 
 #node-info {
@@ -74,6 +79,7 @@ div > h3{
 
 #node-info > div {
   font-family: noto;
+  margin-left: 10px;
 }
 
 #node-text {
@@ -101,6 +107,7 @@ div > h3{
   border-radius: 10px;
   border: 1px solid #eee;
   margin-bottom: 8px;
+  align-self: left;
 }
 
 #add-node-form ::placeholder {
@@ -130,9 +137,10 @@ button {
   margin: 5px;
 }
 
-#title-with-toggle {
+.title-with-toggle {
   display:inline-block;
   cursor:pointer;
+  font-size: 20px;
 }
 
 #add-node-button {
@@ -182,14 +190,15 @@ textarea{
 
 #title_for_zoom {
   position: fixed;
-  bottom: 50px;
+  bottom: 55px;
   right: 30px;
+  font-size: 16px;
 }
 
 #zoom {
-  margin: 20px;
+  margin: 25px;
   position: fixed;
-  width: 29px;
+  width: 22px;
   bottom: 30px;
   right: 20px;
   -webkit-transform: translateZ(0);
@@ -198,15 +207,18 @@ textarea{
 
 #zoom span {
   display: block;
-  height: 29px;
-  width: fit-content;
-  font-size: 25px;
-  left: 0;
-  overflow: hidden;
-  position: absolute;
-  padding: 5px 15px;
-  cursor: pointer;
-  box-sizing: border-box;
+    height: 33px;
+    width: 33px;
+    font-size: 25px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    padding: 0px 6px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 56px;
+    border: solid 2px white;
+    margin-top: 7px;
 }
 
 #zoom span+span {
@@ -222,9 +234,10 @@ textarea{
 /* style for the toggle */
 
 #title_for_toggle {
-  position:fixed;
-  bottom: 115px;
-  right: 30px;
+  position: fixed;
+  bottom: 133px;
+  right: 23px;
+  font-size: 16px;
 }
 
 #toggle-titles .switch {
@@ -232,7 +245,7 @@ textarea{
   display: inline-block;
   width: 60px;
   height: 34px;
-  bottom: 100px;
+  bottom: 130px;
   right: 20px;
 }
 
@@ -291,15 +304,39 @@ textarea{
 }
 
 
-/* STYLE FOR THE INTRODUCTION */
+/* Style dialog - décrets et fin */
 
+#session_dialog {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  width: 50vw;
+  transform: translate(-50%, -50%);
+  border: 1px solid #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  background-color: #0a0a0a;
+  color:white;
+}
+
+dialog > button.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: 0;
+  padding: 0;
+  font-size: 20px;
+  border: none;
+}
+
+/* STYLE FOR THE INTRODUCTION */
 
 /* INTRODUCTION : text-box in the middle of the page */
 #text-box-intro, #text-box-prologue {
   position: absolute;
   top: 52%;
   left: 50%;
-  width: 70vw;
+  width: 40vw;
   transform: translate(-50%, -50%);
   border: 1px solid #f2f2f2;
   padding: 20px;

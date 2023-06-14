@@ -20,8 +20,8 @@
     <div id="container">
 
       <header id="graph_header">
-        <div class="logo" onclick="window.location.href ='/'">
-          <img src="\img\logoV2.png" alt="image" title="Revenir au menu principal">
+        <div class="logo">
+          <img onclick="window.location.href ='/'" src="\img\logoV2.png" alt="image" title="Revenir au menu principal">
         </div> 
       </header>
         
@@ -83,11 +83,11 @@
           <div id="text-box" style="display:flex"> <!-- right zone-->
 
             <div id="messages">
-              <h3 id="title-with-toggle" onclick="toggle('span-toggle-messages', 'messages-inside')">messages <span id="span-toggle-messages" class="arrow-toggle">⇩</span></h3>
+              <h3 class="title-with-toggle" onclick="toggle('span-toggle-messages', 'messages-inside')">messages <span id="span-toggle-messages" class="arrow-toggle">⇩</span></h3>
 
               <div id="messages-inside" style="display:none">
 
-                <h3 id="title-with-toggle" onclick="toggle('span-toggle-writing', 'add-node-form')">écrire un message <span id="span-toggle-writing" class="arrow-toggle">⇩</span></h3>
+                <h3 class="title-with-toggle" id="title-form" onclick="toggle('span-toggle-writing', 'add-node-form')">écrire un message <span id="span-toggle-writing" class="arrow-toggle">⇩</span></h3>
                 <form id="add-node-form" style="display:none">
                   <input required id="add-node-title" class="input" type="text" placeholder="Titre du message" style="font-style:italic">
                   <input required id="add-node-author" class="input" type="text" placeholder="Pseudo" style="font-style:italic">
@@ -128,7 +128,7 @@
 
           <h6 id="title_for_zoom">taille</h6>
           <div id="zoom">
-            <span id="zoom-minus">-</span><span id="zoom-plus">+</span>
+            <span id="zoom-minus">–</span><span id="zoom-plus">+</span>
           </div>
 
 
@@ -198,6 +198,8 @@
         sessionDialog.querySelector('div#dialog_examples').innerHTML = '';
 
         document.getElementById('add-node-form').style.display = "none"; //hide the form
+        document.getElementById('title-form').style.display = "none"; //hide the form
+
 
         // We show the dialog
         sessionDialog.showModal();
