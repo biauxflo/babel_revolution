@@ -61,6 +61,7 @@ publishDecree.head.addEventListener('click', () => {
                 examplesDiv.innerHTML = '';
                 // Add the decrees to the select object
                 res.examples.forEach(example => {
+                    console.log(example);
                     const idCheckbox = 'example_checkbox_' + example.id;
                     // Checkbox creation
                     const checkbox = document.createElement('input');
@@ -77,10 +78,10 @@ publishDecree.head.addEventListener('click', () => {
                     if (example.author) {
                         checkboxText += '[ ' + example.author + ' ] : ';
                     }
-                    checkboxText += example.text;
-                    if (example.hashtags) {
-                        checkboxText += ' [ #' + example.hashtags + ' ]';
+                    if (example.belief){
+                        checkboxText += '[ ' + example.belief + ' ] : ';
                     }
+                    checkboxText += example.text;
                     label.textContent = checkboxText;
                     // We add the elements to the html as children of example messages
                     examplesDiv.appendChild(checkbox);

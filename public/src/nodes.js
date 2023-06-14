@@ -78,7 +78,6 @@ export function createNodes(svg, datas, fetchedNodes){
         }
         return 20;
       })
-      .style('z-index', 1);
   return nodes;
 }
 
@@ -114,7 +113,6 @@ export function joinNodes(svg, datas, fetchedNodes){
         }
         return 20;
       })
-        .style('z-index', 1);
   return nodes;
 }
 
@@ -144,12 +142,10 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeTitle, nodeAuthor,
   node
   .on("mouseover", function(event, d){
     labelSelection.filter(f => String(f.data.data.id) === d.data.data.id).style('opacity', 1)
-        .style('z-index', 10)
   })
   .on("mouseout", function(event, d){
     if(!document.getElementById('toggle_checkbox').checked) {
       labelSelection.filter(f => String(f.data.data.id) === d.data.data.id).style('opacity', 0)
-          .style('z-index', 0);
     }
   })
   .on("click", function(event, d) {
