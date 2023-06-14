@@ -17,13 +17,13 @@ module.exports = (sequelize, DataTypes) => {
     author: DataTypes.STRING,
     title: DataTypes.STRING,
     text: DataTypes.TEXT({ length: 'long' }),
-    hashtags: DataTypes.STRING,
     decree: DataTypes.INTEGER,
     belief: DataTypes.STRING,
     type: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Example',
+    timestamps: false
   });
   return Example;
 };

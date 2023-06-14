@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     author: DataTypes.STRING,
     // text: DataTypes.LONGTEXT,
     text: DataTypes.TEXT({ length: 'long' }),
-    hashtags: DataTypes.STRING,
     react: DataTypes.INTEGER,
     belief: DataTypes.STRING,
     title: DataTypes.STRING,

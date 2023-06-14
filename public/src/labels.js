@@ -1,21 +1,18 @@
 import {getNodeColor, getNodeDatas} from "./nodes.js";
 
 const nodeTextDiv = d3.select("#node-text");
-const nodeHashtagsDiv = d3.select("#node-hashtags");
 const nodeTitle = d3.select("#node-title");
 const nodeAuthor = d3.select("#node-author");
 
 function onLabelClick(event, d, fetchedNodes, nodeSelection) {
     let datas = getNodeDatas(d, fetchedNodes);
-    let hashtags = datas.hashtags.join(" / ")
     let id = datas.id
     nodeTitle.html(datas.title);
     nodeAuthor.html("écrit par "+datas.author);
     nodeTextDiv.html(datas.text);
-    nodeHashtagsDiv.html("# : " +hashtags);
     nodeSelection.style("fill", function(d){
-        var datas = getNodeDatas(d, fetchedNodes);
-        var color =  getNodeColor(datas, d.depth);
+        let datas = getNodeDatas(d, fetchedNodes);
+        let color =  getNodeColor(datas, d.depth);
         return color;
     }) //reset color on all nodes
     nodeSelection.filter(d => String(id) === d.data.data.id).style("fill", "#ffffff");
@@ -44,7 +41,6 @@ export function createLabels(svg, nodeSelection, nodes, fetchedNodes) {
         .style('fill', 'white')
         .style('stroke', 'none')
         .style('opacity', 0)
-        .style('z-index', 0)
         .attr('text-anchor', 'middle')
         .attr('id', d => d.data.data.id)
         .text(function (d) {
@@ -69,7 +65,6 @@ export function joinLabels(svg, nodeSelection, nodes, fetchedNodes) {
         .style('fill', 'white')
         .style('stroke', 'none')
         .style('opacity', 0)
-        .style('z-index', 0)
         .attr('text-anchor', 'middle')
         .text(function (d) {
             let datas = getNodeDatas(d, fetchedNodes);

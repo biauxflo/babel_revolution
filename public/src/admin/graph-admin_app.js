@@ -10,7 +10,6 @@ import {createLabels, joinLabels} from "../labels.js";
 /** Constantes */
 
 const nodeTextDiv = d3.select("#node-text");
-const nodeHashtagsDiv = d3.select("#node-hashtags");
 const nodeTitle = d3.select("#node-title");
 const nodeAuthor = d3.select("#node-author");
 const selectReact = document.getElementById("add-node-react");
@@ -33,15 +32,6 @@ let strats;
 let root;
 
 /** Fonctions utils */
-
-function removeHashtag(h) {
-    if (h.charAt(0) == "#") {
-        h = h.substring(1);
-    }
-
-    h = h.toLowerCase()
-    return h.trim()
-}
 
 function ticked(){
     linkSelection
@@ -104,7 +94,7 @@ function generateGraph(){
 
     simulation.on('tick', ticked);
 
-    displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
+    displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
 
     nodeDragBehavior = createNodeDragBehavior(simulation);
 
@@ -128,7 +118,7 @@ export async function updateGraph(){
 
     simulation.on('tick', ticked);
 
-    displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
+    displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
 
     nodeDragBehavior = createNodeDragBehavior(simulation);
 
@@ -187,9 +177,6 @@ socket.on('decreePublished', async function (decreeAndExamples) {
             paragraphText += '[ ' + example.author + ' ] : ';
         }
         paragraphText += example.text;
-        if (example.hashtags) {
-            paragraphText += ' [ #' + example.hashtags + ' ]';
-        }
         const paragraph = document.createElement('p');
         paragraph.textContent = paragraphText;
         dialogExamples.appendChild(paragraph);

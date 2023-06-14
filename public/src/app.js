@@ -9,7 +9,6 @@ import {createLinks, joinLinks} from "./links.js";
 /** Constantes */
 
 const nodeTextDiv = d3.select("#node-text");
-const nodeHashtagsDiv = d3.select("#node-hashtags");
 const nodeTitle = d3.select("#node-title");
 const nodeAuthor = d3.select("#node-author");
 const selectReact = document.getElementById("add-node-react");
@@ -32,16 +31,6 @@ let strats;
 let root;
 
 /** Fonctions utils */
-
-function removeHashtag(h) {
-  if (h.charAt(0) == "#") {
-    h = h.substring(1);
-  }
-
-  h = h.toLowerCase()
-  return h.trim()
-}
-
 function ticked(){
   linkSelection
       .attr('x1', d => d.source.x)
@@ -76,15 +65,31 @@ async function updateData() {
   links = decreeLinks;
 
   /** Récupération des options pour la séléction de la réaction */
+  let preselectedOption = selectReact.selectedIndex;
+
+  while (selectReact.options.length > 0) {
+    selectReact.remove(0);
+  }
+
   let decrees = fetchedNodes.filter(d=> d.type == "decree");
   let contributions = fetchedNodes.filter(d=> d.type == "contribution");
-  if(selectReact.options.length != fetchedNodes.length) {
+
+  if(selectReact.options.length !== fetchedNodes.length) {
     for (const decree of decrees) {
-      selectReact.add(new Option(decree.title, decree.id)) //add an option for each decree
+
+      let option = new Option(decree.title, decree.id)
+      selectReact.add(option) //add an option for each decree
+
     }
+
     for (const contribution of contributions) {
-      selectReact.add(new Option(contribution.title, contribution.id)) //add an option for each decree
+
+      let option = new Option(contribution.title, contribution.id);
+      selectReact.add(option) //add an option for each decree
+
     }
+
+    selectReact.selectedIndex = preselectedOption;
   }
 }
 
@@ -115,7 +120,7 @@ function generateGraph(){
 
   simulation.on('tick', ticked);
 
-  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
+  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
 
   nodeDragBehavior = createNodeDragBehavior(simulation);
 
@@ -139,7 +144,7 @@ export async function updateGraph(){
 
   simulation.on('tick', ticked);
 
-  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeHashtagsDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
+  displayNodeInfo(fetchedNodes, nodeSelection, nodeTextDiv, nodeTitle, nodeAuthor, selectReact, labelSelection)
 
   nodeDragBehavior = createNodeDragBehavior(simulation);
 
@@ -181,7 +186,6 @@ myForm.addEventListener("submit", function (event) {
   const inputTitle = document.getElementById("add-node-title");
   const inputAuthor = document.getElementById("add-node-author");
   const inputText = document.getElementById("add-node-text");
-  const inputHashtag = document.getElementById("add-node-hashtags");
   const inputReact = document.getElementById("add-node-react");
   const inputBelief = document.getElementById("add-node-belief");
   const inputType = document.getElementById("add-node-type");
@@ -191,13 +195,11 @@ myForm.addEventListener("submit", function (event) {
   const inputTextValue = inputText.value;
   const inputDecreeValue = inputReact.value;
   const inputBeliefValue = inputBelief.value;
-  const inputHashTagArray = inputHashtag.value.split(',').map(hashtag => removeHashtag(hashtag));
   const nextNodeId = nodes.length + 1;
   const inputTypeValue = inputType.value;
 
   const nodeData = {
     "author": inputAuthorValue,
-    "hashtags": inputHashTagArray,
     "id": nextNodeId,
     "text": inputTextValue,
     "react": inputDecreeValue,
@@ -207,7 +209,7 @@ myForm.addEventListener("submit", function (event) {
   }
 
   //Reset form
-  var form = document.getElementById("add-node-form");
+  let form = document.getElementById("add-node-form");
   form.reset();
   //UPDATE DB
   insertData(nodeData, sessionId);

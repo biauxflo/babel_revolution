@@ -30,7 +30,7 @@
         </div>
             <h1>SESSION PUBLIQUE EN COURS</h1>
             <div id="public_sessions">
-                <div id="session_template" onclick="window.location.href = '/session/43?intro'" style="cursor:pointer">
+                <div id="session_template" onclick="window.location.href = '/session/67?intro'" style="cursor:pointer">
                     <div class="image">
                         <img src="/img/graphe1.png" alt="graph" class="graph">
                     </div>
@@ -53,6 +53,7 @@
         method: 'get',
     }).then(res => {
         let sessions = res.json();
+        console.log(sessions);
         // Create the HTML element for each session
         for (let session in sessions){
             let newSession = sessionTemplate.cloneNode(true);
