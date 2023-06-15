@@ -73,11 +73,19 @@ async function updateData() {
 
   let decrees = fetchedNodes.filter(d=> d.type == "decree");
   let contributions = fetchedNodes.filter(d=> d.type == "contribution");
+  let roots = fetchedNodes.filter(d=> d.type == "root");
 
   if(selectReact.options.length !== fetchedNodes.length) {
     for (const decree of decrees) {
 
       let option = new Option(decree.title, decree.id)
+      selectReact.add(option) //add an option for each decree
+
+    }
+
+    for (const root of roots) {
+
+      let option = new Option(root.title, root.id)
       selectReact.add(option) //add an option for each decree
 
     }
@@ -88,8 +96,11 @@ async function updateData() {
       selectReact.add(option) //add an option for each decree
 
     }
-
-    selectReact.selectedIndex = preselectedOption;
+    if (preselectedOption !== -1) {
+      selectReact.selectedIndex = preselectedOption;
+    }else{
+      selectReact.selectedIndex = 0;
+    }
 
     document.getElementById("toggle_checkbox").checked = true;
   }

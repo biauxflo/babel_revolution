@@ -185,7 +185,6 @@
         sessionDialog.showModal();
         // We update the graph
         await updateGraph();
-        console.log("+++ decree pulished");
       });
 
       // The event 'sessionCompleted' is received when the session ends
@@ -244,7 +243,7 @@
         ("zoom" in document.body.style && !transform) && (zoomArea.style.zoom = currentZoom);
       }
 
-      var zoomArea = document.querySelector("#graph"),
+      let zoomArea = document.querySelector("#graph"),
       currentZoom = 1,
       coefficient = .2,
       transform;
