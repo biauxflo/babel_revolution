@@ -3,12 +3,14 @@ import {getNodeColor, getNodeDatas} from "./nodes.js";
 const nodeTextDiv = d3.select("#node-text");
 const nodeTitle = d3.select("#node-title");
 const nodeAuthor = d3.select("#node-author");
+const writtenBy = d3.select("#written-by");
 
 function onLabelClick(event, d, fetchedNodes, nodeSelection) {
     let datas = getNodeDatas(d, fetchedNodes);
     let id = datas.id
     nodeTitle.html(datas.title);
-    nodeAuthor.html("écrit par "+datas.author);
+    writtenBy.style("display", "block")
+    nodeAuthor.html(datas.author);
     nodeTextDiv.html(datas.text);
     nodeSelection.style("fill", function(d){
         let datas = getNodeDatas(d, fetchedNodes);

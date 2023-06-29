@@ -1,0 +1,40 @@
+{
+ "button-about-ouvert" : "à propos +",
+ "button-about-ferme" : "à propos -",
+ "about-text": "<p><i>« Une expression qui, il y a un instant à peine, vivait encore et semblait même indéracinable, pouvait brusquement s’évanouir : elle a disparu avec la situation qui l’avait engendrée et dont elle témoignera un jour tel un fossile » (Klemperer, LTI, la langue du Troisième Reich, 1947).</i></p> <p>BⱯBEL RËVOLUㅏION est un récit dystopique interactif, collaboratif et plurilingue. Cette création cherche à penser le lien entre la dégradation de la biodiversité et la dégradation de la diversité linguistique et culturelle.</p> <p>Ce projet de recherche-création transdisciplinaire, en processus et sans cesse à renouveler, à l’instar de toute révolution, implique des chercheuses et chercheurs de disciplines diverses (didactique des langues, littérature, design, sciences de l'information et de la communication) et des élèves-ingénieur·es en informatique. Mais BⱯBEL RËVOLUㅏION vous invite à entrer, vous aussi, dans l’œuvre pour en être l’auteur·rice. </p> <p><b>Crédits</b><br> Conception et supervision du projet : Serge Bouchardon, Isabelle Cros, Adrien Charannat, Erika Fülöp, Simon Renaud <br> Conception et développement : Florestan Biaux, Lucas D'Aquaro, Solène Desvaux de Marigny, Ismaïl Kadiri, Mathilde Lange, Claire Malgonne</p>",
+
+ "intro_title1" : "Prologue",
+ "intro_page1" : "<p>« R-Pollëynisez la vi(ll)e ! » Malgré la censure, ce mystérieux tag fleurit sur les murs de la ville comme sur ceux des réseaux sociaux, à chaque nouveau décret du Centre de la Monoculture, le CMC, toute puissante institution agro-culturelle régissant à la fois l’agroforesterie et la vie intellectuelle. À quoi exhorte-t-il exactement ? Nul ne le sait précisément. Certains affirment que ce sont simplement des poètes qui veulent replanter des roses dans le bitume ; d’autres que ce sont des nostalgiques de la polyculture archaïque ; d’autres enfin que ce sont des insurgés fomentant un coup d’État… Le tag se multiplie à l’annonce prochaine d’un nouveau décret qui supprimerait des centaines de noms de fleurs, de plantes, d’arbres du Dictionnaire officiel du CMC, dernier d’une longue série de lois et amendements visant à expurger la Langue commune pour « l’actualiser et la mettre mieux en adéquation avec l’environnement », comme le stipule le Dictionnaire officiel du CMC. De fait, la biodiversité végétale s’est drastiquement réduite et les mots pour le dire avec elle.</p>",
+ "intro_title2" : "Prologue",
+ "intro_page2" : "<p>Sous ce tag, des posts publiés dans la DarkMachine rendent témoignage de l’appauvrissement et de la colonisation de la nature, des cultures et du savoir par l’homme, mais aussi de la résistance qui s’organise contre cet étiolement conjoint de la nature et de l'esprit. Assignées derrière leurs écrans, les dissidents résistent à coups de posts, dont le plurilinguisme même est déjà résistance, au cœur même codé de la Machine. Ainsi, spontanément, des voix y germent, d’abord balbutiantes et isolées, bientôt articulées, en des langues éradiquées au Coup d’État : naguères florissantes, comme l’anglais, le mandarin, l’hindi, l’espagnol, l’arabe, le bengali, le russe ; mais aussi de cultures désormais bien lointaines, comme l’étrusque, le trégorois ou les créoles… </p>",
+ "intro_title3" : "Prologue",
+ "intro_page3" : "<p>Suite à l’actualisation du dictionnaire et en dépit de l’interdiction de parler ces langues interdites, le mur de la Machine se couvre de graphes et de glyphes numériques ; de technotextes, de typoèmes et d’éclats de voix hypermédiatisés ; de fenêtres ouvertes sur un ailleurs hypertextuel plurilingue devenu zone prohibée ; de souvenirs de rencontres hétérolingues hétérodoxes ; d’exhortations à cultiver son jardin, là, maintenant, même dans la plus infime fissure de la langue et du bitume. Et qu’importe si les langues se défont ou se fondent, se répondent, s’intriquent à s’en empêtrer les consonnes... Et qui sait si cette polyphonie en toutes langues n’ouvrait pas un chemin vers une diversité revivifiée : en langue mais aussi en germe ? Et si ce n’était pas trop tard ? S’il y avait une manière de revenir en arrière ? Et de faire refleurir le monde dans des cultures diverses ? Oui, mais comment ? Le savez-vous, vous ?</p>",
+
+ "title_presentation" : "<h1>QU'EST-CE QUE BⱯBEL RËVOLUㅏION ?</h1>",
+ "text_presentation" : "<p>BⱯBEL RËVOLUㅏION est une création écopoétique participative en ligne en faveur de la biodiversité dans une perspective écologique, linguistique et culturelle. Cette création est fondée sur une approche de recherche-action collaborative informée par la recherche en sociolinguistique et en didactique du plurilinguisme. Elle aborde le lien entre la perte de la flore et la disparition des langues par le biais d'un récit à plusieurs voix. </p> <p>Dans un monde dystopique, un mouvement populaire de résistance se développe contre une institution toute puissante, le CMC, en réaction à des mesures politiques qui révèlent et accélèrent l’appauvrissement culturel, tant naturel que linguistique. Cette institution contribue en effet à la disparition des langues et de leur vocabulaire, ainsi que de la réalité écologique que les mots façonnent. Toutefois des voix s'élèvent dans des messages publiés en ligne, dans des langues dont la diversité cherche à faire renaître la biodiversité. Clameurs ou murmures, ces voix s'interconnectent instantanément en réseau dans un graphe organique et dynamique. Le soulèvement populaire va-t-il renverser le pouvoir en place ? Cela dépend avant tout de vous !</p>",
+ "session_public" : "SESSION PUBLIQUE EN COURS",
+ "finished_sessions":"SESSIONS TERMINÉES",
+
+ "button-next": "Poursuivre",
+ "button-back": "Retour",
+ "enter-world" : "Entrer dans le monde",
+
+ "messages" : "messages",
+ "write-messages" : "écrire un message",
+ "add-node-title" : "Titre du message",
+ "add-node-author" : "Pseudo",
+ "add-node-text" : "Texte du message",
+ "in-reaction-to" : "En réaction à :",
+ "belief" : "Position :",
+ "belief-against": "Dissident·e",
+ "belief-neutral": "Partagé·e",
+ "belief-in-favor": "Partisan·e",
+ "publish-title": "Publier",
+
+ "written-by" : "écrit par",
+
+ "title_for_toggle" : "titres",
+ "title_for_zoom" : "taille"
+}
+
+

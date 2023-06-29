@@ -21,30 +21,34 @@
         </div> 
       </header>
 
+      <select i18n-switch class="locale-switch">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+      </select>
+
     <div id="container">
-        <div id="title_presentation">
+        <div id="title_presentation" i18n-key="title_presentation">
         </div>
       </div>
       <div id="content">
-        <div id="text_presentation">
+        <div id="text_presentation" i18n-key="text_presentation">
         </div>
-            <h1>SESSION PUBLIQUE EN COURS</h1>
+            <h1 id="session_public" i18n-key="session_public"></h1>
             <div id="public_sessions">
                 <div id="session_template" onclick="window.location.href = '/session/67?intro'" style="cursor:pointer">
                     <div class="image">
                         <img src="/img/graphe1.png" alt="graph" class="graph">
                     </div>
-                    <p class="session_title">Session publique en cours</p>
                 </div>
             </div>
 
-            <h1>SESSIONS TERMINEES</h1>
+            <h1 id="finished_sessions" i18n-key="finished_sessions">=</h1>
             <div id="completed_sessions">
                 <!-- TODO : Populate with completed sessions -->
             </div>
         </div>
   </body>
-  <script src="/texts/presentation_text.js"></script>
+  <script src="/src/i18n.js"></script>
 <script type="module">
     const sessionTemplate = document.querySelector("div#session_template");
     const completedSessionsDiv = document.querySelector("div#completed_sessions");
@@ -67,10 +71,4 @@
         console.error('Error getting sessions : ', error);
     });
 </script>
- <script>
-      //load texts from json (texts in js variable)
-      for (var key in presentation_texts){
-          document.getElementById(key).innerHTML = presentation_texts[key];
-      }
-  </script>
 </html>

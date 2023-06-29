@@ -131,6 +131,7 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeTitle, nodeAuthor,
       });
       nodeTextDiv.html("");  //set text to empty to not show
       nodeTitle.html("");
+      d3.select("#written-by").style("display", "none")
       nodeAuthor.html("");
 
       //close side bar
@@ -150,7 +151,8 @@ export function displayNodeInfo(nodes, node, nodeTextDiv, nodeTitle, nodeAuthor,
   .on("click", function(event, d) {
     let nodeDatas = getNodeDatas(d, nodes)
     nodeTitle.html(nodeDatas.title);
-    nodeAuthor.html("écrit par "+nodeDatas.author);
+    d3.select("#written-by").style("display", "block")
+    nodeAuthor.html(nodeDatas.author);
     nodeTextDiv.html(nodeDatas.text);
     node.style("fill", function(d){
       let datas = getNodeDatas(d, nodes);

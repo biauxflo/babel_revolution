@@ -24,36 +24,41 @@
           <img onclick="window.location.href ='/'" src="\img\logoV2.png" alt="image" title="Revenir au menu principal">
         </div> 
       </header>
+
+      <select i18n-switch class="locale-switch">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+      </select>
         
       <div id="about">
-        <button type="button" id="button-about-ouvert" onclick="OpenText()">à propos +</button>
-        <button type="button" id="button-about-ferme" onclick="OpenText()" style="display:none">à propos -</button>
-        <div id="about-text" style="display:none"></div>
+        <button type="button" id="button-about-ouvert" onclick="OpenText()" i18n-key="button-about-ouvert">à propos +</button>
+        <button type="button" id="button-about-ferme" onclick="OpenText()" style="display:none" i18n-key="button-about-ferme">à propos -</button>
+        <div id="about-text" style="display:none" i18n-key="about-text"></div>
       </div>
 
       <div id="text-box-intro" style="display:none"><!-- Explications / début -->
         <div id="intro" style="display:block">
           <div id="text">
-            <h1 id="intro_title1"></h1>
-            <div id="intro_page1"></div>
+            <h1 id="intro_title1" i18n-key="intro_title1"></h1>
+            <div id="intro_page1" i18n-key="intro_page1"></div>
           </div>
-          <button id="button-next" onclick="nextPageIntro('#intro', '#intro2')">Poursuivre</button>
+          <button id="button-next" onclick="nextPageIntro('#intro', '#intro2')" i18n-key="button-next"></button>
         </div>
         <div id="intro2" style="display:none">
           <div id="text">
-            <h1 id="intro_title2"></h1>
-            <div id="intro_page2"></div>
+            <h1 id="intro_title2" i18n-key="intro_title2"></h1>
+            <div id="intro_page2" i18n-key="intro_page2"></div>
           </div>
-          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro')">Retour</button>
-          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro3')">Poursuivre</button>
+          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro')" i18n-key="button-back"></button>
+          <button id="button-next" onclick="nextPageIntro('#intro2', '#intro3')" i18n-key="button-next"></button>
         </div>
         <div id="intro3" style="display:none">
           <div id="text">
-            <h1 id="intro_title3"></h1>
-            <div id="intro_page3"></div>
+            <h1 id="intro_title3" i18n-key="intro_title3"></h1>
+            <div id="intro_page3" i18n-key="intro_page3"></div>
           </div>
-          <button id="button-next" onclick="nextPageIntro('#intro3', '#intro2')">Retour</button>
-          <button id="button-next" onclick="EnterWorld()">Entrer dans le monde</button>
+          <button id="button-next" onclick="nextPageIntro('#intro3', '#intro2')" i18n-key="button-back"></button>
+          <button id="button-next" onclick="EnterWorld()" i18n-key="enter-world"></button>
         </div>
 
         <div id="load" style="display:none">
@@ -72,7 +77,7 @@
 
         <dialog id="session_dialog">
           <button type="button" class="close">X</button>
-          <h3 id="dialog_type">Nouveau décret</h3>
+          <h3 id="dialog_type"></h3>
           <h2 id="dialog_title"></h2>
           <p id="dialog_text"></p>
           <div id="dialog_examples">
@@ -83,32 +88,32 @@
           <div id="text-box" style="display:flex"> <!-- right zone-->
 
             <div id="messages">
-              <h3 class="title-with-toggle" onclick="toggle('span-toggle-messages', 'messages-inside')">messages <span id="span-toggle-messages" class="arrow-toggle">⇩</span></h3>
+              <h3 class="title-with-toggle" onclick="toggle('span-toggle-messages', 'messages-inside')"><span i18n-key="messages"></span> <span id="span-toggle-messages" class="arrow-toggle">⇩</span></h3>
 
               <div id="messages-inside" style="display:none">
 
-                <h3 class="title-with-toggle" id="title-form" onclick="toggle('span-toggle-writing', 'add-node-form')">écrire un message <span id="span-toggle-writing" class="arrow-toggle">⇩</span></h3>
+                <h3 class="title-with-toggle" id="title-form" onclick="toggle('span-toggle-writing', 'add-node-form')"><span i18n-key="write-messages"></span> <span id="span-toggle-writing" class="arrow-toggle">⇩</span></h3>
                 <form id="add-node-form" style="display:none">
-                  <input required id="add-node-title" class="input" type="text" placeholder="Titre du message" style="font-style:italic">
-                  <input required id="add-node-author" class="input" type="text" placeholder="Pseudo" style="font-style:italic">
-                  <label>En réaction à :</label>
+                  <input required id="add-node-title" class="input" type="text" style="font-style:italic">
+                  <input required id="add-node-author" class="input" type="text" style="font-style:italic">
+                  <label i18n-key="in-reaction-to"></label>
                   <select id="add-node-react" class="input">
                     <!-- options added for each decree in src/app.js-->
                   </select>
-                  <label>Position :</label>
+                  <label i18n-key="belief"></label>
                   <select id="add-node-belief" class="input">
-                    <option value="against" selected>Dissident·e</option>
-                    <option value="neutral">Partagé·e</option>
-                    <option value="in_favor">Partisan·e</option>
+                    <option value="against" selected i18n-key="belief-against"></option>
+                    <option value="neutral" i18n-key="belief-neutral"></option>
+                    <option value="in_favor" i18n-key="belief-in-favor"></option>
                   </select>
-                  <textarea required id="add-node-text" class="input" type="text" placeholder="Texte du message" style="font-style:italic;"></textarea>
+                  <textarea required id="add-node-text" class="input" type="text" style="font-style:italic;"></textarea>
                   <input id="add-node-type" class="input" type="hidden" value="contribution">
-                  <button id="add-node-button" type="submit">Publier</button>
+                  <button id="add-node-button" type="submit" i18n-key="publish-title"></button>
                 </form>
 
                 <div id="node-info">
                   <h4><div id="node-title"></div></h4> 
-                  <h5><div id="node-author"></div></h5>
+                  <h5><span i18n-key='written-by' id="written-by" style="display: none;"></span> <div id="node-author"></div></h5>
                   <div id="node-text"></div>
                 </div>
 
@@ -119,14 +124,14 @@
           </div>
 
           <div id="toggle-titles">
-            <h6 id="title_for_toggle">titres</h6>
+            <h6 id="title_for_toggle" i18n-key="title_for_toggle"></h6>
             <label class="switch">
               <input type="checkbox" id="toggle_checkbox" checked>
               <span class="slider round"></span>
             </label>
           </div>
 
-          <h6 id="title_for_zoom">taille</h6>
+          <h6 id="title_for_zoom" i18n-key="title_for_zoom"></h6>
           <div id="zoom">
             <span id="zoom-minus">–</span><span id="zoom-plus">+</span>
           </div>
@@ -143,8 +148,7 @@
     <script src="/src/story.js"></script>
     <script src="/src/interface.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/texts/intro_text.js"></script>
-    <script src="/texts/about_text.js"></script>
+    <script src="/src/i18n.js"></script>
     <script type="module">
       import {updateGraph} from "/src/app.js";
       import {getLabelSelection} from "/src/app.js"
@@ -177,7 +181,7 @@
 
       socket.on('decreePublished', async function (decreeAndExamples) {
         // We add the decree type, title and text
-        sessionDialog.querySelector('#dialog_type').textContent = 'Nouveau décret';
+        sessionDialog.querySelector('#dialog_type').textContent = null;
         sessionDialog.querySelector('#dialog_title').textContent = decreeAndExamples.decree.title;
         sessionDialog.querySelector('#dialog_text').textContent = decreeAndExamples.decree.text;
   
@@ -267,15 +271,6 @@
         document.getElementById("intro3").style.display = "none";
         document.getElementById("load").style.display = "block";
         setTimeout(() => {document.getElementById("text-box-intro").style.display = "none"; window.location.href = window.location.href.split("?")[0];}, 2000);
-      }
-    </script>
-    <script>
-      //load texts from json (texts in js variable)
-      for (let key in intro_text){
-          document.getElementById(key).innerHTML = intro_text[key]; //textes introductifs
-      }
-      for (let key in about_text){
-          document.getElementById(key).innerHTML = about_text[key]; //à propos
       }
     </script>
     </body>

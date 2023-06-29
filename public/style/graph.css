@@ -27,7 +27,7 @@
   top: 0;
   right: 0;
   
-  height: 78vh;
+  height: 72vh;
   width: 25vw;
   /* border: 1px solid blue; */
 }
@@ -185,12 +185,19 @@ textarea{
   background: rgb(204, 207, 206); 
 }
 
+.locale-switch {
+  position: fixed;
+  bottom: 20px;
+  right: 11px;
+  font-size: 16px;
+}
+
 
 /* style for the zoom */
 
 #title_for_zoom {
   position: fixed;
-  bottom: 55px;
+  bottom: 96px;
   right: 30px;
   font-size: 16px;
 }
@@ -199,7 +206,7 @@ textarea{
   margin: 25px;
   position: fixed;
   width: 22px;
-  bottom: 30px;
+  bottom: 70px;
   right: 20px;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
@@ -235,7 +242,7 @@ textarea{
 
 #title_for_toggle {
   position: fixed;
-  bottom: 133px;
+  bottom: 170px;
   right: 23px;
   font-size: 16px;
 }
@@ -245,7 +252,7 @@ textarea{
   display: inline-block;
   width: 60px;
   height: 34px;
-  bottom: 130px;
+  bottom: 170px;
   right: 20px;
 }
 
