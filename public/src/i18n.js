@@ -1,5 +1,5 @@
 // Locale utilisée par défaut
-const defaultLocale = "fr";
+const defaultLocale = "en";
 
 // Locale active
 let locale;

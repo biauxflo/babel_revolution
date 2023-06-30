@@ -293,7 +293,7 @@ router.post('/create-session', auth, (req, res) => {
       sessionModel.sync().
         then(() => {
           // 3. Add root node
-          sessionModel.create({ title: "Centre de la Monoculture", author: 'CMC', text: "Au service du Bien commun et de l’intercompréhension entre les peuples, le Centre de la Monoculture œuvre à la mise à jour et à l’actualisation de la Langue commune pour la mettre toujours mieux en adéquation avec l’environnement culturel et cultural. Tout usage linguistique et cultural non conventionnel sera sanctionné.  Le CMC", type: 'root'})
+          sessionModel.create({ title: "CMC", author: 'CMC', text: "In the service of the common good and intercomprehension between peoples, the Monoculture Centre works to update and actualise the Common Language to bring it ever more in harmony with the cultural environment. Any unconventional linguistic or cultural practices will be penalised. -- The CMC // Au service du Bien commun et de l’intercompréhension entre les peuples, le Centre de la Monoculture œuvre à la mise à jour et à l’actualisation de la Langue commune pour la mettre toujours mieux en adéquation avec l’environnement culturel et cultural. Tout usage linguistique et cultural non conventionnel sera sanctionné.  -- Le CMC", type: 'root'})
               .then(()=>{
                 // 4. We send the info of the session
                 res.json({ success: true, session });
