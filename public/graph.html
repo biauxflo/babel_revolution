@@ -25,18 +25,21 @@
         </div> 
       </header>
 
+      <!-- switch french / english -->
       <select i18n-switch class="locale-switch">
         <option value="en">English</option>
         <option value="fr">Français</option>
       </select>
         
+      <!-- about informations -->
       <div id="about">
         <button type="button" id="button-about-ouvert" onclick="OpenText()" i18n-key="button-about-ouvert">à propos +</button>
         <button type="button" id="button-about-ferme" onclick="OpenText()" style="display:none" i18n-key="button-about-ferme">à propos -</button>
         <div id="about-text" style="display:none" i18n-key="about-text"></div>
       </div>
 
-      <div id="text-box-intro" style="display:none"><!-- Explications / début -->
+      <!-- prologue : showed by onLoadGraph() in story.js  -->
+      <div id="text-box-intro" style="display:none">
         <div id="intro" style="display:block">
           <div id="text">
             <h1 id="intro_title1" i18n-key="intro_title1"></h1>
@@ -71,10 +74,9 @@
         </div>
       </div>
 
+      <!-- prologue : showed by onLoadGraph() in story.js  -->
       <div id="main" style="display:none">
-
         <div id="graph"></div>
-
         <dialog id="session_dialog">
           <button type="button" class="close">X</button>
           <h3 id="dialog_type"></h3>
@@ -86,12 +88,9 @@
         </dialog>
 
           <div id="text-box" style="display:flex"> <!-- right zone-->
-
             <div id="messages">
               <h3 class="title-with-toggle" onclick="toggle('span-toggle-messages', 'messages-inside')"><span i18n-key="messages"></span> <span id="span-toggle-messages" class="arrow-toggle">⇩</span></h3>
-
               <div id="messages-inside" style="display:none">
-
                 <h3 class="title-with-toggle" id="title-form" onclick="toggle('span-toggle-writing', 'add-node-form')"><span i18n-key="write-messages"></span> <span id="span-toggle-writing" class="arrow-toggle">⇩</span></h3>
                 <form id="add-node-form" style="display:none">
                   <input required id="add-node-title" class="input" type="text" style="font-style:italic">
@@ -154,13 +153,11 @@
       import {getLabelSelection} from "/src/app.js"
 
       let ended = false;
-
       const sessionDialog = document.querySelector('dialog#session_dialog');
-
       const socket = io();
-
       const form = document.getElementById('add-node-form');
-
+      
+      //toggle to show or hide label
       const toggle = document.querySelector('#toggle-titles');
       toggle.addEventListener('click', () => {
         let labelSelection = getLabelSelection()
@@ -179,9 +176,10 @@
         await updateGraph();
       });
 
+      //dialog from the new decree
       socket.on('decreePublished', async function (decreeAndExamples) {
         // We add the decree type, title and text
-        sessionDialog.querySelector('#dialog_type').textContent = null;
+        sessionDialog.querySelector('#dialog_type').textContent = null; //null because the langague can't be changed
         sessionDialog.querySelector('#dialog_title').textContent = decreeAndExamples.decree.title;
         sessionDialog.querySelector('#dialog_text').textContent = decreeAndExamples.decree.text;
   
@@ -199,11 +197,8 @@
         sessionDialog.querySelector('#dialog_text').textContent = end.text;
         // We delete the examples
         sessionDialog.querySelector('div#dialog_examples').innerHTML = '';
-
-        document.getElementById('add-node-form').style.display = "none"; //hide the form
-        document.getElementById('title-form').style.display = "none"; //hide the form
-
-
+        document.getElementById('add-node-form').style.display = "none"; //hide the form after the end
+        document.getElementById('title-form').style.display = "none"; //hide the form after the end
         // We show the dialog
         sessionDialog.showModal();
         // Redirect to this page but in visualisation mode
@@ -219,11 +214,12 @@
 
     </script>
     <script>
-      function OpenText() {
+      function OpenText() { 
         var btnferme = document.getElementById("button-about-ouvert");
         var moreText = document.getElementById("about-text");
         var btnouvert = document.getElementById("button-about-ferme");
       
+        //same function in interface.js (toggle_simple)
         if (btnferme.style.display === "none") {
           btnferme.style.display = "block";
           moreText.style.display = "none";
@@ -240,6 +236,7 @@
         a.addEventListener?a.addEventListener(b,c,d||!1):a.attachEvent('on'+b,c);
       }
       
+      //to fix
       function changeZoom(zoom, e) {
         currentZoom += coefficient * (e.detail < 0 || e.wheelDelta > 0 || zoom > 0 ? 1 : -1);
         currentZoom < 0 && (currentZoom = 0); 

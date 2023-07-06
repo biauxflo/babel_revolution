@@ -7,8 +7,6 @@ let locale;
 // Contient les traductions actives
 let translations = {};
 
-
-
 // Quand le contenu de la page est chargé, on traduit la page avec la locale par défaut
 document.addEventListener("DOMContentLoaded", () => {
   setLocale(defaultLocale);

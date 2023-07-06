@@ -3,7 +3,7 @@ import {getNodeColor, getNodeDatas} from "./nodes.js";
 const nodeTextDiv = d3.select("#node-text");
 const nodeTitle = d3.select("#node-title");
 const nodeAuthor = d3.select("#node-author");
-const writtenBy = d3.select("#written-by");
+const writtenBy = d3.select("#written-by"); //div to show before author
 
 function onLabelClick(event, d, fetchedNodes, nodeSelection) {
     let datas = getNodeDatas(d, fetchedNodes);
